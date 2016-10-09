@@ -1,5 +1,23 @@
 # React-Native-Bref
-Bref developed in React-Native
+Bref developed in React-Native.
+
+#### Usage
+
+Get started by installing dependencies for [React Native](https://facebook.github.io/react-native/docs/getting-started.html).
+
+Install dependencies after cloning the project.
+
+```shell
+npm install --save react-native
+npm install --save react
+# Other dependencies
+```
+
+Then, you can run the project.
+
+```shell
+react-native run-ios
+```
 
 #### Developer Attention
 
@@ -20,8 +38,8 @@ Everyone in the organization has been granted with *admin* priviledge. So each c
 
 Again, feel free to modify anything.
 
+---
 
+Author: Naivee
 
-Author: Soros
-
-Last modified date:  2016/10/07
+Last modified date:  2016/10/09
