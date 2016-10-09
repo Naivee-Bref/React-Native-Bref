@@ -1,5 +1,24 @@
+# OS X
 .DS_Store
+
+# IDE
 .idea
+
+# Android
 *android*
+
+# Dependencies and build 
 node_modules
 design
+build/
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+
