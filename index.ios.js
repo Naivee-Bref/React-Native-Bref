@@ -13,13 +13,13 @@ class RN_Bref extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
+        <Text style={styles.welcome_main}>
+          bref.
         </Text>
-        <Text style={styles.instructions}>
+        <Text style={styles.welcome_text}>
           To get started, edit index.ios.js
         </Text>
-        <Text style={styles.instructions}>
+        <Text style={styles.welcome_text}>
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
@@ -33,16 +33,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#000000',
   },
-  welcome: {
-    fontSize: 20,
+  welcome_main: {
+    fontSize: 50,
+    color: '#FFFFFF',
     textAlign: 'center',
     margin: 10,
+    letterSpacing: 8,
+    fontFamily: 'Courier',
   },
-  instructions: {
+  welcome_text: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#9F9F9F',
     marginBottom: 5,
   },
 });
