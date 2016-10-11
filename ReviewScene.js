@@ -46,14 +46,13 @@ export default class ReviewScene extends Component {
 
     static propTypes = {
         title: PropTypes.string.isRequired,
-        onBack: PropTypes.func.isRequired,
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <TouchableHighlight onPress={this.props.onBack}>
-                    <Text style={{color: '#FFFFFF', fontSize: 50}}>Back</Text>
+                    <Text style={styles.backButtonText}>Back</Text>
                 </TouchableHighlight>
                 <ListView
                     dataSource={this.state.dataSource}
@@ -65,7 +64,8 @@ export default class ReviewScene extends Component {
                             <Text style={styles.timeline_others}>
                                 08:45
                             </Text>
-                        </View>}
+                        </View>
+                    }
                 />
             </View>
         );
@@ -74,8 +74,13 @@ export default class ReviewScene extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        padding: 10,
         backgroundColor: '#000000',
         justifyContent: 'center',
+    },
+    backButtonText: {
+        color: "#FFFFFF",
+        fontSize: 50,
     },
     item: {
         padding: 5,

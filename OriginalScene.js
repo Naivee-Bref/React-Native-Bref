@@ -16,7 +16,6 @@ import {
 export default class OriginalScene extends Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
-        onForward: PropTypes.func.isRequired,
     }
 
     render() {
@@ -26,12 +25,12 @@ export default class OriginalScene extends Component {
                     <Text style={styles.welcome_main}>
                         bref.
                     </Text>
-                    <TouchableHighlight>
+                    <TouchableHighlight onPress={this.props.onForwardToday}>
                         <Text style={styles.welcome_text}>
                             Today
                         </Text>
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={this.props.onForward}>
+                    <TouchableHighlight onPress={this.props.onForwardReview}>
                         <Text style={styles.welcome_text}>
                             Review
                         </Text>
@@ -60,6 +59,7 @@ export default class OriginalScene extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#000000',

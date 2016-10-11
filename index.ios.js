@@ -8,6 +8,7 @@ import {
 
 import OriginalScene from './OriginalScene';
 import ReviewScene from './ReviewScene';
+import TodayScene from './TodayScene';
 
 class RN_Bref extends Component {
     render() {
@@ -18,24 +19,42 @@ class RN_Bref extends Component {
                     if (route.index == 0) {
                         return <OriginalScene
                             title={route.title}
-                            onForward={()=> {
+                            onForwardReview={(scene)=> {
                                 const nextIndex = route.index + 1;
                                 navigator.push({
                                     title: 'Review',
                                     index: nextIndex,
                                 });
                             }}
-                        />
-                    }
-                    else {
-                        return <ReviewScene
-                            title={route.title}
-                            onBack={() => {
-                                navigator.pop();
+                            onForwardToday={(scene)=> {
+                                const nextIndex = route.index + 1;
+                                navigator.push({
+                                    title: 'Today',
+                                    index: nextIndex,
+                                });
                             }}
                         />
                     }
-                }}
+                    else {
+                        if (route.title == 'Review') {
+                            return <ReviewScene
+                                title={route.title}
+                                onBack={() => {
+                                    navigator.pop();
+                                }}
+                            />;
+                        }
+                        else {
+                            return <TodayScene
+                                title={route.title}
+                                onBack={() => {
+                                    navigator.pop();
+                                }}
+                            />;
+                        }
+                    }
+                }
+                }
             />
         );
     }
