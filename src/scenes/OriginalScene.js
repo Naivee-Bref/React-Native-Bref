@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
         letterSpacing: 8,
-        fontFamily: 'Courier',
+        fontFamily: 'PingFang SC',
         justifyContent: 'center'
     },
     welcome_text: {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     },
     motto_text: {
         fontSize: 16,
-        fontFamily: 'Helvetica',
+        fontFamily: 'PingFang SC',
         color: '#CFCFCF',
     }
 });
