@@ -5,25 +5,38 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator,
 } from 'react-native';
 
 
+class OriginalScene extends Component {
+  render() {
+    return (
+        <View style={styles.container}>
+          <Text style={styles.welcome_main}>
+            bref.
+          </Text>
+          <Text style={styles.welcome_text}>
+            To get started, edit index.ios.js
+          </Text>
+          <Text style={styles.welcome_text}>
+            Press Cmd+R to reload,{'\n'}
+            Cmd+D or shake for dev menu
+          </Text>
+        </View>
+    );
+  }
+}
 class RN_Bref extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome_main}>
-          bref.
-        </Text>
-        <Text style={styles.welcome_text}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.welcome_text}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+        <Navigator
+            initialRoute={{title: 'Initial Scene', index:0}}
+            renderScene={()=>{
+              return <OriginalScene/>
+            }}
+        />
     );
   }
 }
