@@ -6,9 +6,9 @@ import {
     Navigator,
 } from 'react-native';
 
-import OriginalScene from './OriginalScene';
-import ReviewScene from './ReviewScene';
-import TodayScene from './TodayScene';
+import OriginalScene from './src/scenes/OriginalScene';
+import ReviewScene from './src/scenes/ReviewScene';
+import TodayScene from './src/scenes/TodayScene';
 
 class RN_Bref extends Component {
     render() {
@@ -53,8 +53,7 @@ class RN_Bref extends Component {
                             />;
                         }
                     }
-                }
-                }
+                }}
             />
         );
     }
