@@ -4,15 +4,21 @@
 
 'use strict'
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {
     StyleSheet,
     Text,
     View,
+    TouchableHighlight,
 } from 'react-native';
 
 
 export default class OriginalScene extends Component {
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        onForward: PropTypes.func.isRequired,
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -20,12 +26,16 @@ export default class OriginalScene extends Component {
                     <Text style={styles.welcome_main}>
                         bref.
                     </Text>
-                    <Text style={styles.welcome_text}>
-                        Today
-                    </Text>
-                    <Text style={styles.welcome_text}>
-                        Review
-                    </Text>
+                    <TouchableHighlight>
+                        <Text style={styles.welcome_text}>
+                            Today
+                        </Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={this.props.onForward}>
+                        <Text style={styles.welcome_text}>
+                            Review
+                        </Text>
+                    </TouchableHighlight>
                     <Text style={styles.welcome_text}>
                         Share
                     </Text>
@@ -45,6 +55,8 @@ export default class OriginalScene extends Component {
     }
 }
 
+// TODO: Global default color
+// TODO: Not FullScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -77,6 +89,6 @@ const styles = StyleSheet.create({
     motto_text: {
         fontSize: 16,
         fontFamily: 'Helvetica',
-        color: '#CFCFCF'
+        color: '#CFCFCF',
     }
 });

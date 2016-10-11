@@ -7,14 +7,34 @@ import {
 } from 'react-native';
 
 import OriginalScene from './OriginalScene';
+import ReviewScene from './ReviewScene';
 
 class RN_Bref extends Component {
     render() {
         return (
             <Navigator
                 initialRoute={{title: 'Initial Scene', index: 0}}
-                renderScene={()=> {
-                    return <OriginalScene/>
+                renderScene={(route, navigator)=> {
+                    if (route.index == 0) {
+                        return <OriginalScene
+                            title={route.title}
+                            onForward={()=> {
+                                const nextIndex = route.index + 1;
+                                navigator.push({
+                                    title: 'Review',
+                                    index: nextIndex,
+                                });
+                            }}
+                        />
+                    }
+                    else {
+                        return <ReviewScene
+                            title={route.title}
+                            onBack={() => {
+                                navigator.pop();
+                            }}
+                        />
+                    }
                 }}
             />
         );
