@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     timeline_text: {
         color: '#FFFFFF',
         fontSize: 18,
-        fontFamily: 'Helvetica',
     },
     timeline_others: {
         color: '#AFAFAF',
