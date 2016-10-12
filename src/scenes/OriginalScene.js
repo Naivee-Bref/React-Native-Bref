@@ -25,26 +25,26 @@ export default class OriginalScene extends Component {
                     <Text style={styles.welcome_main}>
                         bref.
                     </Text>
-                    <TouchableHighlight onPress={() => this.props.navigator.push({
-                        id: 'today'
-                    })}>
+                    <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'today'})}>
                         <Text style={styles.welcome_text}>
                             Today
                         </Text>
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={() => this.props.navigator.push({
-                        id: 'review'
-                    })}>
+                    <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'review'})}>
                         <Text style={styles.welcome_text}>
                             Review
                         </Text>
                     </TouchableHighlight>
-                    <Text style={styles.welcome_text}>
-                        Share
-                    </Text>
-                    <Text style={styles.welcome_text}>
-                        Me
-                    </Text>
+                    <TouchableHighlight>
+                        <Text style={styles.welcome_text}>
+                            Share
+                        </Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'profile'})}>
+                        <Text style={styles.welcome_text}>
+                            Me
+                        </Text>
+                    </TouchableHighlight>
                 </View>
                 <View style={styles.motto}>
                     <Text style={{color: '#CFCFCF', textAlign: 'left'}}>"</Text>

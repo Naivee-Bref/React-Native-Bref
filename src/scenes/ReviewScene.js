@@ -58,10 +58,10 @@ export default class ReviewScene extends Component {
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) =>
                         <View style={styles.item}>
-                            <Text style={styles.timeline_text}>
+                            <Text style={styles.timelineText}>
                                 {rowData}
                             </Text>
-                            <Text style={styles.timeline_others}>
+                            <Text style={styles.timelineOthers}>
                                 08:45
                             </Text>
                         </View>
@@ -86,11 +86,11 @@ const styles = StyleSheet.create({
         padding: 5,
         marginLeft: 10,
     },
-    timeline_text: {
+    timelineText: {
         color: '#FFFFFF',
         fontSize: 18,
     },
-    timeline_others: {
+    timelineOthers: {
         color: '#AFAFAF',
         fontSize: 12,
     }

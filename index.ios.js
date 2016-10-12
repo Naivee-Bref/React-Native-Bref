@@ -9,25 +9,28 @@ import {
 import OriginalScene from './src/scenes/OriginalScene';
 import ReviewScene from './src/scenes/ReviewScene';
 import TodayScene from './src/scenes/TodayScene';
+import ProfileScene from './src/scenes/ProfileScene';
 
 class RN_Bref extends Component {
     render() {
         return (
             <Navigator
-                initialRoute={{id: 'initial'}}
+                initialRoute={{scene: 'initial'}}
                 renderScene={this.navigatorRenderScene}
             />
         );
     }
 
     navigatorRenderScene(route, navigator) {
-        switch (route.id) {
+        switch (route.scene) {
             case 'initial':
                 return (<OriginalScene navigator={navigator}/>);
             case 'review':
                 return (<ReviewScene navigator={navigator}/>);
             case 'today':
                 return (<TodayScene navigator={navigator}/>);
+            case 'profile':
+                return (<ProfileScene navigator={navigator}/>);
             default:
                 return (<OriginalScene navigator={navigator}/>);
         }
