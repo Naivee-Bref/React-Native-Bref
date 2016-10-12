@@ -2,7 +2,7 @@
  * Created by irmo on 16/10/11.
  */
 
-'use strict'
+'use strict';
 
 import React, {Component, PropTypes} from 'react';
 import {
@@ -10,17 +10,16 @@ import {
     Image,
     Text,
     TextInput,
-    View,
     TouchableHighlight,
+    View
 } from 'react-native';
 
 var GeolocationExample = React.createClass({
-    // watchID: (null: ?number),
 
     getInitialState: function () {
         return {
             initialPosition: 'unknown',
-            lastPosition: 'unknown',
+            lastPosition: 'unknown'
         };
     },
 
@@ -42,13 +41,9 @@ var GeolocationExample = React.createClass({
     render: function () {
         return (
             <View>
-                <Text></Text>
                 <Text style={styles.commonText}>
                     <Text>Initial position: </Text>
                     {JSON.stringify(this.state.initialPosition)}
-                </Text>
-                <Text>
-
                 </Text>
                 <Text style={styles.commonText}>
                     <Text>Current position: </Text>
@@ -60,18 +55,17 @@ var GeolocationExample = React.createClass({
 });
 
 export default class TodayScene extends Component {
+    static propTypes = {
+        navigator: PropTypes.object.isRequired
+    };
+
     constructor() {
         super();
         this.state = {
             text: 'Default Text',
-            location: 'unknown',
+            location: 'unknown'
         }
     }
-
-    static propTypes = {
-        navigator: PropTypes.object.isRequired
-    }
-
 
     render() {
         return (
@@ -96,16 +90,16 @@ const styles = StyleSheet.create({
     container: {
         padding: 10,
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: 'black'
     },
     backButtonText: {
-        color: "#FFFFFF",
-        fontSize: 50,
+        color: '#FFFFFF',
+        fontSize: 50
     },
     commonText: {
         padding: 5,
         paddingBottom: 3,
-        color: "#AFAFAF",
+        color: '#AFAFAF'
     },
     input: {
         height: 100,
@@ -113,6 +107,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         color: '#AFAFAF',
         fontSize: 15,
-        alignItems: 'flex-start',
+        alignItems: 'flex-start'
     }
-})
+});

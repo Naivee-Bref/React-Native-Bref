@@ -2,20 +2,20 @@
  * Created by irmo on 16/10/12.
  */
 
-'use strict'
+'use strict';
 
 import React, {Component, PropTypes} from 'react';
 import {
     StyleSheet,
     Text,
     View,
-    TouchableHighlight,
+    TouchableHighlight
 } from 'react-native';
 
 export default class ProfileScene extends Component {
     static propTypes = {
-        navigator: PropTypes.object.isRequired,
-    }
+        navigator: PropTypes.object.isRequired
+    };
 
     render() {
         return (
@@ -38,15 +38,15 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         backgroundColor: '#000000',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-start'
     },
     backButtonText: {
-        color: "#FFFFFF",
-        fontSize: 50,
+        color: '#FFFFFF',
+        fontSize: 50
     },
     commonText: {
         padding: 5,
         paddingBottom: 3,
-        color: "#AFAFAF",
+        color: '#AFAFAF'
     }
 });

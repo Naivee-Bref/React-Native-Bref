@@ -3,25 +3,25 @@
 import React, {Component} from 'react';
 import {
     AppRegistry,
-    Navigator,
+    Navigator
 } from 'react-native';
 
-import OriginalScene from './src/scenes/OriginalScene';
-import ReviewScene from './src/scenes/ReviewScene';
-import TodayScene from './src/scenes/TodayScene';
-import ProfileScene from './src/scenes/ProfileScene';
+import OriginalScene from './js/page/OriginalScene';
+import ReviewScene from './js/page/ReviewScene';
+import TodayScene from './js/page/TodayScene';
+import ProfileScene from './js/page/ProfileScene';
 
 class RN_Bref extends Component {
     render() {
         return (
             <Navigator
                 initialRoute={{scene: 'initial'}}
-                renderScene={this.navigatorRenderScene}
+                renderScene={RN_Bref.navigatorRenderScene}
             />
         );
     }
 
-    navigatorRenderScene(route, navigator) {
+    static navigatorRenderScene(route, navigator) {
         switch (route.scene) {
             case 'initial':
                 return (<OriginalScene navigator={navigator}/>);

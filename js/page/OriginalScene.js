@@ -2,21 +2,21 @@
  * Created by irmo on 16/10/11.
  */
 
-'use strict'
+'use strict';
 
 import React, {Component, PropTypes} from 'react';
 import {
     StyleSheet,
     Text,
     View,
-    TouchableHighlight,
+    TouchableHighlight
 } from 'react-native';
 
 
 export default class OriginalScene extends Component {
     static propTypes = {
-        navigator: PropTypes.object.isRequired,
-    }
+        navigator: PropTypes.object.isRequired
+    };
 
     render() {
         return (
@@ -66,10 +66,10 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#000000',
+        backgroundColor: '#000000'
     },
     welcome: {
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     welcome_main: {
         fontSize: 50,
@@ -83,16 +83,16 @@ const styles = StyleSheet.create({
     welcome_text: {
         textAlign: 'center',
         color: '#CFCFCF',
-        marginBottom: 5,
+        marginBottom: 5
     },
     motto: {
         marginTop: 100,
         marginBottom: 10,
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-end'
     },
     motto_text: {
         fontSize: 16,
         fontFamily: 'PingFang SC',
-        color: '#CFCFCF',
+        color: '#CFCFCF'
     }
 });

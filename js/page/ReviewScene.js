@@ -2,7 +2,7 @@
  * Created by irmo on 16/10/11.
  */
 
-'use strict'
+'use strict';
 
 import React, {Component, PropTypes} from 'react';
 import {
@@ -10,13 +10,17 @@ import {
     Text,
     View,
     ListView,
-    TouchableHighlight,
+    TouchableHighlight
 } from 'react-native';
 
 export default class ReviewScene extends Component {
+    static propTypes = {
+        navigator: PropTypes.object.isRequired
+    };
+
     constructor() {
         super();
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
         this.state = {
             // TODO: Add time and location to data source.
             dataSource: ds.cloneWithRows([
@@ -42,10 +46,6 @@ export default class ReviewScene extends Component {
                 '编不下去了',
             ])
         }
-    }
-
-    static propTypes = {
-        navigator: PropTypes.object.isRequired,
     }
 
     render() {
@@ -76,22 +76,22 @@ const styles = StyleSheet.create({
     container: {
         padding: 10,
         backgroundColor: '#000000',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     backButtonText: {
-        color: "#FFFFFF",
-        fontSize: 50,
+        color: '#FFFFFF',
+        fontSize: 50
     },
     item: {
-        padding: 5,
         marginLeft: 10,
+        padding: 5
     },
     timelineText: {
         color: '#FFFFFF',
-        fontSize: 18,
+        fontSize: 18
     },
     timelineOthers: {
         color: '#AFAFAF',
-        fontSize: 12,
+        fontSize: 12
     }
 });
