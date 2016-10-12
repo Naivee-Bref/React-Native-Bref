@@ -15,7 +15,7 @@ import {
 
 export default class OriginalScene extends Component {
     static propTypes = {
-        title: PropTypes.string.isRequired,
+        navigator: PropTypes.object.isRequired,
     }
 
     render() {
@@ -25,12 +25,16 @@ export default class OriginalScene extends Component {
                     <Text style={styles.welcome_main}>
                         bref.
                     </Text>
-                    <TouchableHighlight onPress={this.props.onForwardToday}>
+                    <TouchableHighlight onPress={() => this.props.navigator.push({
+                        id: 'today'
+                    })}>
                         <Text style={styles.welcome_text}>
                             Today
                         </Text>
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={this.props.onForwardReview}>
+                    <TouchableHighlight onPress={() => this.props.navigator.push({
+                        id: 'review'
+                    })}>
                         <Text style={styles.welcome_text}>
                             Review
                         </Text>
