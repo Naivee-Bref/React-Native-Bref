@@ -8,9 +8,7 @@ Get started by installing dependencies for [React Native](https://facebook.githu
 Install dependencies after cloning the project.
 
 ```shell
-npm install --save react-native
-npm install --save react
-# Other dependencies
+npm install
 ```
 
 Then, you can run the project.
