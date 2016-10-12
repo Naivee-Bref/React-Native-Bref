@@ -45,13 +45,13 @@ export default class ReviewScene extends Component {
     }
 
     static propTypes = {
-        title: PropTypes.string.isRequired,
+        navigator: PropTypes.object.isRequired,
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <TouchableHighlight onPress={this.props.onBack}>
+                <TouchableHighlight onPress={() => this.props.navigator.pop()}>
                     <Text style={styles.backButtonText}>Back</Text>
                 </TouchableHighlight>
                 <ListView
