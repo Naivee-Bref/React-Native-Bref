@@ -11,11 +11,13 @@ import {
   Text,
   TextInput,
   TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native';
 
-var GeolocationExample = React.createClass({
+import  ImagePicker from 'react-native-image-picker';
 
+var GeolocationExample = React.createClass({
   getInitialState: function () {
     return {
       initialPosition: 'unknown',
@@ -67,13 +69,33 @@ export default class TodayScene extends Component {
     }
   }
 
+  selectPhotoTapped() {
+    ImagePicker.showImagePicker(null, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} refreshing>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
-          <Text style={styles.backButtonText}>
-            Back
-          </Text>
+          <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>
         <TextInput
           style={styles.input}
@@ -81,6 +103,13 @@ export default class TodayScene extends Component {
           value={this.state.text}
         />
         <GeolocationExample />
+        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]} refreshing>
+            { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+              <Image style={styles.avatar} source={this.state.avatarSource}/>
+            }
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -108,5 +137,16 @@ const styles = StyleSheet.create({
     color: '#AFAFAF',
     fontSize: 15,
     alignItems: 'flex-start'
+  },
+  avatarContainer: {
+    borderColor: '#9B9B9B',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150
   }
 });
