@@ -49,7 +49,7 @@ export default class Photo extends Component {
       <View>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
           <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]} refreshing>
-            { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+            { this.state.avatarSource === null ? <Text style={styles.commonText}>Select a Photo</Text> :
               <Image style={styles.avatar} source={this.state.avatarSource}/>
             }
           </View>
@@ -70,5 +70,10 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     width: 150,
     height: 150
+  },
+  commonText: {
+    padding: 5,
+    paddingBottom: 3,
+    color: '#AFAFAF'
   }
 });

@@ -16,45 +16,7 @@ import {
 } from 'react-native';
 
 import Photo from '../component/Photo';
-
-var GeolocationExample = React.createClass({
-  getInitialState: function () {
-    return {
-      initialPosition: 'unknown',
-      lastPosition: 'unknown'
-    };
-  },
-
-  componentDidMount: function () {
-    navigator.geolocation.getCurrentPosition(
-      (initialPosition) => this.setState({initialPosition}),
-      (error) => alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-    this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
-      this.setState({lastPosition});
-    });
-  },
-
-  componentWillUnmount: function () {
-    navigator.geolocation.clearWatch(this.watchID);
-  },
-
-  render: function () {
-    return (
-      <View>
-        <Text style={styles.commonText}>
-          <Text>Initial position: </Text>
-          {JSON.stringify(this.state.initialPosition)}
-        </Text>
-        <Text style={styles.commonText}>
-          <Text>Current position: </Text>
-          {JSON.stringify(this.state.lastPosition)}
-        </Text>
-      </View>
-    );
-  }
-});
+import GeolocationExample from '../component/Location';
 
 export default class TodayScene extends Component {
   static propTypes = {
@@ -110,15 +72,4 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignItems: 'flex-start'
   },
-  avatarContainer: {
-    borderColor: '#9B9B9B',
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150
-  }
 });
