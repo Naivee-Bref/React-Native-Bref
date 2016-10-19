@@ -15,7 +15,7 @@ import {
   View
 } from 'react-native';
 
-import  ImagePicker from 'react-native-image-picker';
+import Photo from '../component/Photo';
 
 var GeolocationExample = React.createClass({
   getInitialState: function () {
@@ -69,28 +69,6 @@ export default class TodayScene extends Component {
     }
   }
 
-  selectPhotoTapped() {
-    ImagePicker.showImagePicker(null, (response) => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      }
-      else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
-        const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
-        this.setState({
-          avatarSource: source
-        });
-      }
-    });
-  }
-
   render() {
     return (
       <View style={styles.container} refreshing>
@@ -103,13 +81,7 @@ export default class TodayScene extends Component {
           value={this.state.text}
         />
         <GeolocationExample />
-        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]} refreshing>
-            { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
-              <Image style={styles.avatar} source={this.state.avatarSource}/>
-            }
-          </View>
-        </TouchableOpacity>
+        <Photo />
       </View>
     );
   }
