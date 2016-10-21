@@ -6,7 +6,7 @@ import Reflux from 'reflux';
 var DiaryActions = Reflux.createActions([
   'createDiary',
   'deleteDiary',
-  'editDiary'
+  'editDiary',
 ]);
 
 export default DiaryActions;

@@ -48,6 +48,9 @@ export default  diaryStore = Reflux.createStore({
   },
 
   emit() {
+    // For test storage function, should remove in release code
+    this._deleteAllDiaries();
+    //
     this._writeDiaries().done();
     this.trigger(this._diaries);
   },
@@ -71,6 +74,13 @@ export default  diaryStore = Reflux.createStore({
     });
     match.setFromObject(toEditDiary);
     this.emit();
+  },
+
+  // This method is for test only
+  _deleteAllDiaries() {
+    _.remove(this._diaries, (diary) => {
+      return diary.text === undefined;
+    });
   }
 });
 

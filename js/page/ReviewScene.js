@@ -10,42 +10,51 @@ import {
   Text,
   View,
   ListView,
-  TouchableHighlight
+  TouchableHighlight,
+  AsyncStorage
 } from 'react-native';
 
 export default class ReviewScene extends Component {
   static propTypes = {
-    navigator: PropTypes.object.isRequired
+    navigator: PropTypes.object.isRequired,
   };
 
   constructor(props, context) {
     super(props, context);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
     this.state = {
-      // TODO: Add time and location to data source.
-      dataSource: ds.cloneWithRows([
-        '西柚今天翘课被举报了，假装什么都没有发生的样子',
-        '校车上全都是小鲜肉',
-        '食堂的早饭又有油条',
-        '食堂的早饭有油条，激动人心~',
-        '编不下去了摔',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-      ])
-    }
+      dataSource: ds.cloneWithRows([]),
+      DIARY_KEY: '@Bref:diaries'
+    };
+  }
+
+  componentDidMount() {
+    this._refreshData();
+  }
+
+  _refreshData() {
+    AsyncStorage.getItem(this.state.DIARY_KEY)
+      .then((data) => {
+        return JSON.parse(data);
+      })
+      .then((data) => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(data)
+        })
+      })
+  }
+
+  _renderRow(rowData) {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.timelineText}>
+          {rowData.text}
+        </Text>
+        <Text style={styles.timelineOthers}>
+          08:45
+        </Text>
+      </View>
+    )
   }
 
   render() {
@@ -56,16 +65,7 @@ export default class ReviewScene extends Component {
         </TouchableHighlight>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData) =>
-            <View style={styles.item}>
-              <Text style={styles.timelineText}>
-                {rowData}
-              </Text>
-              <Text style={styles.timelineOthers}>
-                08:45
-              </Text>
-            </View>
-          }
+          renderRow={(rowData) => this._renderRow(rowData)}
         />
       </View>
     );

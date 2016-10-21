@@ -48,6 +48,7 @@ export default class TodayScene extends Component {
           style={styles.input}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
+          onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary('100', this.state.text)} }
         />
         <GeolocationExample />
         <Photo />
