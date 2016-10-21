@@ -18,7 +18,14 @@ import {
 import Photo from '../component/Photo';
 import GeolocationExample from '../component/Location';
 
+import Reflux from 'reflux';
+import diaryStore from './../component/Storage';
+import DiaryActions from './../actions';
+
+
 export default class TodayScene extends Component {
+  mixins =  [Reflux.connect(diaryStore, 'store')];
+
   static propTypes = {
     navigator: PropTypes.object.isRequired
   };

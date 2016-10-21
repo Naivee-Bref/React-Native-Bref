@@ -9,7 +9,9 @@
   "dependencies": {
     "react": "15.3.2",
     "react-native": "0.33.1",
-    "react-native-image-picker": "^0.22.10"
+    "react-native-image-picker": "^0.22.10",
+    "reflux": "^0.4.1",
+    "lodash": "^3.10.1"
   },
   "repository": {
     "type": "git",
