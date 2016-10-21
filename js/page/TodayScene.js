@@ -11,48 +11,12 @@ import {
   Text,
   TextInput,
   TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native';
 
-var GeolocationExample = React.createClass({
-
-  getInitialState: function () {
-    return {
-      initialPosition: 'unknown',
-      lastPosition: 'unknown'
-    };
-  },
-
-  componentDidMount: function () {
-    navigator.geolocation.getCurrentPosition(
-      (initialPosition) => this.setState({initialPosition}),
-      (error) => alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-    this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
-      this.setState({lastPosition});
-    });
-  },
-
-  componentWillUnmount: function () {
-    navigator.geolocation.clearWatch(this.watchID);
-  },
-
-  render: function () {
-    return (
-      <View>
-        <Text style={styles.commonText}>
-          <Text>Initial position: </Text>
-          {JSON.stringify(this.state.initialPosition)}
-        </Text>
-        <Text style={styles.commonText}>
-          <Text>Current position: </Text>
-          {JSON.stringify(this.state.lastPosition)}
-        </Text>
-      </View>
-    );
-  }
-});
+import Photo from '../component/Photo';
+import GeolocationExample from '../component/Location';
 
 export default class TodayScene extends Component {
   static propTypes = {
@@ -69,11 +33,9 @@ export default class TodayScene extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} refreshing>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
-          <Text style={styles.backButtonText}>
-            Back
-          </Text>
+          <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>
         <TextInput
           style={styles.input}
@@ -81,6 +43,7 @@ export default class TodayScene extends Component {
           value={this.state.text}
         />
         <GeolocationExample />
+        <Photo />
       </View>
     );
   }
@@ -108,5 +71,5 @@ const styles = StyleSheet.create({
     color: '#AFAFAF',
     fontSize: 15,
     alignItems: 'flex-start'
-  }
+  },
 });
