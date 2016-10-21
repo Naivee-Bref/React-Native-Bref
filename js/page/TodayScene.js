@@ -30,8 +30,8 @@ export default class TodayScene extends Component {
     navigator: PropTypes.object.isRequired
   };
 
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       text: 'Default Text',
       location: 'unknown'
@@ -40,7 +40,7 @@ export default class TodayScene extends Component {
 
   render() {
     return (
-      <View style={styles.container} refreshing>
+      <View style={styles.container}>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>

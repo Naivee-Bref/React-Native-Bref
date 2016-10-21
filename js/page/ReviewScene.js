@@ -18,8 +18,8 @@ export default class ReviewScene extends Component {
     navigator: PropTypes.object.isRequired
   };
 
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
     this.state = {
       // TODO: Add time and location to data source.
