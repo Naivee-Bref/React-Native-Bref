@@ -7,14 +7,14 @@
 import {StyleSheet} from 'react-native';
 
 const darkTheme = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-        backgroundColor: 'black',
-        justifyContent: 'flex-start',
-    },
-    commonText: {
-        fontSize: 12,
-        color: '#AFAFAF',
-    }
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: 'black',
+    justifyContent: 'flex-start',
+  },
+  commonText: {
+    fontSize: 12,
+    color: '#AFAFAF',
+  }
 });
