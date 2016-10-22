@@ -18,13 +18,20 @@ import {
 import Photo from '../component/Photo';
 import GeolocationExample from '../component/Location';
 
+import Reflux from 'reflux';
+import diaryStore from './../component/Storage';
+import DiaryActions from './../actions';
+
+
 export default class TodayScene extends Component {
+  mixins =  [Reflux.connect(diaryStore, 'store')];
+
   static propTypes = {
     navigator: PropTypes.object.isRequired
   };
 
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       text: 'Default Text',
       location: 'unknown'
@@ -33,7 +40,7 @@ export default class TodayScene extends Component {
 
   render() {
     return (
-      <View style={styles.container} refreshing>
+      <View style={styles.container}>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>
@@ -41,6 +48,7 @@ export default class TodayScene extends Component {
           style={styles.input}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
+          onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary('100', this.state.text)} }
         />
         <GeolocationExample />
         <Photo />
