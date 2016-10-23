@@ -33,8 +33,8 @@ export default class TodayScene extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      text: 'Default Text',
-      location: 'unknown'
+      text: '',
+      location: 'unknown',
     }
   }
 
@@ -48,7 +48,12 @@ export default class TodayScene extends Component {
           style={styles.input}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
-          onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary('100', this.state.text)} }
+          multiline={true}
+          placeholder={'Say something...'}
+          placeholderTextColor={'#CFCFCF'}
+          keyboardType={'default'}
+          maxLength={70}
+          ///*onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary('100', this.state.text)} }*/
         />
         <GeolocationExample />
         <Photo />
