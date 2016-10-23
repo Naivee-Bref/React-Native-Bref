@@ -4,22 +4,28 @@
 
 'use strict';
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {
   StyleSheet,
   Image,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ImageStore
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
 export default class Photo extends Component {
-  constructor() {
-    super();
+  static propTypes = {
+    storeSource: PropTypes.string,
+    getImageUrlBack: PropTypes.func
+  };
+
+  constructor(props, context) {
+    super(props, context);
     this.state = {
-      avatarSource: null
-    }
+      avatarSource: this.props.storeSource
+    };
   }
 
   selectPhotoTapped() {
@@ -37,6 +43,12 @@ export default class Photo extends Component {
       }
       else {
         const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+        ImageStore.addImageFromBase64(response.data,
+          (uri) => {
+            console.log('image store success');
+            this.props.getImageUrlBack(uri);
+          },
+          (error) => console.error('image store fail'));
         this.setState({
           avatarSource: source
         });
@@ -48,7 +60,7 @@ export default class Photo extends Component {
     return (
       <View>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]} refreshing>
+          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
             { this.state.avatarSource === null ? <Text style={styles.commonText}>Select a Photo</Text> :
               <Image style={styles.avatar} source={this.state.avatarSource}/>
             }

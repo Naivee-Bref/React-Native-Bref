@@ -34,8 +34,13 @@ export default class TodayScene extends Component {
     super(props, context);
     this.state = {
       text: 'Default Text',
-      location: 'unknown'
+      location: 'unknown',
+      imageUrl: null
     }
+  }
+
+  _getImageUrl(url) {
+    this.setState({imageUrl: url});
   }
 
   render() {
@@ -48,10 +53,10 @@ export default class TodayScene extends Component {
           style={styles.input}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
-          onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary('100', this.state.text)} }
+          onSubmitEditing={(event) => {DiaryActions.createDiary('100', this.state.text)} }
         />
         <GeolocationExample />
-        <Photo />
+        <Photo storeSource={null} getImageUrlBack={(url) => this._getImageUrl(url)}/>
       </View>
     );
   }
