@@ -1,6 +1,7 @@
 /**
  * Created by SorosLiu on 16/10/21.
  */
+
 import React, {Component} from 'react';
 import {
   AsyncStorage
@@ -13,7 +14,7 @@ import DiaryActions from './../actions';
 
 const DIARY_KEY = '@Bref:diaries';
 
-export default  diaryStore = Reflux.createStore({
+export default diaryStore = Reflux.createStore({
   init() {
     this._diaries = [];
     this._loadDiaries().done();

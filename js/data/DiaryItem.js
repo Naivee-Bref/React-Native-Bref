@@ -1,6 +1,7 @@
 /**
  * Created by SorosLiu on 16/10/21.
  */
+
 import moment from 'moment';
 
 export default class DiaryItem {

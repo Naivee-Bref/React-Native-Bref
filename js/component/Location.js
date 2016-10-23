@@ -2,6 +2,8 @@
  * Created by irmo on 16/10/19.
  */
 
+'use strict';
+
 import React, {Component} from 'react';
 import {
   StyleSheet,

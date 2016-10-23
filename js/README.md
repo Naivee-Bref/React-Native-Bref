@@ -66,3 +66,7 @@ then, when you need to store something, simply call like below code:
 ```javascript
 onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary(timeStamp, this.state.text)} }
 ```
+
+Q: What's the limit of geocoding request?
+
+A: The api supports 600 requests per minute and query up to 50 locations per request.
