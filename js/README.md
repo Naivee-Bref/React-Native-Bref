@@ -68,4 +68,5 @@ onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary(timeStamp, this.
 ```
 
 Q: What's the limit of geocoding request?
+
 A: The api supports 600 requests per minute and query up to 50 locations per request.
