@@ -36,8 +36,38 @@ export default class TodayScene extends Component {
     }
   }
 
+  reverseGeocoding(longitude, latitude) {
+    // TODO: Cannot get parameters.
+    function callback(req) {
+      let jsonObj = JSON.parse(req.responseText);
+      console.log(jsonObj.features[1].text);
+      try {
+        let city = jsonObj.features[1].text;
+      } catch (error) {
+        console.error(error);
+      }
+      return city;
+    }
+
+    let url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+    let apiKey = 'access_token=pk.eyJ1Ijoic3RyYXdiZXJyeWZnIiwiYSI6ImNpdW03a2hhZzAwN2oyb20xYTJ2dmVzOGoifQ.R7XeStof2bdjmKMGHIVlmg';
+    let req = new XMLHttpRequest();
+    // let longitude = 121;
+    // let latitude = 31;
+    let reqUrl = url + longitude + ',' + latitude + '.json?' + apiKey;
+    console.log(reqUrl);
+    req.onreadystatechange = function () {
+      if (req.readyState == 4 && req.status == 200) {
+        callback(req);
+      }
+    };
+    req.open('GET', reqUrl, true);
+    req.send(null);
+  }
+
   submit() {
     let date = new Date();
+    let city = this.reverseGeocoding(121, 31);
     DiaryActions.createDiary(date, this.state.text);
   }
 
