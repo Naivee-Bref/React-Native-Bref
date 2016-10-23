@@ -35,17 +35,17 @@ export default class TodayScene extends Component {
     this.state = {
       text: '',
       location: 'unknown',
-      imageUrl: null
+      imageData: null
     }
   }
 
   submit() {
     let date = new Date();
-    DiaryActions.createDiary(date, this.state.text);
+    DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageData);
   }
 
-  _getImageUrl(url) {
-    this.setState({imageUrl: url});
+  _getImageData(data) {
+    this.setState({imageData: data});
   }
 
   render() {
@@ -65,7 +65,7 @@ export default class TodayScene extends Component {
           maxLength={70}
         />
         <GeolocationExample />
-        <Photo storeSource={null} getImageUrlBack={(url) => this._getImageUrl(url)}/>
+        <Photo storeSource={null} getImageDataBack={(data) => this._getImageData(data)}/>
         <TouchableHighlight>
           <Text style={styles.commonText} onPress={()=>this.submit()}>Submit</Text>
         </TouchableHighlight>
