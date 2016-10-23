@@ -14,15 +14,17 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import Reflux from 'reflux';
 
 import Photo from '../component/Photo';
 import GeolocationExample from '../component/Location';
+
+import Reflux from 'reflux';
 import diaryStore from './../component/Storage';
 import DiaryActions from './../actions';
 
+
 export default class TodayScene extends Component {
-  mixins = [Reflux.connect(diaryStore, 'store')];
+  mixins =  [Reflux.connect(diaryStore, 'store')];
 
   static propTypes = {
     navigator: PropTypes.object.isRequired
@@ -33,12 +35,17 @@ export default class TodayScene extends Component {
     this.state = {
       text: '',
       location: 'unknown',
+      imageUrl: null
     }
   }
 
   submit() {
     let date = new Date();
     DiaryActions.createDiary(date, this.state.text);
+  }
+
+  _getImageUrl(url) {
+    this.setState({imageUrl: url});
   }
 
   render() {
@@ -58,7 +65,7 @@ export default class TodayScene extends Component {
           maxLength={70}
         />
         <GeolocationExample />
-        <Photo />
+        <Photo storeSource={null} getImageUrlBack={(url) => this._getImageUrl(url)}/>
         <TouchableHighlight>
           <Text style={styles.commonText} onPress={()=>this.submit()}>Submit</Text>
         </TouchableHighlight>

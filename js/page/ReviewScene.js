@@ -28,12 +28,12 @@ export default class ReviewScene extends Component {
     };
   }
 
-  componentDidMount() {
-    this._refreshData();
+  componentWillMount() {
+    this._refreshData().done();
   }
 
-  _refreshData() {
-    AsyncStorage.getItem(this.state.DIARY_KEY)
+  async _refreshData() {
+    await AsyncStorage.getItem(this.state.DIARY_KEY)
       .then((data) => {
         return JSON.parse(data);
       })
