@@ -17,7 +17,7 @@ import {
 import Reflux from 'reflux';
 
 import Photo from '../component/Photo';
-import GeolocationExample from '../component/Location';
+import Location from '../component/Location';
 import diaryStore from './../component/Storage';
 import DiaryActions from './../actions';
 
@@ -33,7 +33,12 @@ export default class TodayScene extends Component {
     this.state = {
       text: '',
       location: 'unknown',
+      city: ''
     }
+  }
+
+  getCity(city) {
+    this.state.city = city;
   }
 
   submit() {
@@ -57,7 +62,10 @@ export default class TodayScene extends Component {
           keyboardType={'default'}
           maxLength={70}
         />
-        <GeolocationExample />
+        <Location getCityBack={(city) => this.getCity(city)}/>
+        <View>
+          <Text style={styles.commonText}>{this.state.city}</Text>
+        </View>
         <Photo />
         <TouchableHighlight>
           <Text style={styles.commonText} onPress={()=>this.submit()}>Submit</Text>
