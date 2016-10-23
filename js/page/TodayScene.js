@@ -33,10 +33,15 @@ export default class TodayScene extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      text: 'Default Text',
+      text: '',
       location: 'unknown',
       imageUrl: null
     }
+  }
+
+  submit() {
+    let date = new Date();
+    DiaryActions.createDiary(date, this.state.text);
   }
 
   _getImageUrl(url) {
@@ -53,10 +58,17 @@ export default class TodayScene extends Component {
           style={styles.input}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
-          onSubmitEditing={(event) => {DiaryActions.createDiary('100', this.state.text)} }
+          multiline={true}
+          placeholder={'Say something...'}
+          placeholderTextColor={'#CFCFCF'}
+          keyboardType={'default'}
+          maxLength={70}
         />
         <GeolocationExample />
         <Photo storeSource={null} getImageUrlBack={(url) => this._getImageUrl(url)}/>
+        <TouchableHighlight>
+          <Text style={styles.commonText} onPress={()=>this.submit()}>Submit</Text>
+        </TouchableHighlight>
       </View>
     );
   }
