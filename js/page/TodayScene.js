@@ -24,7 +24,7 @@ import DiaryActions from './../actions';
 
 
 export default class TodayScene extends Component {
-  mixins =  [Reflux.connect(diaryStore, 'store')];
+  mixins = [Reflux.connect(diaryStore, 'store')];
 
   static propTypes = {
     navigator: PropTypes.object.isRequired
@@ -36,6 +36,10 @@ export default class TodayScene extends Component {
       text: '',
       location: 'unknown',
     }
+  }
+
+  submit() {
+    DiaryActions.createDiary('100', this.state.text);
   }
 
   render() {
@@ -53,10 +57,12 @@ export default class TodayScene extends Component {
           placeholderTextColor={'#CFCFCF'}
           keyboardType={'default'}
           maxLength={70}
-          ///*onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary('100', this.state.text)} }*/
         />
         <GeolocationExample />
         <Photo />
+        <TouchableHighlight>
+          <Text style={styles.commonText} onPress={()=>this.submit()}>Submit</Text>
+        </TouchableHighlight>
       </View>
     );
   }
