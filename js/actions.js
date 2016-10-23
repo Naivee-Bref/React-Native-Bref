@@ -7,6 +7,7 @@ var DiaryActions = Reflux.createActions([
   'createDiary',
   'deleteDiary',
   'editDiary',
+  'deleteAllDiaries'
 ]);
 
 export default DiaryActions;

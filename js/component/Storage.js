@@ -20,6 +20,7 @@ export default  diaryStore = Reflux.createStore({
     this.listenTo(DiaryActions.createDiary, this.createDiary);
     this.listenTo(DiaryActions.deleteDiary, this.deleteDiary);
     this.listenTo(DiaryActions.editDiary, this.editDiary);
+    this.listenTo(DiaryActions.deleteAllDiaries, this.deleteAllDiaries);
     this.emit();
   },
 
@@ -48,9 +49,6 @@ export default  diaryStore = Reflux.createStore({
   },
 
   emit() {
-    // For test storage function, should remove in release code
-    this._deleteAllDiaries();
-    //
     this._writeDiaries().done();
     this.trigger(this._diaries);
   },
@@ -76,11 +74,9 @@ export default  diaryStore = Reflux.createStore({
     this.emit();
   },
 
-  // This method is for test only
-  _deleteAllDiaries() {
-    _.remove(this._diaries, (diary) => {
-      return diary.text === undefined;
-    });
+  deleteAllDiaries() {
+    this._diaries = [];
+    this.emit();
   }
 });
 
