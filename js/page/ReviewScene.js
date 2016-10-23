@@ -51,7 +51,7 @@ export default class ReviewScene extends Component {
           {rowData.text}
         </Text>
         <Text style={styles.timelineOthers}>
-          08:45
+          {rowData.timeStamp}
         </Text>
       </View>
     )
@@ -59,7 +59,7 @@ export default class ReviewScene extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} refreshing>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>
