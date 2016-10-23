@@ -11,7 +11,9 @@ import {
   View,
   ListView,
   TouchableHighlight,
-  AsyncStorage
+  AsyncStorage,
+  Image,
+  ImageStore
 } from 'react-native';
 
 export default class ReviewScene extends Component {
@@ -28,12 +30,12 @@ export default class ReviewScene extends Component {
     };
   }
 
-  componentDidMount() {
-    this._refreshData();
+  componentWillMount() {
+    this._refreshData().done();
   }
 
-  _refreshData() {
-    AsyncStorage.getItem(this.state.DIARY_KEY)
+  async _refreshData() {
+    await AsyncStorage.getItem(this.state.DIARY_KEY)
       .then((data) => {
         return JSON.parse(data);
       })
@@ -50,16 +52,14 @@ export default class ReviewScene extends Component {
         <Text style={styles.timelineText}>
           {rowData.text}
         </Text>
-        <Text style={styles.timelineOthers}>
-          {rowData.timeStamp}
-        </Text>
+        <Image style={styles.avatar} source={{uri: 'data:image/jpeg;base64,' +  rowData.imageData, isStatic: true}}/>
       </View>
     )
   }
 
   render() {
     return (
-      <View style={styles.container} refreshing>
+      <View style={styles.container}>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>
@@ -94,5 +94,10 @@ const styles = StyleSheet.create({
   timelineOthers: {
     color: '#AFAFAF',
     fontSize: 12
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150
   }
 });

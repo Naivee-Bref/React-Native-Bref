@@ -54,8 +54,8 @@ export default diaryStore = Reflux.createStore({
     this.trigger(this._diaries);
   },
 
-  createDiary(timeStamp, text) {
-    this._diaries.push(new DiaryItem(timeStamp, text));
+  createDiary(timeStamp, text, location, imageData) {
+    this._diaries.push(new DiaryItem(timeStamp, text, location, imageData));
     console.log(this._diaries);
     this.emit();
   },
