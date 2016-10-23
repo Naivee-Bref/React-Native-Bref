@@ -16,15 +16,16 @@ import {
 } from 'react-native';
 
 import Photo from '../component/Photo';
-import GeolocationExample from '../component/Location';
+
 
 import Reflux from 'reflux';
+import Location from '../component/Location';
 import diaryStore from './../component/Storage';
 import DiaryActions from './../actions';
 
 
 export default class TodayScene extends Component {
-  mixins =  [Reflux.connect(diaryStore, 'store')];
+  mixins = [Reflux.connect(diaryStore, 'store')];
 
   static propTypes = {
     navigator: PropTypes.object.isRequired
@@ -35,37 +36,13 @@ export default class TodayScene extends Component {
     this.state = {
       text: '',
       location: 'unknown',
-      imageData: null
+      imageData: null,
+      city: ''
     }
   }
 
-  reverseGeocoding(longitude, latitude) {
-    // TODO: Cannot get parameters.
-    function callback(req) {
-      let jsonObj = JSON.parse(req.responseText);
-      console.log(jsonObj.features[1].text);
-      try {
-        let city = jsonObj.features[1].text;
-      } catch (error) {
-        console.error(error);
-      }
-      return city;
-    }
-
-    let url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
-    let apiKey = 'access_token=pk.eyJ1Ijoic3RyYXdiZXJyeWZnIiwiYSI6ImNpdW03a2hhZzAwN2oyb20xYTJ2dmVzOGoifQ.R7XeStof2bdjmKMGHIVlmg';
-    let req = new XMLHttpRequest();
-    // let longitude = 121;
-    // let latitude = 31;
-    let reqUrl = url + longitude + ',' + latitude + '.json?' + apiKey;
-    console.log(reqUrl);
-    req.onreadystatechange = function () {
-      if (req.readyState == 4 && req.status == 200) {
-        callback(req);
-      }
-    };
-    req.open('GET', reqUrl, true);
-    req.send(null);
+  getCity(city) {
+    this.state.city = city;
   }
 
   submit() {
@@ -93,8 +70,12 @@ export default class TodayScene extends Component {
           keyboardType={'default'}
           maxLength={70}
         />
-        <GeolocationExample />
+        <Location getCityBack={(city) => this.getCity(city)}/>
         <Photo storeSource={null} getImageDataBack={(data) => this._getImageData(data)}/>
+        <View>
+          <Text style={styles.commonText}>{this.state.city}</Text>
+        </View>
+        <Photo />
         <TouchableHighlight>
           <Text style={styles.commonText} onPress={()=>this.submit()}>Submit</Text>
         </TouchableHighlight>
