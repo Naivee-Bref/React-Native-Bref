@@ -18,7 +18,7 @@ import ImagePicker from 'react-native-image-picker';
 export default class Photo extends Component {
   static propTypes = {
     storeSource: PropTypes.string,
-    getImageDataBack: PropTypes.func
+    getImageUrlBack: PropTypes.func
   };
 
   constructor(props, context) {
@@ -49,7 +49,7 @@ export default class Photo extends Component {
         //     this.props.getImageUrlBack(uri);
         //   },
         //   (error) => console.error('image store fail'));
-        this.props.getImageDataBack(response.data);
+        this.props.getImageUrlBack(response.uri);
         this.setState({
           avatarSource: source
         });

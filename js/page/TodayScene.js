@@ -36,7 +36,7 @@ export default class TodayScene extends Component {
     this.state = {
       text: '',
       location: 'unknown',
-      imageData: null,
+      imageUrl: null,
       city: ''
     }
   }
@@ -45,13 +45,13 @@ export default class TodayScene extends Component {
     this.state.city = city;
   }
   
-  _getImageData(data) {
-    this.setState({imageData: data});
+  _getImageData(url) {
+    this.setState({imageUrl: url});
   }
 
   submit() {
     let date = new Date();
-    DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageData);
+    DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageUrl);
   }
 
   render() {
@@ -71,7 +71,7 @@ export default class TodayScene extends Component {
           maxLength={70}
         />
         <Location getCityBack={(city) => this._getCity(city)}/>
-        <Photo storeSource={null} getImageDataBack={(data) => this._getImageData(data)}/>
+        <Photo storeSource={null} getImageUrlBack={(url) => this._getImageData(url)}/>
         <View>
           <Text style={styles.commonText}>{this.state.city}</Text>
         </View>
