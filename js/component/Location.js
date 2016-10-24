@@ -27,7 +27,7 @@ export default class Location extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.watchID = navigator.geolocation.watchPosition(
       (position) => {
         var jsonPosition = JSON.stringify(position);
@@ -35,7 +35,7 @@ export default class Location extends Component {
       }
     );
     console.log('state: ' + this.state.position);
-    setTimeout(()=>this.getCity(), 300);
+    await setTimeout(()=>this.getCity(), 300);
   }
 
   componentWillUnmount() {
