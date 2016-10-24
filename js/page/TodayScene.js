@@ -41,17 +41,17 @@ export default class TodayScene extends Component {
     }
   }
 
-  getCity(city) {
+  _getCity(city) {
     this.state.city = city;
+  }
+  
+  _getImageData(data) {
+    this.setState({imageData: data});
   }
 
   submit() {
     let date = new Date();
     DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageData);
-  }
-
-  _getImageData(data) {
-    this.setState({imageData: data});
   }
 
   render() {
@@ -70,12 +70,11 @@ export default class TodayScene extends Component {
           keyboardType={'default'}
           maxLength={70}
         />
-        <Location getCityBack={(city) => this.getCity(city)}/>
+        <Location getCityBack={(city) => this._getCity(city)}/>
         <Photo storeSource={null} getImageDataBack={(data) => this._getImageData(data)}/>
         <View>
           <Text style={styles.commonText}>{this.state.city}</Text>
         </View>
-        <Photo />
         <TouchableHighlight>
           <Text style={styles.commonText} onPress={()=>this.submit()}>Submit</Text>
         </TouchableHighlight>

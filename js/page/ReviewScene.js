@@ -65,6 +65,7 @@ export default class ReviewScene extends Component {
         </TouchableHighlight>
         <ListView
           dataSource={this.state.dataSource}
+          enableEmptySections={true}
           renderRow={(rowData) => this._renderRow(rowData)}
         />
       </View>
