@@ -52,7 +52,7 @@ export default class ReviewScene extends Component {
         <Text style={styles.timelineText}>
           {rowData.text}
         </Text>
-        <Image style={styles.avatar} source={{uri: 'data:image/jpeg;base64,' +  rowData.imageData, isStatic: true}}/>
+        <Image style={styles.avatar} source={{uri: rowData.imageUrl}}/>
       </View>
     )
   }
