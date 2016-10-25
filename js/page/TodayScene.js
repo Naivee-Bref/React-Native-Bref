@@ -121,12 +121,6 @@ export default class TodayScene extends Component {
           {/*<Text style={styles.buttonText}>POST</Text>*/}
           {/*</TouchableHighlight>*/}
         </View>
-<<<<<<< HEAD
-        <TouchableHighlight onPress={()=> this.submitOnPress()}>
-          <Text style={styles.commonText}>Submit</Text>
-        </TouchableHighlight>
-=======
->>>>>>> origin/development-ann
       </View>
     );
   }
