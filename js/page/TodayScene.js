@@ -51,11 +51,9 @@ export default class TodayScene extends Component {
   }
 
   submit() {
-    if (this.state.text !== null) {
-      let date = new Date();
-      DiaryActions.createDiary(dateFormat(date, 'H:MM:ss, mmmm dS, yyyy'), this.state.text, this.state.location, this.state.imageUrl);
-      this.state.isSubmitted = true;
-    }
+    let date = new Date();
+    DiaryActions.createDiary(dateFormat(date, 'H:MM:ss, mmmm dS, yyyy'), this.state.text, this.state.location, this.state.imageUrl);
+    this.state.isSubmitted = true;
   }
 
   render() {
@@ -83,16 +81,21 @@ export default class TodayScene extends Component {
         </View>
         <TouchableHighlight
           onPress={()=> {
-            this.submit();
-            AlertIOS.alert(
-              'Diary submitted',
-              'Press OK and back to the Bref.',
-              [
-                {
-                  text: 'OK', onPress: () => this.props.navigator.pop()
-                }
-              ]
-            );
+            if (this.state.text !== '') {
+              this.submit();
+              AlertIOS.alert(
+                'Diary submitted',
+                'Press OK and back to the Bref.',
+                [
+                  {
+                    text: 'OK', onPress: () => this.props.navigator.pop()
+                  }
+                ]
+              );
+            }
+            else {
+              AlertIOS.alert('Diary empty', 'Press OK and continue to edit diary.');
+            }
           }}>
           <Text style={styles.commonText}>Submit</Text>
         </TouchableHighlight>
