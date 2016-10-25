@@ -43,12 +43,6 @@ export default class Photo extends Component {
       }
       else {
         const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
-        // ImageStore.addImageFromBase64(response.data,
-        //   (uri) => {
-        //     console.log('image store success');
-        //     this.props.getImageUrlBack(uri);
-        //   },
-        //   (error) => console.error('image store fail'));
         this.props.getImageUrlBack(response.uri);
         this.setState({
           avatarSource: source

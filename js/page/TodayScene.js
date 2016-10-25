@@ -72,6 +72,8 @@ export default class TodayScene extends Component {
           placeholderTextColor={'#CFCFCF'}
           keyboardType={'default'}
           maxLength={70}
+          autoCapitalize={'none'}
+          autoCorrect={false}
         />
         <Location getCityBack={(city) => this._getCity(city)}/>
         <Photo storeSource={null} getImageUrlBack={(url) => this._getImageData(url)}/>

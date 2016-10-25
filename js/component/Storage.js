@@ -26,27 +26,27 @@ export default diaryStore = Reflux.createStore({
   },
 
   async _loadDiaries() {
-    try {
-      var value = await AsyncStorage.getItem(DIARY_KEY);
-      if (value !== null) {
-        this._diaries = JSON.parse(value).map((diaryObject) => {
-          return DiaryItem.CreateFromObject(diaryObject);
-        });
-        this.emit();
-      } else {
-        console.info(`$(DIARY_KEY) not found in storage`);
-      }
-    } catch (error) {
-      console.error('Load Storage Error: ', error.message);
-    }
+    await AsyncStorage.getItem(DIARY_KEY)
+      .then(result => {
+        if (result !== null) {
+          this._diaries = JSON.parse(result).map((diaryObject) => {
+            return DiaryItem.CreateFromObject(diaryObject);
+          });
+          this.emit();
+        } else {
+          console.info(`$(DIARY_KEY) not found in storage`);
+        }
+      })
+      .catch(error => {
+        console.error('Load Storage Error: ', error.message);
+      });
   },
 
   async _writeDiaries() {
-    try {
-      await AsyncStorage.setItem(DIARY_KEY, JSON.stringify(this._diaries));
-    } catch (error) {
-      console.error('Write Storage Error: ', error.message);
-    }
+    await AsyncStorage.setItem(DIARY_KEY, JSON.stringify(this._diaries))
+      .catch(error => {
+        console.error('Write Storage Error: ', error.message);
+      });
   },
 
   emit() {
