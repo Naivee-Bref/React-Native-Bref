@@ -7,6 +7,7 @@
 import React, {Component, PropTypes} from 'react';
 import {
   StyleSheet,
+  Dimensions,
   Image,
   Text,
   TextInput,
@@ -74,40 +75,100 @@ export default class TodayScene extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableHighlight onPress={() => this.props.navigator.pop()}>
+      <View style={styles.container_out}>
+        <TouchableHighlight
+          underlayColor={'gray'}
+          onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-          multiline={true}
-          placeholder={'Say something...'}
-          placeholderTextColor={'#CFCFCF'}
-          keyboardType={'default'}
-          maxLength={70}
-          autoCapitalize={'none'}
-          autoCorrect={false}
-        />
-        <Location getCityBack={(city) => this._getCity(city)}/>
-        <Photo storeSource={null} getImageUrlBack={(url) => this._getImageData(url)}/>
-        <View>
-          <Text style={styles.commonText}>{this.state.city}</Text>
+        <View style={styles.container}>
+          <Photo
+            storeSource={null}
+            getImageUrlBack={(url) => this._getImageData(url)}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.text}
+            multiline={true}
+            placeholder={'Say something...'}
+            placeholderTextColor={'gray'}
+            keyboardType={'default'}
+            maxLength={70}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+          />
+          <Location getCityBack={(city) => this._getCity(city)}/>
+          <View style={styles.location}>
+            <Text style={styles.commonText}>{this.state.city}</Text>
+          </View>
+          {/*<TouchableHighlight*/}
+          {/*style={styles.button}*/}
+          {/*underlayColor={'gray'}*/}
+          {/*activeOpacity={0.5}*/}
+          {/*onPress={()=> {*/}
+          {/*this.submit();*/}
+          {/*AlertIOS.alert(*/}
+          {/*'Diary submitted',*/}
+          {/*'Press OK and back to the Bref.',*/}
+          {/*[*/}
+          {/*{*/}
+          {/*text: 'OK', onPress: () => this.props.navigator.pop()*/}
+          {/*}*/}
+          {/*]*/}
+          {/*);*/}
+          {/*}}>*/}
+          {/*<Text style={styles.buttonText}>POST</Text>*/}
+          {/*</TouchableHighlight>*/}
         </View>
+<<<<<<< HEAD
         <TouchableHighlight onPress={()=> this.submitOnPress()}>
           <Text style={styles.commonText}>Submit</Text>
         </TouchableHighlight>
+=======
+>>>>>>> origin/development-ann
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container_out: {
     padding: 10,
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: '#202020'
+  },
+  container: {
+    backgroundColor: '#202020',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    paddingTop: 30,
+    alignItems: 'center'
+  },
+  location: {
+    flex: 1,
+    marginLeft: 20,
+    paddingBottom: 40
+  },
+  button: {
+    height: 25,
+    width: 70,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: '#202020',
+    marginRight: 30
+  },
+  buttonText: {
+    height: 20,
+    width: 50,
+    marginLeft: 10,
+    marginTop: 5,
+    fontSize: 14,
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontWeight: 'bold'
   },
   backButtonText: {
     color: '#FFFFFF',
@@ -119,11 +180,18 @@ const styles = StyleSheet.create({
     color: '#AFAFAF'
   },
   input: {
+    flex: 1,
+    paddingTop: 10,
     height: 100,
-    borderColor: 'white',
-    borderWidth: 1,
+    width: Dimensions.get('window').width - 60,
+    borderBottomColor: '#AFAFAF',
+    borderLeftColor: '#202020',
+    borderRightColor: '#202020',
+    borderTopColor: '#202020',
+    borderWidth: 0.5,
     color: '#AFAFAF',
-    fontSize: 15,
-    alignItems: 'flex-start'
-  },
+    marginLeft: 30,
+    marginRight: 30,
+    fontSize: 15
+  }
 });
