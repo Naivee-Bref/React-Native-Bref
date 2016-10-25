@@ -3,14 +3,10 @@
 import React, {Component} from 'react';
 import {
   AppRegistry,
-<<<<<<< Updated upstream
-  Navigator
-=======
   Navigator,
   Text,
   TouchableHighlight,
-  StyleSheet
->>>>>>> Stashed changes
+  StyleSheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -25,8 +21,6 @@ class RN_Bref extends Component {
       <Navigator
         initialRoute={{scene: 'initial'}}
         renderScene={RN_Bref.navigatorRenderScene}
-<<<<<<< Updated upstream
-=======
         navigationBar={
           <Navigator.NavigationBar
             routeMapper={{
@@ -76,7 +70,6 @@ class RN_Bref extends Component {
             style={{backgroundColor: 'black'}}
           />
         }
->>>>>>> Stashed changes
       />
     );
   }

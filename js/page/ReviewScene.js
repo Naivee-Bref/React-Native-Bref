@@ -12,12 +12,10 @@ import {
   ListView,
   TouchableHighlight,
   Image,
-<<<<<<< Updated upstream
-=======
   ImageStore,
   formatDate,
-  StatusBar
->>>>>>> Stashed changes
+  StatusBar,
+  AsyncStorage
 } from 'react-native';
 import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,36 +25,10 @@ export default class ReviewScene extends Component {
     navigator: PropTypes.object.isRequired
   };
 
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
     this.state = {
-<<<<<<< Updated upstream
-      // TODO: Add time and location to data source.
-      dataSource: ds.cloneWithRows([
-        '西柚今天翘课被举报了，假装什么都没有发生的样子',
-        '校车上全都是小鲜肉',
-        '食堂的早饭又有油条',
-        '食堂的早饭有油条，激动人心~',
-        '编不下去了摔',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-        '编不下去了',
-      ])
-    }
-=======
       dataSource: ds.cloneWithRows([]),
       DIARY_KEY: '@Bref:diaries'
     };
@@ -76,18 +48,6 @@ export default class ReviewScene extends Component {
           dataSource: this.state.dataSource.cloneWithRows(data)
         })
       })
-  }
-
-  getMonth(timeStamp) {
-
-  }
-
-  getDate(timeStamp) {
-
-  }
-
-  getTime(timeStamp) {
-
   }
 
   _renderRow(rowData) {
@@ -129,7 +89,6 @@ export default class ReviewScene extends Component {
         </View>
       </View>
     )
->>>>>>> Stashed changes
   }
 
   render() {
@@ -141,23 +100,7 @@ export default class ReviewScene extends Component {
         </TouchableHighlight>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData) =>
-            <View style={styles.item}>
-              <View style={{flex: 5}}>
-                <Text style={styles.timelineText}>
-                  {rowData}
-                </Text>
-                <Text style={styles.timelineOthers}>
-                  08:45
-                </Text>
-              </View>
-              <View style={{flex: 1, marginRight: 1}}>
-                <TouchableHighlight style={ styles.imageContainer }>
-                  <Image style={ styles.image } source={{ uri: 'http://www.free-avatars.com/data/media/37/cat_avatar_0597.jpg' }} />
-                </TouchableHighlight>
-              </View>
-            </View>
-          }
+          renderRow={(rowData) => this._renderRow(rowData)}
         />
       </View>
     );
@@ -166,6 +109,7 @@ export default class ReviewScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1, 
     padding: 10,
     backgroundColor: '#202020',
     justifyContent: 'center'
@@ -226,14 +170,11 @@ const styles = StyleSheet.create({
     width: 40,
     borderRadius: 20,
     backgroundColor: 'grey',
-<<<<<<< Updated upstream
-=======
   },
   image: {
     marginRight: 10,
     height: 40,
     width: 40,
     borderRadius: 20,
->>>>>>> Stashed changes
   }
 });

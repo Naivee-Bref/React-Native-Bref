@@ -11,14 +11,10 @@ import {
   Text,
   TextInput,
   TouchableHighlight,
-<<<<<<< Updated upstream
-  View
-=======
   TouchableOpacity,
   View,
   AlertIOS,
-  StatusBar
->>>>>>> Stashed changes
+  StatusBar,
 } from 'react-native';
 
 var GeolocationExample = React.createClass({
@@ -74,8 +70,6 @@ export default class TodayScene extends Component {
     }
   }
 
-<<<<<<< Updated upstream
-=======
   _getCity(city) {
     this.state.city = city;
   }
@@ -106,7 +100,6 @@ export default class TodayScene extends Component {
     this.state.isSubmitted = true;
   }
 
->>>>>>> Stashed changes
   render() {
     return (
       <View style={styles.container}>
