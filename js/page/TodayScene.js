@@ -7,6 +7,7 @@
 import React, {Component, PropTypes} from 'react';
 import {
     StyleSheet,
+    Dimensions,
     Image,
     Text,
     TextInput,
@@ -61,7 +62,9 @@ export default class TodayScene extends Component {
     render() {
         return (
             <View style={styles.container_out}>
-                <TouchableHighlight onPress={() => this.props.navigator.pop()}>
+                <TouchableHighlight
+                    underlayColor={'gray'}
+                    onPress={() => this.props.navigator.pop()}>
                     <Text style={styles.backButtonText}>Back</Text>
                 </TouchableHighlight>
                 <View style={styles.container}>
@@ -85,23 +88,24 @@ export default class TodayScene extends Component {
                     <View style={styles.location}>
                         <Text style={styles.commonText}>{this.state.city}</Text>
                     </View>
-                    <TouchableHighlight
-                        style={styles.button}
-                        activeOpacity={0.7}
-                        onPress={()=> {
-                            this.submit();
-                            AlertIOS.alert(
-                                'Diary submitted',
-                                'Press OK and back to the Bref.',
-                                [
-                                    {
-                                        text: 'OK', onPress: () => this.props.navigator.pop()
-                                    }
-                                ]
-                            );
-                        }}>
-                        <Text style={styles.buttonText}>Submit</Text>
-                    </TouchableHighlight>
+                    {/*<TouchableHighlight*/}
+                        {/*style={styles.button}*/}
+                        {/*underlayColor={'gray'}*/}
+                        {/*activeOpacity={0.5}*/}
+                        {/*onPress={()=> {*/}
+                            {/*this.submit();*/}
+                            {/*AlertIOS.alert(*/}
+                                {/*'Diary submitted',*/}
+                                {/*'Press OK and back to the Bref.',*/}
+                                {/*[*/}
+                                    {/*{*/}
+                                        {/*text: 'OK', onPress: () => this.props.navigator.pop()*/}
+                                    {/*}*/}
+                                {/*]*/}
+                            {/*);*/}
+                        {/*}}>*/}
+                        {/*<Text style={styles.buttonText}>POST</Text>*/}
+                    {/*</TouchableHighlight>*/}
                 </View>
             </View>
         );
@@ -112,11 +116,10 @@ const styles = StyleSheet.create({
     container_out: {
         padding: 10,
         flex: 1,
-        paddingBottom: 60,
-        backgroundColor: 'black'
+        backgroundColor: '#202020'
     },
     container: {
-        backgroundColor: 'black',
+        backgroundColor: '#202020',
         justifyContent: 'center',
         flexDirection: 'column',
         paddingTop: 30,
@@ -124,18 +127,18 @@ const styles = StyleSheet.create({
     },
     location: {
         flex: 1,
+        marginLeft: 20,
         paddingBottom: 40
     },
     button: {
-        flex: 1,
         height: 25,
         width: 70,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
-        backgroundColor: 'gray',
-        backfaceVisibility: 'visible'
+        backgroundColor: '#202020',
+        marginRight:30
     },
     buttonText: {
         height: 20,
@@ -159,12 +162,16 @@ const styles = StyleSheet.create({
     input: {
         flex:1,
         paddingTop: 10,
-        paddingLeft: 5,
         height: 100,
-        borderColor: '#AFAFAF',
+        width: Dimensions.get('window').width - 60,
+        borderBottomColor: '#AFAFAF',
+        borderLeftColor: '#202020',
+        borderRightColor: '#202020',
+        borderTopColor: '#202020',
         borderWidth: 0.5,
         color: '#AFAFAF',
-        alignItems: 'center',
+        marginLeft: 30,
+        marginRight: 30,
         fontSize: 15
     }
 });

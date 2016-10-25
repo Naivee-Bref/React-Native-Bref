@@ -98,7 +98,6 @@ export default class Location extends Component {
 
 const styles = StyleSheet.create({
   commonText: {
-    justifyContent: 'flex-start',
     padding: 20,
     paddingBottom: 3,
     color: '#AFAFAF'
