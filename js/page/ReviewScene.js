@@ -49,10 +49,19 @@ export default class ReviewScene extends Component {
   _renderRow(rowData) {
     return (
       <View style={styles.item}>
-        <Text style={styles.timelineText}>
-          {rowData.text}
-        </Text>
-        <Image style={styles.avatar} source={{uri: rowData.imageUrl}}/>
+        <View style={{flex: 5}}>
+          <Text style={styles.timelineText}>
+            {rowData.text}
+          </Text>
+          <Text style={styles.timelineOthers}>
+            {rowData.timeStamp}
+          </Text>
+        </View>
+        <View style={{flex: 1, marginRight: 1}}>
+          <TouchableHighlight style={ styles.imageContainer }>
+            <Image style={ styles.image } source={{uri: rowData.imageUrl}}/>
+          </TouchableHighlight>
+        </View>
       </View>
     )
   }
@@ -77,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#000000',
+    backgroundColor: '#1F1F1F',
     justifyContent: 'center'
   },
   backButtonText: {
@@ -86,19 +95,37 @@ const styles = StyleSheet.create({
   },
   item: {
     marginLeft: 10,
-    padding: 5
+    marginRight: 10,
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: "black",
+    borderRadius: 2,
+    shadowColor: "black",
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0.3,
+    },
+    flexDirection: 'row',
   },
   timelineText: {
     color: '#FFFFFF',
-    fontSize: 18
+    fontSize: 14
   },
   timelineOthers: {
     color: '#AFAFAF',
     fontSize: 12
   },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150
+  imageContainer: {
+    height: 40,
+    width: 40,
+    borderRadius: 2,
+    backgroundColor: 'grey',
+  },
+  image: {
+    height: 40,
+    width: 40,
+    borderRadius: 2,
   }
 });

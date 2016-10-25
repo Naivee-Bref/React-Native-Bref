@@ -16,6 +16,7 @@ import {
   AlertIOS
 } from 'react-native';
 import Reflux from 'reflux';
+import dateFormat from 'dateformat';
 
 import Photo from '../component/Photo';
 import Location from '../component/Location';
@@ -52,7 +53,7 @@ export default class TodayScene extends Component {
   submit() {
     if (this.state.text !== null) {
       let date = new Date();
-      DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageUrl);
+      DiaryActions.createDiary(dateFormat(date, 'H:MM:ss, mmmm dS, yyyy'), this.state.text, this.state.location, this.state.imageUrl);
       this.state.isSubmitted = true;
     }
   }
