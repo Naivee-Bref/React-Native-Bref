@@ -47,6 +47,14 @@ export default class ReviewScene extends Component {
   }
 
   _renderRow(rowData) {
+    let oneImage;
+    if (rowData.imageUrl !== null) {
+      oneImage = (
+        <TouchableHighlight style={ styles.imageContainer }>
+          <Image style={ styles.image } source={{uri: rowData.imageUrl}}/>
+        </TouchableHighlight>
+      );
+    }
     return (
       <View style={styles.item}>
         <View style={{flex: 5}}>
@@ -58,9 +66,7 @@ export default class ReviewScene extends Component {
           </Text>
         </View>
         <View style={{flex: 1, marginRight: 1}}>
-          <TouchableHighlight style={ styles.imageContainer }>
-            <Image style={ styles.image } source={{uri: rowData.imageUrl}}/>
-          </TouchableHighlight>
+          {oneImage}
         </View>
       </View>
     )
