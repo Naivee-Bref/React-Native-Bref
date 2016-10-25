@@ -71,12 +71,13 @@ const styles = StyleSheet.create({
     borderColor: '#9B9B9B',
     borderWidth: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150
+    borderRadius: 60,
+    width: 120,
+    height: 120,
+    marginBottom: 30
   },
   commonText: {
     padding: 5,

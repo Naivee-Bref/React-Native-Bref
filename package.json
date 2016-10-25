@@ -7,12 +7,14 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "dateformat": "^1.0.12",
+    "lodash": "^3.10.1",
     "react": "15.3.2",
     "react-native": "0.35.0",
+    "react-native-icons": "^0.4.0",
     "react-native-image-picker": "^0.22.10",
-    "reflux": "^0.4.1",
-    "lodash": "^3.10.1",
-    "dateformat": "^1.0.12"
+    "react-native-vector-icons": "^2.1.0",
+    "reflux": "^0.4.1"
   },
   "repository": {
     "type": "git",

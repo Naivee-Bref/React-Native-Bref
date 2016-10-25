@@ -5,10 +5,10 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		014A3B6A1C6CF34500B6D375 /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3B691C6CF34500B6D375 /* ImagePickerManager.m */; };
 		1DBDDCCD1DB66F2B00C1EEE3 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A3B5C1C6CF33500B6D375 /* libRNImagePicker.a */; };
+		721377CF396C4805B6E8FA88 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C879791E85416BB166D2E3 /* libRNVectorIcons.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +27,9 @@
 		014A3B5C1C6CF33500B6D375 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		014A3B681C6CF34500B6D375 /* ImagePickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerManager.h; sourceTree = "<group>"; };
 		014A3B691C6CF34500B6D375 /* ImagePickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerManager.m; sourceTree = "<group>"; };
+		9061AD1366514FF8855CD108 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		D6EB1564775D441884D46F0D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		68C879791E85416BB166D2E3 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +38,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DBDDCCD1DB66F2B00C1EEE3 /* libRNImagePicker.a in Frameworks */,
+				721377CF396C4805B6E8FA88 /* libRNVectorIcons.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +51,7 @@
 				014A3B681C6CF34500B6D375 /* ImagePickerManager.h */,
 				014A3B691C6CF34500B6D375 /* ImagePickerManager.m */,
 				014A3B5D1C6CF33500B6D375 /* Products */,
+				471FFE74F303409684C068E6 /* Libraries */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +61,16 @@
 				014A3B5C1C6CF33500B6D375 /* libRNImagePicker.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		471FFE74F303409684C068E6 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				9061AD1366514FF8855CD108 /* RNImagePicker.xcodeproj */,
+				D6EB1564775D441884D46F0D /* RNVectorIcons.xcodeproj */,
+			);
+			name = Libraries;
+			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,7 +99,7 @@
 		014A3B541C6CF33500B6D375 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 720;
 				ORGANIZATIONNAME = "Marc Shilling";
 				TargetAttributes = {
 					014A3B5B1C6CF33500B6D375 = {
@@ -208,10 +223,16 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../Example/node_modules/react-native/React/**",
+					"$(SRCROOT)/../../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../../node_modules/react-native-vector-icons/RNVectorIconsManager",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 			};
 			name = Debug;
 		};
@@ -222,10 +243,16 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../Example/node_modules/react-native/React/**",
+					"$(SRCROOT)/../../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../../node_modules/react-native-vector-icons/RNVectorIconsManager",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 			};
 			name = Release;
 		};

@@ -83,10 +83,10 @@ export default class Location extends Component {
   render() {
     return (
       <View refreshing>
-        <Text style={styles.commonText}>
-          <Text>Current position: </Text>
-          {this.state.position}
-        </Text>
+        {/*<Text style={styles.commonText}>*/}
+          {/*<Text>Current position: </Text>*/}
+          {/*{this.state.position}*/}
+        {/*</Text>*/}
         <Text style={styles.commonText}>
           <Text>City: </Text>
           {this.state.city}
@@ -98,7 +98,8 @@ export default class Location extends Component {
 
 const styles = StyleSheet.create({
   commonText: {
-    padding: 5,
+    justifyContent: 'flex-start',
+    padding: 20,
     paddingBottom: 3,
     color: '#AFAFAF'
   }
