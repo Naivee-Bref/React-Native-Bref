@@ -12,13 +12,12 @@ import {
   TextInput,
   TouchableHighlight,
   TouchableOpacity,
-  View
+  View,
+  AlertIOS
 } from 'react-native';
+import Reflux from 'reflux';
 
 import Photo from '../component/Photo';
-
-
-import Reflux from 'reflux';
 import Location from '../component/Location';
 import diaryStore from './../component/Storage';
 import DiaryActions from './../actions';
@@ -37,21 +36,25 @@ export default class TodayScene extends Component {
       text: '',
       location: 'unknown',
       imageUrl: null,
-      city: ''
+      city: '',
+      isSubmitted: false
     }
   }
 
   _getCity(city) {
     this.state.city = city;
   }
-  
+
   _getImageData(url) {
     this.setState({imageUrl: url});
   }
 
   submit() {
-    let date = new Date();
-    DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageUrl);
+    if (this.state.text !== null) {
+      let date = new Date();
+      DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageUrl);
+      this.state.isSubmitted = true;
+    }
   }
 
   render() {
@@ -75,8 +78,20 @@ export default class TodayScene extends Component {
         <View>
           <Text style={styles.commonText}>{this.state.city}</Text>
         </View>
-        <TouchableHighlight>
-          <Text style={styles.commonText} onPress={()=>this.submit()}>Submit</Text>
+        <TouchableHighlight
+          onPress={()=> {
+            this.submit();
+            AlertIOS.alert(
+              'Diary submitted',
+              'Press OK and back to the Bref.',
+              [
+                {
+                  text: 'OK', onPress: () => this.props.navigator.pop()
+                }
+              ]
+            );
+          }}>
+          <Text style={styles.commonText}>Submit</Text>
         </TouchableHighlight>
       </View>
     );
