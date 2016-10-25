@@ -84,8 +84,8 @@ export default class Location extends Component {
     return (
       <View refreshing>
         {/*<Text style={styles.commonText}>*/}
-          {/*<Text>Current position: </Text>*/}
-          {/*{this.state.position}*/}
+        {/*<Text>Current position: </Text>*/}
+        {/*{this.state.position}*/}
         {/*</Text>*/}
         <Text style={styles.commonText}>
           <Text>City: </Text>
