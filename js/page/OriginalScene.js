@@ -23,10 +23,13 @@ export default class OriginalScene extends Component {
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#FFFFFF"  barStyle="light-content" />
-        <View style={styles.welcome}>
+        <View style={{flex: 1.5, justifyContent: 'flex-end'}}>
           <Text style={styles.welcome_main}>
             bref.
           </Text>
+        </View>
+
+        <View style={{flex:1}}>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'today'})}>
             <Text style={styles.welcome_text}>
               Today
@@ -48,12 +51,13 @@ export default class OriginalScene extends Component {
             </Text>
           </TouchableHighlight>
         </View>
+
         <View style={styles.motto}>
-          <Text style={{color: '#CFCFCF', textAlign: 'left'}}>"</Text>
+          <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold', textAlign: 'left', fontSize: 20}}>“</Text>
           <Text style={styles.motto_text}>
-            这是一条非主流个性签名
+            How we spend our days is, of course, how we spend our lives.
           </Text>
-          <Text style={{color: '#CFCFCF', textAlign: 'right'}}>"</Text>
+          <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold',textAlign: 'right', fontSize: 20}}>”</Text>
         </View>
       </View>
     );
@@ -70,31 +74,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000000'
   },
-  welcome: {
-    justifyContent: 'center'
-  },
   welcome_main: {
-    fontSize: 50,
+    fontSize: 70,
     color: '#FFFFFF',
     textAlign: 'center',
     margin: 10,
     letterSpacing: 8,
-    fontFamily: 'PingFang SC',
+    fontFamily: 'Georgia-Bold',
     justifyContent: 'center'
   },
   welcome_text: {
     textAlign: 'center',
     color: '#CFCFCF',
+    fontSize: 16,
     marginBottom: 5
   },
   motto: {
-    marginTop: 100,
     marginBottom: 10,
-    justifyContent: 'flex-end'
+    marginLeft: 40,
+    marginRight: 40,
+    justifyContent: 'flex-start',
+    flex: 1
   },
   motto_text: {
-    fontSize: 16,
-    fontFamily: 'PingFang SC',
-    color: '#CFCFCF'
+    fontSize: 14,
+    color: '#CFCFCF',
+    marginLeft: 10,
+    marginRight: 10
   }
 });
