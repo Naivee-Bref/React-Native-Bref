@@ -11,7 +11,14 @@ import {
   Text,
   TextInput,
   TouchableHighlight,
+<<<<<<< Updated upstream
   View
+=======
+  TouchableOpacity,
+  View,
+  AlertIOS,
+  StatusBar
+>>>>>>> Stashed changes
 } from 'react-native';
 
 var GeolocationExample = React.createClass({
@@ -67,9 +74,43 @@ export default class TodayScene extends Component {
     }
   }
 
+<<<<<<< Updated upstream
+=======
+  _getCity(city) {
+    this.state.city = city;
+  }
+
+  _getImageData(url) {
+    this.setState({imageUrl: url});
+  }
+
+  submitOnPress() {
+    if (this.state.text !== '') {
+      this.submit();
+      AlertIOS.alert(
+        'Diary submitted',
+        'Press OK and back to the Bref.',
+        [{
+          text: 'OK', onPress: () => this.props.navigator.pop()
+        }]
+      );
+    }
+    else {
+      AlertIOS.alert('Diary empty', 'Press OK and continue to edit diary.');
+    }
+  }
+
+  submit() {
+    let date = new Date();
+    DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageUrl);
+    this.state.isSubmitted = true;
+  }
+
+>>>>>>> Stashed changes
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#FFFFFF"  barStyle="light-content" />
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>
             Back

@@ -9,7 +9,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  StatusBar
 } from 'react-native';
 
 
@@ -21,6 +22,7 @@ export default class OriginalScene extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#FFFFFF"  barStyle="light-content" />
         <View style={styles.welcome}>
           <Text style={styles.welcome_main}>
             bref.
