@@ -10,7 +10,8 @@ import {
   Text,
   View,
   ListView,
-  TouchableHighlight
+  TouchableHighlight,
+  Image,
 } from 'react-native';
 
 export default class ReviewScene extends Component {
@@ -58,12 +59,19 @@ export default class ReviewScene extends Component {
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
             <View style={styles.item}>
-              <Text style={styles.timelineText}>
-                {rowData}
-              </Text>
-              <Text style={styles.timelineOthers}>
-                08:45
-              </Text>
+              <View style={{flex: 5}}>
+                <Text style={styles.timelineText}>
+                  {rowData}
+                </Text>
+                <Text style={styles.timelineOthers}>
+                  08:45
+                </Text>
+              </View>
+              <View style={{flex: 1, marginRight: 1}}>
+                <TouchableHighlight style={ styles.imageContainer }>
+                  <Image style={ styles.image } source={{ uri: 'http://www.free-avatars.com/data/media/37/cat_avatar_0597.jpg' }} />
+                </TouchableHighlight>
+              </View>
             </View>
           }
         />
@@ -75,7 +83,7 @@ export default class ReviewScene extends Component {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: '#000000',
+    backgroundColor: '#1F1F1F',
     justifyContent: 'center'
   },
   backButtonText: {
@@ -84,14 +92,32 @@ const styles = StyleSheet.create({
   },
   item: {
     marginLeft: 10,
-    padding: 5
+    marginRight: 10,
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: "black",
+    borderRadius: 2,
+    shadowColor: "black",
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0.3,
+    },
+    flexDirection: 'row',
   },
   timelineText: {
     color: '#FFFFFF',
-    fontSize: 18
+    fontSize: 14
   },
   timelineOthers: {
     color: '#AFAFAF',
     fontSize: 12
+  },
+  imageContainer: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    backgroundColor: 'grey',
   }
 });
