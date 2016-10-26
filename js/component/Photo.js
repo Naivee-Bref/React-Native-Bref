@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
   avatar: {
     borderRadius: 60,
     width: 120,
-    height: 120
+    height: 120,
+    marginTop: 10
   },
   commonText: {
     padding: 5,

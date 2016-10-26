@@ -77,7 +77,7 @@ export default class TodayScene extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container_out}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
         <View style={styles.container}>
           <Photo
@@ -116,7 +116,7 @@ export default class TodayScene extends Component {
 
 const styles = StyleSheet.create({
   container_out: {
-    padding: 10,
+    paddingTop: 50,
     flex: 1,
     backgroundColor: '#202020'
   },
@@ -130,18 +130,17 @@ const styles = StyleSheet.create({
   },
   location: {
     flex: 1,
-    marginLeft: 20,
-    paddingBottom: 40
+    marginLeft: 20
   },
   button: {
+    flex: 1,
     height: 25,
     width: 70,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: '#202020',
-    marginRight: 30
+    backgroundColor: '#202020'
   },
   buttonText: {
     height: 20,
@@ -163,7 +162,7 @@ const styles = StyleSheet.create({
     color: '#AFAFAF'
   },
   input: {
-    flex: 1,
+
     paddingTop: 10,
     height: 100,
     width: Dimensions.get('window').width - 60,
