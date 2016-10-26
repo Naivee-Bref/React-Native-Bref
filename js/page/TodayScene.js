@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#202020',
     justifyContent: 'center',
     flexDirection: 'column',
-    paddingTop: 30,
+    paddingTop: 40,
     alignItems: 'center',
     flex: 1
   },
