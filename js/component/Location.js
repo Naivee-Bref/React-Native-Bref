@@ -56,9 +56,10 @@ export default class Location extends Component {
           let jsonObj = JSON.parse(req.responseText);
           var city = jsonObj.features[1].text;
           this.setState({city: city});
+          this.props.getCityBack(this.state.city);
         }
         catch (error) {
-          console.warn(error);
+          console.log(error);
         }
       }
     }.bind(this);
@@ -71,9 +72,7 @@ export default class Location extends Component {
       let jsonObj = JSON.parse(this.state.position);
       let longitude = -jsonObj.coords.longitude.toFixed(3);
       let latitude = jsonObj.coords.latitude.toFixed(3);
-      let city = this.reverseGeocoding(longitude, latitude);
-      this.setState({city: city});
-      this.props.getCityBack(city);
+      this.reverseGeocoding(longitude, latitude);
     }
     catch (error) {
       console.error(error);
@@ -83,10 +82,6 @@ export default class Location extends Component {
   render() {
     return (
       <View refreshing>
-        {/*<Text style={styles.commonText}>*/}
-        {/*<Text>Current position: </Text>*/}
-        {/*{this.state.position}*/}
-        {/*</Text>*/}
         <Text style={styles.commonText}>
           <Text>City: </Text>
           {this.state.city}

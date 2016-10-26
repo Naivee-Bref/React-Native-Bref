@@ -80,7 +80,7 @@ export default class ReviewScene extends Component {
               <Icon name="clock-o"/>&nbsp;
               {dateFormat(date, 'HH:MM:ss')}&nbsp;&nbsp;
               <Icon name="map-marker"/>&nbsp;
-              {rowData.location}
+              {rowData.city}
             </Text>
           </View>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
