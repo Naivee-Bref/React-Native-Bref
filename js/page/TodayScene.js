@@ -39,13 +39,14 @@ export default class TodayScene extends Component {
       text: '',
       location: 'unknown',
       imageUrl: null,
-      city: '',
+      city: 'unknown',
       isSubmitted: false
     }
   }
 
   _getCity(city) {
-    this.state.city = city;
+    console.log('getcity:' + city);
+    this.setState({city: city});
   }
 
   _getImageData(url) {
@@ -70,38 +71,8 @@ export default class TodayScene extends Component {
 
   submit() {
     let date = new Date();
-    DiaryActions.createDiary(dateFormat(date, 'H:MM:ss, mmmm dS, yyyy'), this.state.text, this.state.location, this.state.imageUrl);
-    this.state.isSubmitted = true;
-  }
-
-  _getCity(city) {
-    this.state.city = city;
-  }
-
-  _getImageData(url) {
-    this.setState({imageUrl: url});
-  }
-
-  submitOnPress() {
-    if (this.state.text !== '') {
-      this.submit();
-      AlertIOS.alert(
-        'Diary submitted',
-        'Press OK and back to the Bref.',
-        [{
-          text: 'OK', onPress: () => this.props.navigator.pop()
-        }]
-      );
-    }
-    else {
-      AlertIOS.alert('Diary empty', 'Press OK and continue to edit diary.');
-    }
-  }
-
-  submit() {
-    let date = new Date();
-    DiaryActions.createDiary(date, this.state.text, this.state.location, this.state.imageUrl);
-    this.state.isSubmitted = true;
+    DiaryActions.createDiary(date, this.state.text, this.state.city, this.state.imageUrl);
+    this.setState({isSubmitted: true});
   }
 
   render() {
@@ -125,15 +96,16 @@ export default class TodayScene extends Component {
             autoCapitalize={'none'}
             autoCorrect={false}
           />
-          <Location getCityBack={(city) => this._getCity(city)}/>
-          <View style={styles.location}>
-            <Text style={styles.commonText}>{this.state.city}</Text>
+          <View style={styles.location} refreshing>
+            <Location getCityBack={(city) => this._getCity(city)}/>
           </View>
           <TouchableHighlight
             style={styles.button}
             underlayColor={'gray'}
             activeOpacity={0.5}
-            onPress={()=> {this.submitOnPress();}}>
+            onPress={()=> {
+              this.submitOnPress();
+            }}>
             <Text style={styles.buttonText}>POST</Text>
           </TouchableHighlight>
         </View>
