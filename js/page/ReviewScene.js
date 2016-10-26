@@ -11,18 +11,18 @@ import {
   View,
   ListView,
   TouchableHighlight,
+  AsyncStorage,
   Image,
   ImageStore,
   formatDate,
   StatusBar,
-  AsyncStorage
 } from 'react-native';
 import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class ReviewScene extends Component {
   static propTypes = {
-    navigator: PropTypes.object.isRequired
+    navigator: PropTypes.object.isRequired,
   };
 
   constructor(props, context) {
@@ -77,9 +77,9 @@ export default class ReviewScene extends Component {
               {rowData.text}
             </Text>
             <Text style={styles.timelineOthers}>
-              <Icon name="clock-o" />&nbsp;
+              <Icon name="clock-o"/>&nbsp;
               {dateFormat(date, 'HH:MM:ss')}&nbsp;&nbsp;
-              <Icon name="map-marker" />&nbsp;
+              <Icon name="map-marker"/>&nbsp;
               {rowData.location}
             </Text>
           </View>
@@ -94,12 +94,13 @@ export default class ReviewScene extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#FFFFFF"  barStyle="light-content" />
+        <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>
         <ListView
           dataSource={this.state.dataSource}
+          enableEmptySections={true}
           renderRow={(rowData) => this._renderRow(rowData)}
         />
       </View>
@@ -109,7 +110,7 @@ export default class ReviewScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     padding: 10,
     backgroundColor: '#202020',
     justifyContent: 'center'

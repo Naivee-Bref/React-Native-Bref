@@ -17,6 +17,10 @@ export default class ProfileScene extends Component {
     navigator: PropTypes.object.isRequired
   };
 
+  constructor(props, context) {
+    super(props, context);
+  };
+
   render() {
     return (
       <View style={styles.container}>

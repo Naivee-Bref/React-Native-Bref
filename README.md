@@ -1,4 +1,5 @@
 # React-Native-Bref
+
 Bref developed in React-Native.
 
 #### Usage
@@ -16,6 +17,8 @@ Then, you can run the project.
 ```shell
 react-native run-ios
 ```
+
+Notice that Xcode 8 is needed, or you may encounter 'Build failed' error.
 
 #### Developer Attention
 
@@ -40,4 +43,4 @@ Again, feel free to modify anything.
 
 Author: Naivee
 
-Last modified date:  2016/10/09
+Last modified date:  2016/10/25
