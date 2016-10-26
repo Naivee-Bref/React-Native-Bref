@@ -45,7 +45,7 @@ export default class ReviewScene extends Component {
       })
       .then((data) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(data)
+          dataSource: this.state.dataSource.cloneWithRows(data.reverse())
         })
       })
   }
