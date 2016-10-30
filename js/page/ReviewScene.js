@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   },
   dayText: {
     color: 'white',
-    fontSize: 25
+    fontSize: 23
   },
   card: {
     padding: 10,
