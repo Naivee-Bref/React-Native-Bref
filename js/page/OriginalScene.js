@@ -34,24 +34,24 @@ export default class OriginalScene extends Component {
         </View>
 
         <View style={{flex:1}}>
-          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'today'})}>
+          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'New'})}>
             <Text style={styles.welcome_text}>
-              Today
+              New
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'review'})}>
+          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Timeline'})}>
             <Text style={styles.welcome_text}>
-              Review
+              Timeline
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight>
+          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Sites'})}>
             <Text style={styles.welcome_text}>
-              Share
+              Sites
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'profile'})}>
+          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Settings'})}>
             <Text style={styles.welcome_text}>
-              Me
+              Settings
             </Text>
           </TouchableHighlight>
         </View>
@@ -68,8 +68,6 @@ export default class OriginalScene extends Component {
   }
 }
 
-// TODO: Global default color
-// TODO: Not FullScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,

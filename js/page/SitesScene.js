@@ -1,5 +1,5 @@
 /**
- * Created by irmo on 16/10/12.
+ * Created by irmo on 16/11/2.
  */
 
 'use strict';
@@ -12,7 +12,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-export default class ProfileScene extends Component {
+export default class SitesScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired
   };
@@ -24,11 +24,6 @@ export default class ProfileScene extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={() => this.props.navigator.pop()}>
-          <Text style={styles.backButtonText}>
-            Back
-          </Text>
-        </TouchableHighlight>
         <Text style={styles.commonText}>
           Profile Scene
         </Text>

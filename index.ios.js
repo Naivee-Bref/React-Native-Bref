@@ -11,21 +11,22 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import OriginalScene from './js/page/OriginalScene';
-import ReviewScene from './js/page/ReviewScene';
-import TodayScene from './js/page/TodayScene';
-import ProfileScene from './js/page/ProfileScene';
+import NewScene from './js/page/NewScene';
+import TimelineScene from './js/page/TimelineScene';
+import SitesScene from './js/page/SitesScene';
+import SettingsScene from './js/page/SettingsScene';
 
 class RN_Bref extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{scene: 'initial'}}
+        initialRoute={{scene: 'Initial'}}
         renderScene={RN_Bref.navigatorRenderScene}
         navigationBar={
           <Navigator.NavigationBar
             routeMapper={{
               LeftButton: (route, navigator, index, navState) => {
-                if (route.scene === 'initial') {
+                if (route.scene === 'Initial') {
                   return null;
                 } else {
                   return (
@@ -36,7 +37,7 @@ class RN_Bref extends Component {
                 }
               },
               RightButton: (route, navigator, index, navState) => {
-                if (route.scene === 'today') {
+                if (route.scene === 'New') {
                   return (
                     <TouchableHighlight
                       style={{alignItems: 'center'}}
@@ -52,13 +53,8 @@ class RN_Bref extends Component {
               },
               Title: (route, navigator, index, navState) => {
                 var title = null;
-                if (route.scene === 'today') {
-                  title = 'Today';
-                }
-                else if (route.scene === 'review') {
-                  title = 'Review';
-                }
-                if (title) {
+                title = route.scene;
+                if (title != 'Initial') {
                   return (
                     <Text style={styles.navBarTitle}>
                       {title}
@@ -76,14 +72,16 @@ class RN_Bref extends Component {
 
   static navigatorRenderScene(route, navigator) {
     switch (route.scene) {
-      case 'initial':
+      case 'Initial':
         return (<OriginalScene navigator={navigator}/>);
-      case 'review':
-        return (<ReviewScene navigator={navigator}/>);
-      case 'today':
-        return (<TodayScene navigator={navigator}/>);
-      case 'profile':
-        return (<ProfileScene navigator={navigator}/>);
+      case 'New':
+        return (<NewScene navigator={navigator}/>);
+      case 'Timeline':
+        return (<TimelineScene navigator={navigator}/>);
+      case 'Sites':
+        return (<SitesScene navigator={navigator}/>);
+      case 'Settings':
+        return (<SettingsScene navigator={navigator}/>);
       default:
         return (<OriginalScene navigator={navigator}/>);
     }
@@ -111,5 +109,4 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold'
   }
-
 });

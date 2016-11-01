@@ -20,7 +20,7 @@ import {
 import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default class ReviewScene extends Component {
+export default class TimelineScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
   };

@@ -26,7 +26,7 @@ import diaryStore from './../component/Storage';
 import DiaryActions from './../actions';
 
 
-export default class TodayScene extends Component {
+export default class NewScene extends Component {
   mixins = [Reflux.connect(diaryStore, 'store')];
 
   static propTypes = {
@@ -92,7 +92,7 @@ export default class TodayScene extends Component {
             placeholder={'Say something...'}
             placeholderTextColor={'gray'}
             keyboardType={'default'}
-            maxLength={70}
+            maxLength={700}
             autoCapitalize={'none'}
             autoCorrect={false}
           />
@@ -162,7 +162,6 @@ const styles = StyleSheet.create({
     color: '#AFAFAF'
   },
   input: {
-
     paddingTop: 10,
     height: 100,
     width: Dimensions.get('window').width - 60,
