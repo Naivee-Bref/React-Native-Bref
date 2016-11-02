@@ -40,6 +40,7 @@ export default class NewScene extends Component {
       location: 'unknown',
       imageUrl: null,
       city: 'unknown',
+      tag: [],
       isSubmitted: false
     }
   }
@@ -71,7 +72,9 @@ export default class NewScene extends Component {
 
   submit() {
     let date = new Date();
-    DiaryActions.createDiary(date, this.state.text, this.state.city, this.state.imageUrl);
+    // modify the parameters if necessary
+    DiaryActions.createDiary(date, this.state.text, this.state.city,
+      this.state.imageUrl, this.state.tag === [] ? '' : this.state.tag);
     this.setState({isSubmitted: true});
   }
 

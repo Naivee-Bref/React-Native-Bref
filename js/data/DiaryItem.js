@@ -5,11 +5,12 @@
 import moment from 'moment';
 
 export default class DiaryItem {
-  constructor(timeStamp, text, city, imageUrl) {
+  constructor(timeStamp, text, city, imageUrl, tag) {
     this.timeStamp = timeStamp;
     this.text = text;
     this.city = city;
     this.imageUrl = imageUrl;
+    this.tag = tag;
   }
 
   setFromObject(object) {
@@ -17,9 +18,10 @@ export default class DiaryItem {
     this.text = object.text;
     this.city = object.city;
     this.imageUrl = object.imageUrl;
+    this.tag = object.tag;
   }
 
   static CreateFromObject(object) {
-    return new DiaryItem(object.timeStamp, object.text, object.city, object.imageUrl);
+    return new DiaryItem(object.timeStamp, object.text, object.city, object.imageUrl, object.tag);
   }
 }
