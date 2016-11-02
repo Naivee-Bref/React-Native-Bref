@@ -79,23 +79,26 @@ A: You can basically do *create*, *delete*, *modify*, *delete all* .
 
 More specifically, here is the available methods:
 
-- ```javascript
+- ​
+```javascript
   createDiary(timeStamp, text, city, imageUrl, tag)
   //timeStamp: Date object
   //text: string
   //city: string
   //imageUrl: string
   //tag: Array[string]
-  ```
+```
 
-- ```JavaScript
+- ​
+```JavaScript
   deleteDiary(toDeleteDiary)
   //toDeleteDiary: Js obejct, use timeStamp to match
   //				must in format like :
   //        		toDeleteDiary = {timeStamp: a-date-object, ...}
-  ```
+```
 
-- ```JavaScript
+- ​
+```JavaScript
   editDiary(toEditDiary)
   //toEditDiary: Js object, use timeStamp to match
   //				must in format like:
@@ -104,11 +107,12 @@ More specifically, here is the available methods:
   //								city: a-string,
   //								imageUrl: a-string,
   //								tag: a-array-of-string}
-  ```
+```
 
-- ```JavaScript
+- ​
+```JavaScript
   deleteAllDiaries()
-  ```
+```
 
 Note that all these methods must be called with prefix: ''**DiaryActions.** ''
 
