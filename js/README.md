@@ -17,12 +17,13 @@ js
 ├── data
 │   └── DiaryItem.js
 ├── page
+│   ├── NewScene.js
 │   ├── OriginalScene.js
-│   ├── ProfileScene.js
-│   ├── ReviewScene.js
-│   └── TodayScene.js
+│   ├── SettingsScene.js
+│   ├── SitesScene.js
+│   └── TimelineScene.js
 └── style
-	└── style.js
+    └── style.js
 ```
 ### Sub-directory / File Description
 
@@ -36,18 +37,21 @@ js
 - data:
   - DiaryItem.js: **Diary** class definition, provide methods to create a diary and modify a diary
 - page:
+  - NewScene.js: TODO
   - OriginalScene.js: TODO
-  - ProfileScene.js: TODO
-  - ReviewScene.js: TODO
-  - TodayScene.js: TODO
+  - SettingScene.js: TODO
+  - SitesScene.js: TODO
+  - TimelineScene.js: TODO
 - Style:
   - style.js: TODO
 
 ### For developer:
 
+---
+
 Q: How to use **storage** component ?
 
-A: In your page component, (like **TodayScene.js**), import below components:
+A: In your page component, (like **NewScene.js**), import below components:
 
 ```javascript
 import Reflux from 'reflux';
@@ -64,9 +68,52 @@ mixins =  [Reflux.connect(diaryStore, 'store')];
 then, when you need to store something, simply call like below code:
 
 ```javascript
-onSubmitEditing={(timeStamp, text) => {DiaryActions.createDiary(timeStamp, this.state.text)} }
+onSubmitEditing={(event) => {DiaryActions.createDiary(timeStamp, this.state.text)} }
 ```
+
+---
+
+Q: What can I do to a **Diary** item?
+
+A: You can basically do *create*, *delete*, *modify*, *delete all* .
+
+More specifically, here is the available methods:
+
+- ```javascript
+  createDiary(timeStamp, text, city, imageUrl, tag)
+  //timeStamp: Date object
+  //text: string
+  //city: string
+  //imageUrl: string
+  //tag: Array[string]
+  ```
+
+- ```JavaScript
+  deleteDiary(toDeleteDiary)
+  //toDeleteDiary: Js obejct, use timeStamp to match
+  //				must in format like :
+  //        		toDeleteDiary = {timeStamp: a-date-object, ...}
+  ```
+
+- ```JavaScript
+  editDiary(toEditDiary)
+  //toEditDiary: Js object, use timeStamp to match
+  //				must in format like:
+  // 				toEditDiary = {timeStamp: a-date-object,
+  //								text: a-string,
+  //								city: a-string,
+  //								imageUrl: a-string,
+  //								tag: a-array-of-string}
+  ```
+
+- ```JavaScript
+  deleteAllDiaries()
+  ```
+
+Note that all these methods must be called with prefix: ''**DiaryActions.** ''
+
+---
 
 Q: What's the limit of geocoding request?
 
-A: The api supports 600 requests per minute and query up to 50 locations per request.
+A: The api supports 600 requests per minute and query up to 50 locations per request.
