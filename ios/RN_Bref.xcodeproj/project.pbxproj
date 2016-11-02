@@ -10,6 +10,7 @@
 		00E356F31AD99517003FC87E /* RN_BrefTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RN_BrefTests.m */; };
 		054DB3721DC04E8F005C35D9 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 054DB3711DC04E85005C35D9 /* libRNVectorIcons.a */; };
 		056A11E31DBA5630009D4A1B /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 056A11D81DBA561A009D4A1B /* libRNImagePicker.a */; };
+		05C38DD61DC9B01700AC6D0C /* libPasscodeAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C38DC91DC9B00D00AC6D0C /* libPasscodeAuth.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -100,6 +101,13 @@
 			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
 			remoteInfo = RNImagePicker;
 		};
+		05C38DC81DC9B00D00AC6D0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05C38DC41DC9B00D00AC6D0C /* PasscodeAuth.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = PasscodeAuth;
+		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
@@ -149,6 +157,7 @@
 		00E356F21AD99517003FC87E /* RN_BrefTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RN_BrefTests.m; sourceTree = "<group>"; };
 		054DB36C1DC04E85005C35D9 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		056A11D31DBA561A009D4A1B /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
+		05C38DC41DC9B00D00AC6D0C /* PasscodeAuth.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PasscodeAuth.xcodeproj; path = "../node_modules/react-native-passcode-auth/PasscodeAuth.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* RN_Bref.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RN_Bref.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05C38DD61DC9B01700AC6D0C /* libPasscodeAuth.a in Frameworks */,
 				054DB3721DC04E8F005C35D9 /* libRNVectorIcons.a in Frameworks */,
 				1D7A01C01DC049040060CEDB /* libRCTActionSheet.a in Frameworks */,
 				1D7A01C11DC049040060CEDB /* libRCTGeolocation.a in Frameworks */,
@@ -275,6 +285,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		05C38DC51DC9B00D00AC6D0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05C38DC91DC9B00D00AC6D0C /* libPasscodeAuth.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +358,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				05C38DC41DC9B00D00AC6D0C /* PasscodeAuth.xcodeproj */,
 				054DB36C1DC04E85005C35D9 /* RNVectorIcons.xcodeproj */,
 				056A11D31DBA561A009D4A1B /* RNImagePicker.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -459,6 +478,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 05C38DC51DC9B00D00AC6D0C /* Products */;
+					ProjectRef = 05C38DC41DC9B00D00AC6D0C /* PasscodeAuth.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -563,6 +586,13 @@
 			fileType = archive.ar;
 			path = libRNImagePicker.a;
 			remoteRef = 056A11D71DBA561A009D4A1B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05C38DC91DC9B00D00AC6D0C /* libPasscodeAuth.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPasscodeAuth.a;
+			remoteRef = 05C38DC81DC9B00D00AC6D0C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
