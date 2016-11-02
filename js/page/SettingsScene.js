@@ -9,7 +9,9 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Switch,
+  AsyncStorage
 } from 'react-native';
 
 export default class SettingsScene extends Component {
@@ -19,14 +21,53 @@ export default class SettingsScene extends Component {
 
   constructor(props, context) {
     super(props, context);
+    this.state = {
+      touchIdEnabled: null
+    };
   };
+
+  async _loadInitialState() {
+    await AsyncStorage.getItem('@Bref:TouchIdEnabled')
+      .then(result => {
+        if (result !== null) {
+          this.setState({touchIdEnabled: result === 'true'});
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  componentWillMount() {
+    this._loadInitialState().done();
+  }
+
+  async _storeTouchIdOption(value) {
+    await AsyncStorage.setItem('@Bref:TouchIdEnabled', value.toString())
+      .then(success => {
+        console.log('store touch id option success');
+      })
+      .catch(error => {
+        console.log('store touch id option fail')
+      });
+  }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[{marginTop: 60}, styles.container]}>
         <Text style={styles.commonText}>
           Profile Scene
         </Text>
+        <View style={{width: 400}}>
+          <Text style={styles.commonText}>Enable Touch ID</Text>
+          <Switch
+            onValueChange={(value) => {
+              this.setState({touchIdEnabled: value});
+              this._storeTouchIdOption(value).done();
+            }}
+            value={this.state.touchIdEnabled === true}
+          />
+        </View>
       </View>
     )
   }
