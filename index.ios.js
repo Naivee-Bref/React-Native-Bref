@@ -18,6 +18,7 @@ import NewScene from './js/page/NewScene';
 import TimelineScene from './js/page/TimelineScene';
 import SitesScene from './js/page/SitesScene';
 import SettingsScene from './js/page/SettingsScene';
+import AboutScene from './js/page/AboutScene';
 
 class RN_Bref extends Component {
   constructor(props, context) {
@@ -158,6 +159,8 @@ class RN_Bref extends Component {
         return (<SitesScene navigator={navigator}/>);
       case 'Settings':
         return (<SettingsScene navigator={navigator}/>);
+      case 'About':
+        return (<AboutScene navigator={navigator}/>);
       default:
         return (<OriginalScene navigator={navigator}/>);
     }
