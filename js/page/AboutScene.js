@@ -8,8 +8,7 @@ import React, {Component, PropTypes} from 'react';
 import {
   StyleSheet,
   Text,
-  View,
-
+  View
 } from 'react-native';
 
 export default class AboutScene extends Component {
@@ -23,7 +22,6 @@ export default class AboutScene extends Component {
       touchIdEnabled: null
     };
   };
-
 
   render() {
     return (
@@ -54,7 +52,6 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingBottom: 3,
     color: '#AFAFAF',
-
   }
 });
 

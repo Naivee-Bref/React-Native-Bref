@@ -25,7 +25,6 @@ import Location from '../component/Location';
 import diaryStore from './../component/Storage';
 import DiaryActions from './../actions';
 
-
 export default class NewScene extends Component {
   mixins = [Reflux.connect(diaryStore, 'store')];
 
@@ -54,7 +53,7 @@ export default class NewScene extends Component {
     this.setState({imageUrl: url});
   }
 
-  submitOnPress() {
+  _submitOnPress() {
     if (this.state.text !== '') {
       this.submit();
       AlertIOS.alert(
@@ -79,11 +78,9 @@ export default class NewScene extends Component {
   }
 
   render() {
-
     return (
       <View style={styles.container_out}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
-
         <View style={styles.container}>
           <Photo
             storeSource={null}
@@ -104,18 +101,15 @@ export default class NewScene extends Component {
           <View style={styles.location} refreshing>
             <Location getCityBack={(city) => this._getCity(city)}/>
           </View>
-
           <TouchableHighlight
             style={styles.button}
             underlayColor={'gray'}
             activeOpacity={0.5}
             onPress={() => {
-              this.submitOnPress();
+              this._submitOnPress();
             }}>
             <Text style={styles.buttonText}>Post </Text>
-
           </TouchableHighlight>
-
         </View>
       </View>
     );
@@ -140,7 +134,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 20
   },
-
   button: {
     height: 50,
     width: 90,
@@ -150,7 +143,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     backgroundColor: '#202020'
   },
-
   buttonText: {
     height: 32,
     width: 70,

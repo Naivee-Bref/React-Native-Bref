@@ -15,7 +15,6 @@ import {
   AlertIOS
 } from 'react-native';
 
-
 export default class OriginalScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired
@@ -26,25 +25,7 @@ export default class OriginalScene extends Component {
     this.state = {
       motto: 'How we spend our day is, of course how we spend our lives.'
     }
-
   };
-
-  async _loadInitialState() {
-    await AsyncStorage.getItem('@Bref:Motto')
-      .then(result => {
-        if (result !== null) {
-          this.setState({motto: result});
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      })
-  }
-
-  componentWillMount() {
-    //this._loadInitialState().done();
-  }
-
 
   async _loadMotto() {
     await AsyncStorage.getItem('@Bref:Motto')
@@ -56,11 +37,8 @@ export default class OriginalScene extends Component {
       })
   }
 
-
   render() {
-
     this._loadMotto().done();
-
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
@@ -71,7 +49,7 @@ export default class OriginalScene extends Component {
         </View>
 
         <View style={{flex: 1}}>
-        ß  <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'New'})}>
+          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'New'})}>
             <Text style={styles.welcome_text}>
               New
             </Text>
@@ -91,7 +69,6 @@ export default class OriginalScene extends Component {
               Settings
             </Text>
           </TouchableHighlight>
-
         </View>
 
         <View style={styles.motto}>

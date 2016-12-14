@@ -21,7 +21,8 @@ import {
 import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DiaryActions from './../actions';
-var ds;
+let ds;
+
 export default class TimelineScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
@@ -47,8 +48,7 @@ export default class TimelineScene extends Component {
       this.setState({dataSource: ds.cloneWithRows(this.state.rows)});
   }
 
-  _deleteStatus(rowID)
-  {
+  _deleteStatus(rowID) {
       AlertIOS.alert(
           'Confirm deletion?',
           '',
@@ -57,20 +57,14 @@ export default class TimelineScene extends Component {
               {text: 'Cancel', onPress: () => console.log('Cancel deletion')},
           ],
       );
-
   }
 
   _refreshData = async() =>{
-
-
     let data = await AsyncStorage.getItem(this.state.DIARY_KEY);
     let JSONdata = (JSON.parse(data)).reverse();
     this.setState({dataSource:this.state.dataSource.cloneWithRows(JSONdata)});
     this.setState({rows : JSONdata});
-
   }
-
-
 
   _renderRow(rowData, sectionID, rowID) {
     let oneImage;
@@ -81,7 +75,7 @@ export default class TimelineScene extends Component {
         </TouchableHighlight>
       );
     }
-    var date = new Date(rowData.timeStamp);
+    let date = new Date(rowData.timeStamp);
     return (
       <View style={styles.item}>
         <View style={styles.date}>
@@ -107,18 +101,14 @@ export default class TimelineScene extends Component {
                   onPress={()=> {
                       this._deleteStatus(rowID);
                   }}>
-                <Text style={styles.buttonText}>Delete &nbsp; <Text style={[styles.buttonText, {color:'black', fontSize:1, width: 0, height:0}]}> 00:50:12 </Text> </Text>
-
+                <Text style={styles.buttonText}>Delete </Text>
               </TouchableHighlight>
             </Text>
-
           </View>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
             {oneImage}
           </View>
         </View>
-
-
       </View>
     )
   }
@@ -135,8 +125,6 @@ export default class TimelineScene extends Component {
           enableEmptySections={true}
           renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
         />
-
-
       </View>
     );
   }
@@ -212,15 +200,11 @@ const styles = StyleSheet.create({
     width: 40,
     borderRadius: 20,
   },
-  
-
   buttonText: {
-
     marginLeft: 0,
     marginTop: 3.3,
     fontSize: 12,
     textAlign: 'center',
     color: '#AFAFAF',
-
-  },
+  }
 });

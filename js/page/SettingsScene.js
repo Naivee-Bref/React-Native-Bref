@@ -128,8 +128,6 @@ export default class SettingsScene extends Component {
         />
       </View>
     );
-
-
   }
 }
 
@@ -144,35 +142,29 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 50
   },
-
   commonText: {
     padding: 5,
     paddingTop: 10,
     paddingBottom: 10,
     color: '#FFFFFF'
   },
-
   separator_top: {
     height: 1,
     backgroundColor: '#D7DBDD',
   },
-
   separator_bottom: {
     height: 1,
     marginLeft: 10,
     marginRight: 30,
     backgroundColor: '#D7DBDD',
   },
-
   row: {
     flexDirection: 'row',
     margin: 10,
     backgroundColor: 'black',
   },
-
   switch: {
     marginLeft: 40,
     marginTop: 20
   }
-
 });
