@@ -30,7 +30,9 @@ export default class OriginalScene extends Component {
   async _loadMotto() {
     await AsyncStorage.getItem('@Bref:Motto')
       .then(result => {
-        this.setState({motto: result});
+        if (result !== null) {
+          this.setState({motto: result});
+        }
       })
       .catch(error => {
         console.log(error);
