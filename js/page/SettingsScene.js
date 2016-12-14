@@ -15,8 +15,6 @@ import {
   AsyncStorage
 } from 'react-native';
 
-var TouchableWithoutFeedback = require('TouchableWithoutFeedback');
-
 export default class SettingsScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired
@@ -24,10 +22,11 @@ export default class SettingsScene extends Component {
 
   constructor(props, context) {
     super(props, context);
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(['Set Motto','Enable Touch ID','Enable Night Mode','About']),
-      touchIdEnabled: null
+      dataSource: ds.cloneWithRows(['Set Motto', 'Enable Touch ID', 'Enable Night Mode', 'About']),
+      touchIdEnabled: null,
+      nightModeEnabled: null
     };
   };
 
@@ -57,104 +56,80 @@ export default class SettingsScene extends Component {
       });
   }
 
-    _handlePress = () => {
-        this.setState({showBorder: !this.state.showBorder});
-    };
-
-    submitOnPress() {
-
+  _renderRow(rowData) {
+    switch (rowData.toString()) {
+      case 'Set Motto':
+        return (
+          <View>
+            <View style={styles.separator_top}/>
+            <TouchableHighlight
+              underlayColor={"#21618C"}
+              activeOpacity={0.5}
+              onPress={() => this.props.navigator.push({scene: 'Set Motto'})}>
+              <Text style={styles.commonText}> {rowData.toString()} </Text>
+            </TouchableHighlight>
+          </View>
+        );
+      case 'Enable Touch ID':
+        return (
+          <View style={{width: 400}}>
+            <View style={styles.separator_bottom}/>
+            <Text style={[styles.commonText, {marginLeft: 3}]}>
+              Enable Touch ID
+              <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 160}}>
+                <Switch disabled={false} style={styles.switch}
+                        onValueChange={(value) => {
+                          this.setState({touchIdEnabled: value});
+                          this._storeTouchIdOption(value).done();
+                        }}
+                        value={this.state.touchIdEnabled == true}/>
+              </View>
+            </Text>
+          </View>
+        );
+      case 'Enable Night Mode':
+        return (
+          <View style={{width: 400}}>
+            <View style={styles.separator_bottom}/>
+            <Text style={[styles.commonText, {marginLeft: 3}]}>
+              Enable Night Mode
+              <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 142}}>
+                <Switch disabled={false} style={styles.switch}/>
+              </View>
+            </Text>
+          </View>
+        );
+      case 'About':
+        return (
+          <View style={{width: 400}}>
+            <View style={styles.separator_bottom}/>
+            <TouchableHighlight
+              underlayColor={"#21618C"}
+              activeOpacity={0.5}
+              onPress={() => this.props.navigator.push({scene: 'About'})}>
+              <Text style={[styles.commonText, {marginLeft: 3}]}>
+                About
+              </Text>
+            </TouchableHighlight>
+            <View style={styles.separator_top}/>
+          </View>
+        );
     }
-
-    _renderRow(rowData) {
-
-      switch (rowData.toString())
-      {
-          case 'Set Motto':
-              return (
-                  <View>
-                    <View style={styles.separator_top} />
-                    <TouchableHighlight
-                        underlayColor={'gray'}
-                        activeOpacity={0.7}
-                        onPress={()=> {
-                            this.submitOnPress();
-                        }}>
-                      <Text style={styles.commonText}> {rowData.toString()} </Text>
-                    </TouchableHighlight>
-                  </View>
-              );
-          case 'Enable Touch ID':
-
-              return (
-                  <View style={{width: 400}}>
-                    <Text style={styles.commonText}>
-                      Enable Touch ID
-                      <Switch disabled={false}
-
-                              onValueChange={(value) => {
-                                  this.setState({touchIdEnabled: value});
-                                  this._storeTouchIdOption(value).done();
-                              }}
-                              value={this.state.touchIdEnabled==true}
-                      />
-                    </Text>
-
-                  </View>
-              );
-          case 'Enable Night Mode':
-              return (
-                  <View>
-                    <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'About'})}>
-                      <Text style={styles.commonText}>
-                        About
-                      </Text>
-                    </TouchableHighlight>
-                  </View>
-
-              );
-          case 'About':
-            return (
-                      <View>
-                        <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'About'})}>
-                          <Text style={styles.commonText}>
-                            About
-                          </Text>
-                        </TouchableHighlight>
-                     </View>
-                );
-
-
-      }
-
-    }
+  }
 
   render() {
-      return (
-          <View style={[{marginTop: 60}, styles.container]}>
-            <ListView style={{marginTop: 10}}
-                dataSource={this.state.dataSource}
-                enableEmptySections={true}
-                renderRow={(rowData) => this._renderRow(rowData)}
-
-            />
-
-            <View style={{width: 400}}>
-              <Text style={styles.commonText}>Enable Touch ID</Text>
-
-            </View>
-          </View>
-      );
-
     return (
       <View style={[{marginTop: 60}, styles.container]}>
+        <ListView style={{marginTop: 10}}
+                  dataSource={this.state.dataSource}
+                  enableEmptySections={true}
+                  renderRow={(rowData) => this._renderRow(rowData)}
 
-
-
-
-
-
+        />
       </View>
-    )
+    );
+
+
   }
 }
 
@@ -179,19 +154,25 @@ const styles = StyleSheet.create({
 
   separator_top: {
     height: 1,
-    backgroundColor: '#CCCCCC',
+    backgroundColor: '#D7DBDD',
   },
 
   separator_bottom: {
     height: 1,
     marginLeft: 10,
-    marginRight: 10,
-    backgroundColor: '#CCCCCC',
+    marginRight: 30,
+    backgroundColor: '#D7DBDD',
   },
 
   row: {
     flexDirection: 'row',
     margin: 10,
     backgroundColor: 'black',
+  },
+
+  switch: {
+    marginLeft: 40,
+    marginTop: 20
   }
+
 });

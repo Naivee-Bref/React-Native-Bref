@@ -10,7 +10,9 @@ import {
   Text,
   View,
   TouchableHighlight,
-  StatusBar
+  StatusBar,
+  AsyncStorage,
+  AlertIOS
 } from 'react-native';
 
 
@@ -21,20 +23,55 @@ export default class OriginalScene extends Component {
 
   constructor(props, context) {
     super(props, context);
+    this.state = {
+      motto: 'How we spend our day is, of course how we spend our lives.'
+    }
+
   };
 
+  async _loadInitialState() {
+    await AsyncStorage.getItem('@Bref:Motto')
+      .then(result => {
+        if (result !== null) {
+          this.setState({motto: result});
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  componentWillMount() {
+    //this._loadInitialState().done();
+  }
+
+
+  async _loadMotto() {
+    await AsyncStorage.getItem('@Bref:Motto')
+      .then(result => {
+        this.setState({motto: result});
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+
   render() {
+
+    this._loadMotto().done();
+
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#FFFFFF"  barStyle="light-content" />
+        <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
         <View style={{flex: 1.5, justifyContent: 'flex-end'}}>
           <Text style={styles.welcome_main}>
             bref.
           </Text>
         </View>
 
-        <View style={{flex:1}}>
-          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'New'})}>
+        <View style={{flex: 1}}>
+        ß  <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'New'})}>
             <Text style={styles.welcome_text}>
               New
             </Text>
@@ -54,14 +91,15 @@ export default class OriginalScene extends Component {
               Settings
             </Text>
           </TouchableHighlight>
+
         </View>
 
         <View style={styles.motto}>
           <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold', textAlign: 'left', fontSize: 20}}>“</Text>
           <Text style={styles.motto_text}>
-            How we spend our days is, of course, how we spend our lives.
+            { this.state.motto }
           </Text>
-          <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold',textAlign: 'right', fontSize: 20}}>”</Text>
+          <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold', textAlign: 'right', fontSize: 20}}>”</Text>
         </View>
       </View>
     );

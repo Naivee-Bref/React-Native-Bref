@@ -19,6 +19,8 @@ import TimelineScene from './js/page/TimelineScene';
 import SitesScene from './js/page/SitesScene';
 import SettingsScene from './js/page/SettingsScene';
 import AboutScene from './js/page/AboutScene';
+import SetMottoScene from './js/page/SetMottoScene';
+
 
 class RN_Bref extends Component {
   constructor(props, context) {
@@ -113,7 +115,7 @@ class RN_Bref extends Component {
                   }
                 },
                 RightButton: (route, navigator, index, navState) => {
-                  if (route.scene === 'New') {
+                  if (route.scene === 'New' || route.scene === 'Set Motto') {
                     return (
                       <TouchableHighlight
                         style={{alignItems: 'center'}}
@@ -161,6 +163,8 @@ class RN_Bref extends Component {
         return (<SettingsScene navigator={navigator}/>);
       case 'About':
         return (<AboutScene navigator={navigator}/>);
+      case 'Set Motto':
+        return (<SetMottoScene navigator={navigator}/>);
       default:
         return (<OriginalScene navigator={navigator}/>);
     }

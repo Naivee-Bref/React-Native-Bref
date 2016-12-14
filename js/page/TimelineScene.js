@@ -16,10 +16,12 @@ import {
   ImageStore,
   formatDate,
   StatusBar,
+  AlertIOS,
 } from 'react-native';
 import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import DiaryActions from './../actions';
+var ds;
 export default class TimelineScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
@@ -27,9 +29,10 @@ export default class TimelineScene extends Component {
 
   constructor(props, context) {
     super(props, context);
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
+    ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([]),
+      rows: [],
       DIARY_KEY: '@Bref:diaries'
     };
   }
@@ -38,19 +41,38 @@ export default class TimelineScene extends Component {
     this._refreshData().done();
   }
 
-  async _refreshData() {
-    await AsyncStorage.getItem(this.state.DIARY_KEY)
-      .then((data) => {
-        return JSON.parse(data);
-      })
-      .then((data) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(data.reverse())
-        })
-      })
+  _deleteItem(rowID) {
+      DiaryActions.deleteDiary(this.state.rows[rowID]);
+      delete this.state.rows[rowID];
+      this.setState({dataSource: ds.cloneWithRows(this.state.rows)});
   }
 
-  _renderRow(rowData) {
+  _deleteStatus(rowID)
+  {
+      AlertIOS.alert(
+          'Confirm deletion?',
+          '',
+          [
+              {text: 'Delete', onPress: () => this._deleteItem(rowID)},
+              {text: 'Cancel', onPress: () => console.log('Cancel deletion')},
+          ],
+      );
+
+  }
+
+  _refreshData = async() =>{
+
+
+    let data = await AsyncStorage.getItem(this.state.DIARY_KEY);
+    let JSONdata = (JSON.parse(data)).reverse();
+    this.setState({dataSource:this.state.dataSource.cloneWithRows(JSONdata)});
+    this.setState({rows : JSONdata});
+
+  }
+
+
+
+  _renderRow(rowData, sectionID, rowID) {
     let oneImage;
     if (rowData.imageUrl !== null) {
       oneImage = (
@@ -80,13 +102,23 @@ export default class TimelineScene extends Component {
               <Icon name="clock-o"/>&nbsp;
               {dateFormat(date, 'HH:MM:ss')}&nbsp;&nbsp;
               <Icon name="map-marker"/>&nbsp;
-              {rowData.city}
+              {rowData.city}&nbsp;
+              <TouchableHighlight style={{width: 55, height: 15}}
+                  onPress={()=> {
+                      this._deleteStatus(rowID);
+                  }}>
+                <Text style={styles.buttonText}>Delete &nbsp; <Text style={[styles.buttonText, {color:'black', fontSize:1, width: 0, height:0}]}> 00:50:12 </Text> </Text>
+
+              </TouchableHighlight>
             </Text>
+
           </View>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
             {oneImage}
           </View>
         </View>
+
+
       </View>
     )
   }
@@ -101,8 +133,10 @@ export default class TimelineScene extends Component {
         <ListView
           dataSource={this.state.dataSource}
           enableEmptySections={true}
-          renderRow={(rowData) => this._renderRow(rowData)}
+          renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
         />
+
+
       </View>
     );
   }
@@ -177,5 +211,16 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     borderRadius: 20,
-  }
+  },
+  
+
+  buttonText: {
+
+    marginLeft: 0,
+    marginTop: 3.3,
+    fontSize: 12,
+    textAlign: 'center',
+    color: '#AFAFAF',
+
+  },
 });

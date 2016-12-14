@@ -79,9 +79,11 @@ export default class NewScene extends Component {
   }
 
   render() {
+
     return (
       <View style={styles.container_out}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
+
         <View style={styles.container}>
           <Photo
             storeSource={null}
@@ -102,15 +104,18 @@ export default class NewScene extends Component {
           <View style={styles.location} refreshing>
             <Location getCityBack={(city) => this._getCity(city)}/>
           </View>
+
           <TouchableHighlight
             style={styles.button}
             underlayColor={'gray'}
             activeOpacity={0.5}
-            onPress={()=> {
+            onPress={() => {
               this.submitOnPress();
             }}>
-            <Text style={styles.buttonText}>POST</Text>
+            <Text style={styles.buttonText}>Post </Text>
+
           </TouchableHighlight>
+
         </View>
       </View>
     );
@@ -129,28 +134,29 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingTop: 40,
     alignItems: 'center',
-    flex: 1
+    flex: 0
   },
   location: {
     flex: 1,
     marginLeft: 20
   },
+
   button: {
-    flex: 1,
-    height: 25,
-    width: 70,
+    height: 50,
+    width: 90,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     backgroundColor: '#202020'
   },
+
   buttonText: {
-    height: 20,
-    width: 50,
+    height: 32,
+    width: 70,
     marginLeft: 10,
     marginTop: 5,
-    fontSize: 14,
+    fontSize: 24,
     textAlign: 'center',
     color: '#FFFFFF',
     fontWeight: 'bold'
