@@ -20,7 +20,10 @@ import SitesScene from './js/page/SitesScene';
 import SettingsScene from './js/page/SettingsScene';
 import AboutScene from './js/page/AboutScene';
 import SetMottoScene from './js/page/SetMottoScene';
+import theme, {styles} from 'react-native-theme';
 
+theme.add(require('./js/style/darkTheme'));
+theme.add(require('./js/style/lightTheme'), 'light');
 
 class RN_Bref extends Component {
   constructor(props, context) {
@@ -173,23 +176,23 @@ class RN_Bref extends Component {
 
 AppRegistry.registerComponent('RN_Bref', () => RN_Bref);
 
-const styles = StyleSheet.create({
-  navButtonLeft: {
-    marginLeft: 25,
-    marginTop: 10,
-    fontSize: 20,
-    color: 'white'
-  },
-  navButtonRight: {
-    marginRight: 25,
-    marginTop: 10,
-    fontSize: 25,
-    color: 'white'
-  },
-  navBarTitle: {
-    marginTop: 10,
-    fontSize: 20,
-    color: 'white',
-    fontWeight: 'bold'
-  }
-});
+// const styles = StyleSheet.create({
+//   navButtonLeft: {
+//     marginLeft: 25,
+//     marginTop: 10,
+//     fontSize: 20,
+//     color: 'white'
+//   },
+//   navButtonRight: {
+//     marginRight: 25,
+//     marginTop: 10,
+//     fontSize: 25,
+//     color: 'white'
+//   },
+//   navBarTitle: {
+//     marginTop: 10,
+//     fontSize: 20,
+//     color: 'white',
+//     fontWeight: 'bold'
+//   }
+// });

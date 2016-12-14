@@ -12,6 +12,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import {styles} from 'react-native-theme';
 export default class SitesScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired
@@ -32,20 +33,21 @@ export default class SitesScene extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: '#000000',
-    justifyContent: 'flex-start'
-  },
-  backButtonText: {
-    color: '#FFFFFF',
-    fontSize: 50
-  },
-  commonText: {
-    padding: 5,
-    paddingBottom: 3,
-    color: '#AFAFAF'
-  }
-});
+//
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 10,
+//     backgroundColor: '#000000',
+//     justifyContent: 'flex-start'
+//   },
+//   backButtonText: {
+//     color: '#FFFFFF',
+//     fontSize: 50
+//   },
+//   commonText: {
+//     padding: 5,
+//     paddingBottom: 3,
+//     color: '#AFAFAF'
+//   }
+// });
