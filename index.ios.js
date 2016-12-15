@@ -20,7 +20,7 @@ import SitesScene from './js/page/SitesScene';
 import SettingsScene from './js/page/SettingsScene';
 import AboutScene from './js/page/AboutScene';
 import SetMottoScene from './js/page/SetMottoScene';
-
+import DatePickerScene from './js/page/DatePickerScene';
 
 class RN_Bref extends Component {
   constructor(props, context) {
@@ -168,6 +168,8 @@ class RN_Bref extends Component {
         return (<AboutScene navigator={navigator}/>);
       case 'Set Motto':
         return (<SetMottoScene navigator={navigator}/>);
+      case 'Date Picker':
+        return (<DatePickerScene navigator={navigator}/>);
       default:
         return (<OriginalScene navigator={navigator}/>);
     }

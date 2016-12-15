@@ -34,6 +34,7 @@ export default class TimelineScene extends Component {
     this.state = {
       dataSource: ds.cloneWithRows([]),
       rows: [],
+      date: new Date(),
       DIARY_KEY: '@Bref:diaries'
     };
     this.listView = null;
@@ -44,18 +45,16 @@ export default class TimelineScene extends Component {
 
   componentWillMount() {
     this._refreshData().done();
-
   }
 
   _deleteItem(rowID) {
-
     DiaryActions.deleteDiary(this.state.rows[rowID]);
     delete this.state.rows[rowID];
     this.setState({dataSource: ds.cloneWithRows(this.state.rows)});
   }
 
   _scrollToTop() {
-    if (this.listView != null && this.state.rows.length != 0){
+    if (this.listView != null && this.state.rows.length != 0) {
       this.listView.scrollTo({y: 0});
     }
   }
@@ -63,13 +62,13 @@ export default class TimelineScene extends Component {
   _scrollToBottom() {
     if (this.listView != null && this.state.rows.length != 0) { //now rows
       let last_row_id = this.state.rows.length - 1;
-
       this.listViewItem[last_row_id].measure((t_x, t_y, t_width, t_height, t_pageX, t_pageY) => {
         this.t_scroll_y = t_y + t_height - this.listViewHeight;
       });
       this.listView.scrollTo({y: this.t_scroll_y});
     }
   }
+
 
   _deleteStatus(rowID) {
     AlertIOS.alert(
@@ -152,7 +151,7 @@ export default class TimelineScene extends Component {
             underlayColor={'gray'}
             activeOpacity={0.5}
             onPress={() => {
-              this.props.navigator.pop()
+              this.props.navigator.push({scene: 'Date Picker'});
             }}>
             <Text style={styles.buttonText}>Search By Date</Text>
           </TouchableHighlight>
@@ -169,7 +168,9 @@ export default class TimelineScene extends Component {
             style={[styles.button, {width: 60, marginLeft: 0}]}
             underlayColor={'gray'}
             activeOpacity={0.5}
-            onPress={() => { this._scrollToBottom(); this._scrollToBottom();}}>
+            onPress={() => {
+              this._scrollToBottom();
+            }}>
             <Text style={styles.buttonText}>Bottom</Text>
           </TouchableHighlight>
         </View>
@@ -186,7 +187,6 @@ export default class TimelineScene extends Component {
           enableEmptySections={true}
           renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
         />
-
       </View>
     );
   }
