@@ -9,7 +9,8 @@ import {
   TouchableHighlight,
   Switch,
   ListView,
-  AsyncStorage
+  AsyncStorage,
+  AlertIOS
 } from 'react-native';
 import Calendar from 'react-native-calendar';
 
@@ -41,28 +42,50 @@ export default class DatePickerScene extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {
-
-    };
+    this.state = {};
   };
 
-  _getCurrentDate(){
+  _getCurrentDate() {
     let currentDate = new Date();
     let DateString = currentDate.getFullYear().toString() + "-" + (currentDate.getMonth() + 1).toString() + "-" + currentDate.getDate();
     return DateString;
   }
 
+  async _storeSelectDate(value) {
+    let DateString = value.substring(0, 10);
+    await AsyncStorage.setItem('@Bref:SelectDate', DateString)
+      .then(success => {
+        console.log('store select date success');
+      })
+      .catch(error => {
+        console.log('store select date fail')
+      });
+
+    await AsyncStorage.setItem('@Bref:FilterByDate', "true")
+      .then(success => {
+        console.log('set filter by date success');
+      })
+      .catch(error => {
+        console.log('set filter by date fail')
+      });
+  }
+
+  _onDateSelect(date) {
+    this._storeSelectDate(date);
+  }
+
+
   render() {
     return (
       <View style={[{marginTop: 60}, styles.container]}>
         <Calendar
-          customStyle= {style_0}
+          customStyle={style_0}
           showEventIndicators
-          eventDates={['2016-12-07','2016-11-03']}
+          eventDates={['2016-12-07', '2016-11-03']}
           dayHeadings={customDayHeadings}               // Default: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
           monthNames={customMonthNames}                // Defaults to english names of months
           nextButtonText={'Next'}           // Text for next button. Default: 'Next'
-          //onDateSelect={(date) => this.onDateSelect(date)} // Callback after date selection
+          onDateSelect={(date) => this._onDateSelect(date)} // Callback after date selection
           onSwipeNext={this.onSwipeNext}    // Callback for forward swipe event
           onSwipePrev={this.onSwipePrev}    // Callback for back swipe event
           onTouchNext={this.onTouchNext}    // Callback for next touch event

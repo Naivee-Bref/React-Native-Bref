@@ -22,6 +22,7 @@ import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DiaryActions from './../actions';
 let ds;
+let tf;
 
 export default class TimelineScene extends Component {
   static propTypes = {
@@ -47,6 +48,39 @@ export default class TimelineScene extends Component {
     this._refreshData().done();
   }
 
+  componentDidMount() {   //will be executed after the first render
+    this._checkFilterByDate().done();
+  }
+
+  componentDidUpdate() {
+    this._checkFilterByDate().done();
+  }
+
+  _checkFilterByDate = async() => {
+    let FilterByDate = await AsyncStorage.getItem('@Bref:FilterByDate');
+    if (FilterByDate != null)
+    {
+      if (FilterByDate == 'true')
+      {
+        let SelectDate = await AsyncStorage.getItem('@Bref:SelectDate');
+        if (SelectDate != null)
+        {
+          let first_index = -1;
+          for (let i = 0; i < this.state.rows.length; i++){
+            let date = this.state.rows[i].timeStamp;
+            let t_date = dateFormat(date, 'yyyy') + '-' + dateFormat(date, 'mm') + '-' + dateFormat(date,'dd');
+            if (SelectDate == t_date) {
+              first_index = i;
+              break;
+            }
+          }
+//          AlertIOS.alert(first_index.toString());
+        }
+      }
+
+    }
+  }
+
   _deleteItem(rowID) {
     DiaryActions.deleteDiary(this.state.rows[rowID]);
     delete this.state.rows[rowID];
@@ -69,6 +103,9 @@ export default class TimelineScene extends Component {
     }
   }
 
+  _scrollToIndex(index) {
+
+  }
 
   _deleteStatus(rowID) {
     AlertIOS.alert(
