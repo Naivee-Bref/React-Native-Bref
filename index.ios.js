@@ -31,7 +31,8 @@ class RN_Bref extends Component {
     this.state = {
       touchIdEnabled: null,
       touchIdSet: null,
-      authSuccess: null
+      authSuccess: null,
+      lightModeEnabled: null
     }
   }
 
@@ -42,6 +43,21 @@ class RN_Bref extends Component {
           this.setState({touchIdEnabled: result === 'true', touchIdSet: true});
         } else {
           this.setState({touchIdSet: false});
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    await AsyncStorage.getItem('@Bref:LightModeEnabled')
+      .then(result => {
+        console.log('Load initial state LightModeEnabled: ' + result);
+        if (result !== null) {
+          theme.active('light');
+          this.setState({lightModeEnabled: result == 'true'});
+        }
+        else {
+          this.setState({lightModeEnabled: false});
         }
       })
       .catch(error => {
@@ -85,7 +101,6 @@ class RN_Bref extends Component {
         })
     }
   }
-
 
   async componentDidMount() {
     await setTimeout(() => {

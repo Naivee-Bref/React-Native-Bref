@@ -8,10 +8,19 @@ const darkTheme = {
   background: {
     backgroundColor: 'black'
   },
+  Bref: {
+    color: '#FFFFFF'
+  },
   welcomeText: {
-    color: 'white'
+    color: '#CFCFCF'
   },
   mottoText: {
+    color: '#CFCFCF'
+  },
+  text: {
+    color: '#CFCFCF'
+  },
+  navBar: {
     color: 'white'
   }
 };

@@ -15,7 +15,7 @@ import {
   AlertIOS
 } from 'react-native';
 
-// import {styles} from 'react-native-theme';
+import {styles} from 'react-native-theme';
 
 export default class OriginalScene extends Component {
   static propTypes = {
@@ -44,43 +44,43 @@ export default class OriginalScene extends Component {
   render() {
     this._loadMotto().done();
     return (
-      <View style={sceneStyle.container}>
+      <View style={[styles.background, sceneStyle.container]}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
         <View style={{flex: 1.5, justifyContent: 'flex-end'}}>
-          <Text style={sceneStyle.welcome_main}>
+          <Text style={[styles.Bref, sceneStyle.welcome_main]}>
             bref.
           </Text>
         </View>
 
         <View style={{flex: 1}}>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'New'})}>
-            <Text style={sceneStyle.welcome_text}>
+            <Text style={[styles.welcomeText, sceneStyle.welcome_text]}>
               New
             </Text>
           </TouchableHighlight>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Timeline'})}>
-            <Text style={sceneStyle.welcome_text}>
+            <Text style={[styles.welcomeText, sceneStyle.welcome_text]}>
               Timeline
             </Text>
           </TouchableHighlight>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Sites'})}>
-            <Text style={sceneStyle.welcome_text}>
+            <Text style={[styles.welcomeText, sceneStyle.welcome_text]}>
               Sites
             </Text>
           </TouchableHighlight>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Settings'})}>
-            <Text style={sceneStyle.welcome_text}>
+            <Text style={[styles.welcomeText, sceneStyle.welcome_text]}>
               Settings
             </Text>
           </TouchableHighlight>
         </View>
 
         <View style={sceneStyle.motto}>
-          <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold', textAlign: 'left', fontSize: 20}}>“</Text>
-          <Text style={sceneStyle.motto_text}>
+          <Text style={[styles.welcomeText, sceneStyle.quote, {textAlign: 'left'}]}>“</Text>
+          <Text style={[styles.mottoText, sceneStyle.motto_text]}>
             { this.state.motto }
           </Text>
-          <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold', textAlign: 'right', fontSize: 20}}>”</Text>
+          <Text style={[styles.welcomeText, sceneStyle.quote, {textAlign: 'right'}]}>”</Text>
         </View>
       </View>
     );
@@ -93,11 +93,11 @@ const sceneStyle = StyleSheet.create({
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000'
+    // backgroundColor: '#000000'
   },
   welcome_main: {
     fontSize: 70,
-    color: '#FFFFFF',
+    // color: '#FFFFFF',
     textAlign: 'center',
     margin: 10,
     letterSpacing: 8,
@@ -106,7 +106,7 @@ const sceneStyle = StyleSheet.create({
   },
   welcome_text: {
     textAlign: 'center',
-    color: '#CFCFCF',
+    // color: '#CFCFCF',
     fontSize: 16,
     marginBottom: 5
   },
@@ -119,8 +119,13 @@ const sceneStyle = StyleSheet.create({
   },
   motto_text: {
     fontSize: 14,
-    color: '#CFCFCF',
+    // color: '#CFCFCF',
     marginLeft: 10,
     marginRight: 10
+  },
+  quote: {
+    color: '#CFCFCF',
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 20
   }
 });

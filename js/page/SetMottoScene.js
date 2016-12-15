@@ -14,6 +14,8 @@ import {
   AlertIOS
 } from 'react-native';
 
+import {styles} from 'react-native-theme';
+
 export default class SetMottoScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired

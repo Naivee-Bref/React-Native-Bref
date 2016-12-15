@@ -4,16 +4,25 @@
 
 'use strict';
 
-const darkTheme = {
+const lightTheme = {
   background: {
     backgroundColor: 'white'
   },
+  Bref: {
+    color: '#000000'
+  },
   welcomeText: {
-    color: 'black'
+    color: '#AFAFAF'
   },
   mottoText: {
+    color: '#CFCFCF'
+  },
+  text: {
+    color: '#CFCFCF'
+  },
+  navBar: {
     color: 'black'
   }
 };
 
-module.exports = darkTheme;
+module.exports = lightTheme;

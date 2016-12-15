@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 import Reflux from 'reflux';
 import dateFormat from 'dateformat';
-
+import {styles} from 'react-native-theme';
 import Photo from '../component/Photo';
 import Location from '../component/Location';
 import diaryStore from './../component/Storage';

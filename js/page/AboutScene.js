@@ -11,6 +11,8 @@ import {
   View
 } from 'react-native';
 
+import {styles} from 'react-native-theme';
+
 export default class AboutScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired
@@ -25,7 +27,7 @@ export default class AboutScene extends Component {
 
   render() {
     return (
-      <View style={[{marginTop: 60}, sceneStyle.container]}>
+      <View style={[styles.background, {marginTop: 60}, sceneStyle.container]}>
         <Text style={[{fontSize: 40}, sceneStyle.commonText]}>
           bref. v1.0
         </Text>
@@ -44,7 +46,7 @@ const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'flex-start'
   },

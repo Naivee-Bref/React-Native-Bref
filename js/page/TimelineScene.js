@@ -20,6 +20,7 @@ import {
 } from 'react-native';
 import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {styles} from 'react-native-theme';
 import DiaryActions from './../actions';
 let ds;
 
@@ -43,28 +44,28 @@ export default class TimelineScene extends Component {
   }
 
   _deleteItem(rowID) {
-      DiaryActions.deleteDiary(this.state.rows[rowID]);
-      delete this.state.rows[rowID];
-      this.setState({dataSource: ds.cloneWithRows(this.state.rows)});
+    DiaryActions.deleteDiary(this.state.rows[rowID]);
+    delete this.state.rows[rowID];
+    this.setState({dataSource: ds.cloneWithRows(this.state.rows)});
   }
 
   _deleteStatus(rowID) {
-      AlertIOS.alert(
-          'Confirm deletion?',
-          '',
-          [
-              {text: 'Delete', onPress: () => this._deleteItem(rowID)},
-              {text: 'Cancel', onPress: () => console.log('Cancel deletion')},
-          ],
-      );
+    AlertIOS.alert(
+      'Confirm deletion?',
+      '',
+      [
+        {text: 'Delete', onPress: () => this._deleteItem(rowID)},
+        {text: 'Cancel', onPress: () => console.log('Cancel deletion')},
+      ],
+    );
   }
 
-  _refreshData = async() =>{
+  _refreshData = async() => {
     let data = await AsyncStorage.getItem(this.state.DIARY_KEY);
     let JSONdata = (JSON.parse(data)).reverse();
-    this.setState({dataSource:this.state.dataSource.cloneWithRows(JSONdata)});
-    this.setState({rows : JSONdata});
-  }
+    this.setState({dataSource: this.state.dataSource.cloneWithRows(JSONdata)});
+    this.setState({rows: JSONdata});
+  };
 
   _renderRow(rowData, sectionID, rowID) {
     let oneImage;
@@ -98,9 +99,9 @@ export default class TimelineScene extends Component {
               <Icon name="map-marker"/>&nbsp;
               {rowData.city}&nbsp;
               <TouchableHighlight style={{width: 55, height: 15}}
-                  onPress={()=> {
-                      this._deleteStatus(rowID);
-                  }}>
+                                  onPress={()=> {
+                                    this._deleteStatus(rowID);
+                                  }}>
                 <Text style={sceneStyle.buttonText}>Delete </Text>
               </TouchableHighlight>
             </Text>
