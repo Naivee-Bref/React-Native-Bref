@@ -30,40 +30,69 @@ export default class TimelineScene extends Component {
 
   constructor(props, context) {
     super(props, context);
-    ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
+    ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([]),
       rows: [],
       DIARY_KEY: '@Bref:diaries'
     };
+    this.listView = null
+    this.listViewItem = []
   }
 
   componentWillMount() {
     this._refreshData().done();
+
   }
 
   _deleteItem(rowID) {
-      DiaryActions.deleteDiary(this.state.rows[rowID]);
-      delete this.state.rows[rowID];
-      this.setState({dataSource: ds.cloneWithRows(this.state.rows)});
+
+    DiaryActions.deleteDiary(this.state.rows[rowID]);
+    delete this.state.rows[rowID];
+    this.setState({dataSource: ds.cloneWithRows(this.state.rows)});
+  }
+
+  _scrollToTop() {
+    if (this.listView != null){
+      this.listView.scrollTo({y: 0});
+    }
+  }
+
+  _scrollToBottom() {
+
   }
 
   _deleteStatus(rowID) {
-      AlertIOS.alert(
-          'Confirm deletion?',
-          '',
-          [
-              {text: 'Delete', onPress: () => this._deleteItem(rowID)},
-              {text: 'Cancel', onPress: () => console.log('Cancel deletion')},
-          ],
-      );
+
+    let ID = 7;
+    let ID_y = 0;
+    this.listViewItem[ID].measure((x, y, width, height, pageX, pageY) => {
+      ID_y = y;
+      this.listView.scrollTo({y: ID_y});
+      AlertIOS.alert(x.toString() + " " + y.toString() + " " + width.toString() + " " + height.toString() + " " + pageX.toString() + " " + pageY.toString())
+    });
+
+    AlertIOS.alert(
+      'Confirm deletion?',
+      '',
+      [
+        {text: 'Delete', onPress: () => this._deleteItem(rowID)},
+        {
+          text: 'Cancel', onPress: () => {
+          console.log('Cancel deletion');
+          //this.listView.scrollTo({y: 0});
+        }
+        },
+      ],
+    );
   }
 
-  _refreshData = async() =>{
+  _refreshData = async() => {
     let data = await AsyncStorage.getItem(this.state.DIARY_KEY);
     let JSONdata = (JSON.parse(data)).reverse();
-    this.setState({dataSource:this.state.dataSource.cloneWithRows(JSONdata)});
-    this.setState({rows : JSONdata});
+    this.setState({dataSource: this.state.dataSource.cloneWithRows(JSONdata)});
+    this.setState({rows: JSONdata});
+
   }
 
   _renderRow(rowData, sectionID, rowID) {
@@ -77,7 +106,7 @@ export default class TimelineScene extends Component {
     }
     let date = new Date(rowData.timeStamp);
     return (
-      <View style={styles.item}>
+      <View style={styles.item} ref={ref => this.listViewItem[rowID] = ref}>
         <View style={styles.date}>
           <Text style={styles.monthText}>
             {dateFormat(date, 'mmm')}.
@@ -98,9 +127,9 @@ export default class TimelineScene extends Component {
               <Icon name="map-marker"/>&nbsp;
               {rowData.city}&nbsp;
               <TouchableHighlight style={{width: 55, height: 15}}
-                  onPress={()=> {
-                      this._deleteStatus(rowID);
-                  }}>
+                                  onPress={() => {
+                                    this._deleteStatus(rowID);
+                                  }}>
                 <Text style={styles.buttonText}>Delete </Text>
               </TouchableHighlight>
             </Text>
@@ -114,17 +143,50 @@ export default class TimelineScene extends Component {
   }
 
   render() {
+
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableHighlight>
+
+        <View style={styles.content}>
+          <TouchableHighlight
+            style={[styles.button, {width: 100, marginLeft: 150}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => {
+              this.props.navigator.pop()
+            }}>
+            <Text style={styles.buttonText}>Search By Date</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[styles.button, {width: 30, marginLeft: 0}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => this._scrollToTop()}>
+            <Text style={styles.buttonText}>Top</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[styles.button, {width: 60, marginLeft: 0}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => this._scrollToTop()}>
+            <Text style={styles.buttonText}>Bottom</Text>
+          </TouchableHighlight>
+        </View>
+
+
         <ListView
+          ref={ref => this.listView = ref}
           dataSource={this.state.dataSource}
           enableEmptySections={true}
           renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
         />
+
       </View>
     );
   }
@@ -202,9 +264,25 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     marginLeft: 0,
-    marginTop: 3.3,
+    marginTop: 3.5,
     fontSize: 12,
     textAlign: 'center',
     color: '#AFAFAF',
+    fontWeight: 'bold'
+  },
+  button: {
+    marginTop: 0,
+    height: 25,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+    backgroundColor: '#202020'
+  },
+  content: {
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

@@ -117,12 +117,15 @@ class RN_Bref extends Component {
                 RightButton: (route, navigator, index, navState) => {
                   if (route.scene === 'New' || route.scene === 'Set Motto') {
                     return (
+
                       <TouchableHighlight
                         style={{alignItems: 'center'}}
                         onPress={() => navigator.pop()}
                       >
                         <Icon name="check-square-o" style={styles.navButtonRight}/>
                       </TouchableHighlight>
+
+
                     );
                   }
                   else {
