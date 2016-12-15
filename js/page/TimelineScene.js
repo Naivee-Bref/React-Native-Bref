@@ -36,8 +36,10 @@ export default class TimelineScene extends Component {
       rows: [],
       DIARY_KEY: '@Bref:diaries'
     };
-    this.listView = null
-    this.listViewItem = []
+    this.listView = null;
+    this.listViewItem = [];
+    this.listViewHeight = 0;
+    this.t_scrolly = 0;
   }
 
   componentWillMount() {
@@ -53,36 +55,29 @@ export default class TimelineScene extends Component {
   }
 
   _scrollToTop() {
-    if (this.listView != null){
+    if (this.listView != null && this.state.rows.length != 0){
       this.listView.scrollTo({y: 0});
     }
   }
 
   _scrollToBottom() {
+    if (this.listView != null && this.state.rows.length != 0) { //now rows
+      let last_row_id = this.state.rows.length - 1;
 
+      this.listViewItem[last_row_id].measure((t_x, t_y, t_width, t_height, t_pageX, t_pageY) => {
+        this.t_scroll_y = t_y + t_height - this.listViewHeight;
+      });
+      this.listView.scrollTo({y: this.t_scroll_y});
+    }
   }
 
   _deleteStatus(rowID) {
-
-    let ID = 7;
-    let ID_y = 0;
-    this.listViewItem[ID].measure((x, y, width, height, pageX, pageY) => {
-      ID_y = y;
-      this.listView.scrollTo({y: ID_y});
-      AlertIOS.alert(x.toString() + " " + y.toString() + " " + width.toString() + " " + height.toString() + " " + pageX.toString() + " " + pageY.toString())
-    });
-
     AlertIOS.alert(
       'Confirm deletion?',
       '',
       [
         {text: 'Delete', onPress: () => this._deleteItem(rowID)},
-        {
-          text: 'Cancel', onPress: () => {
-          console.log('Cancel deletion');
-          //this.listView.scrollTo({y: 0});
-        }
-        },
+        {text: 'Cancel', onPress: () => console.log('Cancel deletion')},
       ],
     );
   }
@@ -145,7 +140,7 @@ export default class TimelineScene extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container }>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={styles.backButtonText}>Back</Text>
@@ -174,7 +169,7 @@ export default class TimelineScene extends Component {
             style={[styles.button, {width: 60, marginLeft: 0}]}
             underlayColor={'gray'}
             activeOpacity={0.5}
-            onPress={() => this._scrollToTop()}>
+            onPress={() => { this._scrollToBottom(); this._scrollToBottom();}}>
             <Text style={styles.buttonText}>Bottom</Text>
           </TouchableHighlight>
         </View>
@@ -182,6 +177,11 @@ export default class TimelineScene extends Component {
 
         <ListView
           ref={ref => this.listView = ref}
+          initialListSize={10}
+          onLayout={(event) => {
+            let layout = event.nativeEvent.layout;
+            this.listViewHeight = layout.height;
+          }}
           dataSource={this.state.dataSource}
           enableEmptySections={true}
           renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
