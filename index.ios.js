@@ -32,7 +32,7 @@ class RN_Bref extends Component {
       touchIdEnabled: null,
       touchIdSet: null,
       authSuccess: null,
-      lightModeEnabled: null
+      lightModeEnabled: false
     }
   }
 
@@ -52,7 +52,7 @@ class RN_Bref extends Component {
     await AsyncStorage.getItem('@Bref:LightModeEnabled')
       .then(result => {
         console.log('Load initial state LightModeEnabled: ' + result);
-        if (result !== null) {
+        if (result !== null && result == 'true') {
           theme.active('light');
           this.setState({lightModeEnabled: result == 'true'});
         }
