@@ -22,7 +22,6 @@ import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DiaryActions from './../actions';
 let ds;
-let tf;
 
 export default class TimelineScene extends Component {
   static propTypes = {
@@ -41,10 +40,11 @@ export default class TimelineScene extends Component {
     this.listView = null;
     this.listViewItem = [];
     this.listViewHeight = 0;
-    this.t_scrolly = 0;
+    this.t_scroll_y = 0;
   }
 
   componentWillMount() {
+    this._disableFilterByDate().done();
     this._refreshData().done();
   }
 
@@ -52,32 +52,41 @@ export default class TimelineScene extends Component {
     this._checkFilterByDate().done();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate() {  //will be executed after returning back from the filter by date scene (or deletion of the listView, but it will not cause the modification of stoorage
     this._checkFilterByDate().done();
   }
 
-  _checkFilterByDate = async() => {
+  async _disableFilterByDate() {
+    await AsyncStorage.setItem('@Bref:FilterByDate', "false")
+      .then(success => {
+        console.log('disable filter by date success');
+      })
+      .catch(error => {
+        console.log('disable filter by date fail')
+      });
+  }
+
+  async _checkFilterByDate() {
     let FilterByDate = await AsyncStorage.getItem('@Bref:FilterByDate');
-    if (FilterByDate != null)
-    {
-      if (FilterByDate == 'true')
-      {
+    if (FilterByDate != null) {
+      if (FilterByDate == 'true') {
+        this._disableFilterByDate().done(); //after scrolling, set the operation to false
         let SelectDate = await AsyncStorage.getItem('@Bref:SelectDate');
-        if (SelectDate != null)
-        {
+        if (SelectDate != null) {
           let first_index = -1;
-          for (let i = 0; i < this.state.rows.length; i++){
+          for (let i = 0; i < this.state.rows.length; i++) { //the first is the lastest item with date equal to the selected date in the calendar picker
             let date = this.state.rows[i].timeStamp;
-            let t_date = dateFormat(date, 'yyyy') + '-' + dateFormat(date, 'mm') + '-' + dateFormat(date,'dd');
+            let t_date = dateFormat(date, 'yyyy') + '-' + dateFormat(date, 'mm') + '-' + dateFormat(date, 'dd');
             if (SelectDate == t_date) {
               first_index = i;
               break;
             }
           }
-//          AlertIOS.alert(first_index.toString());
+          if (first_index != -1) {
+            this._scrollToIndex(first_index);
+          }
         }
       }
-
     }
   }
 
@@ -94,6 +103,7 @@ export default class TimelineScene extends Component {
   }
 
   _scrollToBottom() {
+
     if (this.listView != null && this.state.rows.length != 0) { //now rows
       let last_row_id = this.state.rows.length - 1;
       this.listViewItem[last_row_id].measure((t_x, t_y, t_width, t_height, t_pageX, t_pageY) => {
@@ -104,7 +114,14 @@ export default class TimelineScene extends Component {
   }
 
   _scrollToIndex(index) {
+    if (this.listView != null && this.state.rows.length != 0) { //now rows
+      if (index < 0 || index >= this.state.rows.length) return;
+      this.listViewItem[index].measure((t_x, t_y, t_width, t_height, t_pageX, t_pageY) => {
+        this.t_scroll_y = t_y;
+      });
+      this.listView.scrollTo({y: this.t_scroll_y});
 
+    }
   }
 
   _deleteStatus(rowID) {
@@ -123,7 +140,6 @@ export default class TimelineScene extends Component {
     let JSONdata = (JSON.parse(data)).reverse();
     this.setState({dataSource: this.state.dataSource.cloneWithRows(JSONdata)});
     this.setState({rows: JSONdata});
-
   }
 
   _renderRow(rowData, sectionID, rowID) {
@@ -137,7 +153,8 @@ export default class TimelineScene extends Component {
     }
     let date = new Date(rowData.timeStamp);
     return (
-      <View style={styles.item} ref={ref => this.listViewItem[rowID] = ref}>
+      <View style={styles.item}
+            ref={(t_ref) => this.listViewItem[rowID] = t_ref}>
         <View style={styles.date}>
           <Text style={styles.monthText}>
             {dateFormat(date, 'mmm')}.
@@ -205,17 +222,13 @@ export default class TimelineScene extends Component {
             style={[styles.button, {width: 60, marginLeft: 0}]}
             underlayColor={'gray'}
             activeOpacity={0.5}
-            onPress={() => {
-              this._scrollToBottom();
-            }}>
+            onPress={() => this._scrollToBottom()}>
             <Text style={styles.buttonText}>Bottom</Text>
           </TouchableHighlight>
         </View>
-
-
         <ListView
           ref={ref => this.listView = ref}
-          initialListSize={10}
+          pageSize={1000000}   //the reason why no pageSize setting will fail when touching bottom is that the page cannot load too many items
           onLayout={(event) => {
             let layout = event.nativeEvent.layout;
             this.listViewHeight = layout.height;

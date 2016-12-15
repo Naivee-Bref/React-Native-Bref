@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import Calendar from 'react-native-calendar';
 
+
 const customDayHeadings = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const customMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const style_0 = {
@@ -52,6 +53,14 @@ export default class DatePickerScene extends Component {
   }
 
   async _storeSelectDate(value) {
+    await AsyncStorage.setItem('@Bref:FilterByDate', "true")
+      .then(success => {
+        console.log('set filter by date success');
+      })
+      .catch(error => {
+        console.log('set filter by date fail')
+      });
+    
     let DateString = value.substring(0, 10);
     await AsyncStorage.setItem('@Bref:SelectDate', DateString)
       .then(success => {
@@ -60,20 +69,11 @@ export default class DatePickerScene extends Component {
       .catch(error => {
         console.log('store select date fail')
       });
-
-    await AsyncStorage.setItem('@Bref:FilterByDate', "true")
-      .then(success => {
-        console.log('set filter by date success');
-      })
-      .catch(error => {
-        console.log('set filter by date fail')
-      });
   }
 
   _onDateSelect(date) {
     this._storeSelectDate(date);
   }
-
 
   render() {
     return (
