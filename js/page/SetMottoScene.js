@@ -66,28 +66,28 @@ export default class SetMottoScene extends Component {
 
   render() {
     return (
-      <View style={[{marginTop: 60}, styles.container]}>
-        <TextInput style={[styles.commonText, {height: 420}]}
+      <View style={[{marginTop: 60}, sceneStyle.container]}>
+        <TextInput style={[sceneStyle.commonText, {height: 420}]}
                    defaultValue={this.state.motto}
                    multiline={true}
                    onChangeText={(motto) => this.setState({motto})}
         />
-        <View style={styles.separator}/>
+        <View style={sceneStyle.separator}/>
         <TouchableHighlight
-          style={styles.button}
+          style={sceneStyle.button}
           underlayColor={'gray'}
           activeOpacity={0.5}
           onPress={() => {
             this.setMotto();
           }}>
-          <Text style={styles.buttonText}>Save</Text>
+          <Text style={sceneStyle.buttonText}>Save</Text>
         </TouchableHighlight>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 0,

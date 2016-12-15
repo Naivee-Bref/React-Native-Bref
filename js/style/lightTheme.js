@@ -6,7 +6,7 @@
 
 const darkTheme = {
   background: {
-    color: 'green'
+    backgroundColor: 'white'
   },
   welcomeText: {
     color: 'black'

@@ -25,14 +25,14 @@ export default class AboutScene extends Component {
 
   render() {
     return (
-      <View style={[{marginTop: 60}, styles.container]}>
-        <Text style={[{fontSize: 40}, styles.commonText]}>
+      <View style={[{marginTop: 60}, sceneStyle.container]}>
+        <Text style={[{fontSize: 40}, sceneStyle.commonText]}>
           bref. v1.0
         </Text>
-        <Text style={[{fontSize: 20}, styles.commonText]}>
+        <Text style={[{fontSize: 20}, sceneStyle.commonText]}>
           Naivee Team
         </Text>
-        <Text style={[{fontSize: 20}, styles.commonText]}>
+        <Text style={[{fontSize: 20}, sceneStyle.commonText]}>
           Copyright @ 2016. All rights reserved.
         </Text>
       </View>
@@ -40,7 +40,7 @@ export default class AboutScene extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,

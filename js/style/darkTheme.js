@@ -11,8 +11,8 @@ const darkTheme = {
   welcomeText: {
     color: 'white'
   },
-  mottoText:{
-    color:'white'
+  mottoText: {
+    color: 'white'
   }
 };
 

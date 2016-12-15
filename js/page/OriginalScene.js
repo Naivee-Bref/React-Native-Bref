@@ -44,40 +44,40 @@ export default class OriginalScene extends Component {
   render() {
     this._loadMotto().done();
     return (
-      <View style={styles.container}>
+      <View style={sceneStyle.container}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
         <View style={{flex: 1.5, justifyContent: 'flex-end'}}>
-          <Text style={styles.welcome_main}>
+          <Text style={sceneStyle.welcome_main}>
             bref.
           </Text>
         </View>
 
         <View style={{flex: 1}}>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'New'})}>
-            <Text style={styles.welcome_text}>
+            <Text style={sceneStyle.welcome_text}>
               New
             </Text>
           </TouchableHighlight>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Timeline'})}>
-            <Text style={styles.welcome_text}>
+            <Text style={sceneStyle.welcome_text}>
               Timeline
             </Text>
           </TouchableHighlight>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Sites'})}>
-            <Text style={styles.welcome_text}>
+            <Text style={sceneStyle.welcome_text}>
               Sites
             </Text>
           </TouchableHighlight>
           <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Settings'})}>
-            <Text style={styles.welcome_text}>
+            <Text style={sceneStyle.welcome_text}>
               Settings
             </Text>
           </TouchableHighlight>
         </View>
 
-        <View style={styles.motto}>
+        <View style={sceneStyle.motto}>
           <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold', textAlign: 'left', fontSize: 20}}>“</Text>
-          <Text style={styles.motto_text}>
+          <Text style={sceneStyle.motto_text}>
             { this.state.motto }
           </Text>
           <Text style={{color: '#CFCFCF', fontFamily: 'Helvetica-Bold', textAlign: 'right', fontSize: 20}}>”</Text>
@@ -87,7 +87,7 @@ export default class OriginalScene extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,

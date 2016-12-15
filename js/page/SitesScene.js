@@ -12,7 +12,6 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-// import {styles} from 'react-native-theme';
 export default class SitesScene extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired
@@ -24,8 +23,8 @@ export default class SitesScene extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.commonText}>
+      <View style={sceneStyle.container}>
+        <Text style={sceneStyle.commonText}>
           Profile Scene
         </Text>
       </View>
@@ -34,7 +33,7 @@ export default class SitesScene extends Component {
 }
 
 
-const styles = StyleSheet.create({
+const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,

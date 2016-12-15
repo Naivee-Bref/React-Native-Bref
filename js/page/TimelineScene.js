@@ -70,29 +70,29 @@ export default class TimelineScene extends Component {
     let oneImage;
     if (rowData.imageUrl !== null) {
       oneImage = (
-        <TouchableHighlight style={ styles.imageContainer }>
-          <Image style={ styles.image } source={{uri: rowData.imageUrl}}/>
+        <TouchableHighlight style={ sceneStyle.imageContainer }>
+          <Image style={ sceneStyle.image } source={{uri: rowData.imageUrl}}/>
         </TouchableHighlight>
       );
     }
     let date = new Date(rowData.timeStamp);
     return (
-      <View style={styles.item}>
-        <View style={styles.date}>
-          <Text style={styles.monthText}>
+      <View style={sceneStyle.item}>
+        <View style={sceneStyle.date}>
+          <Text style={sceneStyle.monthText}>
             {dateFormat(date, 'mmm')}.
           </Text>
-          <Text style={styles.dayText}>
+          <Text style={sceneStyle.dayText}>
             {dateFormat(date, 'dd')}
           </Text>
         </View>
 
-        <View style={styles.card}>
+        <View style={sceneStyle.card}>
           <View style={{flex: 5}}>
-            <Text style={styles.timelineText}>
+            <Text style={sceneStyle.timelineText}>
               {rowData.text}
             </Text>
-            <Text style={styles.timelineOthers}>
+            <Text style={sceneStyle.timelineOthers}>
               <Icon name="clock-o"/>&nbsp;
               {dateFormat(date, 'HH:MM:ss')}&nbsp;&nbsp;
               <Icon name="map-marker"/>&nbsp;
@@ -101,7 +101,7 @@ export default class TimelineScene extends Component {
                   onPress={()=> {
                       this._deleteStatus(rowID);
                   }}>
-                <Text style={styles.buttonText}>Delete </Text>
+                <Text style={sceneStyle.buttonText}>Delete </Text>
               </TouchableHighlight>
             </Text>
           </View>
@@ -115,10 +115,10 @@ export default class TimelineScene extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={sceneStyle.container}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
-          <Text style={styles.backButtonText}>Back</Text>
+          <Text style={sceneStyle.backButtonText}>Back</Text>
         </TouchableHighlight>
         <ListView
           dataSource={this.state.dataSource}
@@ -130,7 +130,7 @@ export default class TimelineScene extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,

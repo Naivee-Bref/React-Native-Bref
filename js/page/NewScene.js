@@ -79,15 +79,15 @@ export default class NewScene extends Component {
 
   render() {
     return (
-      <View style={styles.container_out}>
+      <View style={sceneStyle.container_out}>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
-        <View style={styles.container}>
+        <View style={sceneStyle.container}>
           <Photo
             storeSource={null}
             getImageUrlBack={(url) => this._getImageData(url)}
           />
           <TextInput
-            style={styles.input}
+            style={sceneStyle.input}
             onChangeText={(text) => this.setState({text})}
             value={this.state.text}
             multiline={true}
@@ -98,17 +98,17 @@ export default class NewScene extends Component {
             autoCapitalize={'none'}
             autoCorrect={false}
           />
-          <View style={styles.location} refreshing>
+          <View style={sceneStyle.location} refreshing>
             <Location getCityBack={(city) => this._getCity(city)}/>
           </View>
           <TouchableHighlight
-            style={styles.button}
+            style={sceneStyle.button}
             underlayColor={'gray'}
             activeOpacity={0.5}
             onPress={() => {
               this._submitOnPress();
             }}>
-            <Text style={styles.buttonText}>Post </Text>
+            <Text style={sceneStyle.buttonText}>Post </Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -116,7 +116,7 @@ export default class NewScene extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const sceneStyle = StyleSheet.create({
   container_out: {
     paddingTop: 50,
     flex: 1,

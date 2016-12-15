@@ -112,7 +112,7 @@ class RN_Bref extends Component {
                   } else {
                     return (
                       <TouchableHighlight style={{alignItems: 'center'}} onPress={() => navigator.pop()}>
-                        <Icon name="chevron-left" style={styles.navButtonLeft}/>
+                        <Icon name="chevron-left" style={navStyle.navButtonLeft}/>
                       </TouchableHighlight>
                     );
                   }
@@ -124,7 +124,7 @@ class RN_Bref extends Component {
                         style={{alignItems: 'center'}}
                         onPress={() => navigator.pop()}
                       >
-                        <Icon name="check-square-o" style={styles.navButtonRight}/>
+                        <Icon name="check-square-o" style={navStyle.navButtonRight}/>
                       </TouchableHighlight>
                     );
                   }
@@ -137,7 +137,7 @@ class RN_Bref extends Component {
                   title = route.scene;
                   if (title != 'Initial') {
                     return (
-                      <Text style={styles.navBarTitle}>
+                      <Text style={navStyle.navBarTitle}>
                         {title}
                       </Text>
                     );
@@ -176,7 +176,7 @@ class RN_Bref extends Component {
 
 AppRegistry.registerComponent('RN_Bref', () => RN_Bref);
 
-const styles = StyleSheet.create({
+const navStyle = StyleSheet.create({
   navButtonLeft: {
     marginLeft: 25,
     marginTop: 10,

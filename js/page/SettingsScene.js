@@ -97,17 +97,32 @@ export default class SettingsScene extends Component {
       .catch(error => {
         console.log('Store night mode option fail.');
       });
+    if (value) {
+      this._darkTheme();
+    }
+    else {
+      this._lightTheme();
+    }
   }
 
   render() {
     return (
-      <View style={[{marginTop: 60}, styles.container]}>
+      <View style={[{marginTop: 60}, sceneStyle.container]}>
+        <View>
+          <View style={sceneStyle.separator_top}/>
+          <TouchableHighlight
+            underlayColor={"#21618C"}
+            activeOpacity={0.5}
+            onPress={() => this.props.navigator.push({scene: 'Set Motto'})}>
+            <Text style={sceneStyle.commonText}> Set Motto </Text>
+          </TouchableHighlight>
+        </View>
         <View style={{width: 400}}>
-          <View style={styles.separator_bottom}/>
-          <Text style={[styles.commonText, {marginLeft: 3}]}>
+          <View style={sceneStyle.separator_bottom}/>
+          <Text style={[sceneStyle.commonText, {marginLeft: 3}]}>
             Enable Touch ID
             <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 160}}>
-              <Switch style={styles.switch}
+              <Switch style={sceneStyle.switch}
                       value={this.state.touchIdEnabled === true}
                       onValueChange={(value) => {
                         this.setState({touchIdEnabled: value});
@@ -118,11 +133,11 @@ export default class SettingsScene extends Component {
           </Text>
         </View>
         <View style={{width: 400}}>
-          <View style={styles.separator_bottom}/>
-          <Text style={[styles.commonText, {marginLeft: 3}]}>
+          <View style={sceneStyle.separator_bottom}/>
+          <Text style={[sceneStyle.commonText, {marginLeft: 3}]}>
             Enable Night Mode
             <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 142}}>
-              <Switch style={styles.switch}
+              <Switch style={sceneStyle.switch}
                       value={this.state.nightModeEnabled === true}
                       onValueChange={(value) => {
                         this.setState({nightModeEnabled: value});
@@ -133,23 +148,23 @@ export default class SettingsScene extends Component {
           </Text>
         </View>
         <View style={{width: 400}}>
-          <View style={styles.separator_bottom}/>
+          <View style={sceneStyle.separator_bottom}/>
           <TouchableHighlight
             underlayColor={"#21618C"}
             activeOpacity={0.5}
             onPress={() => this.props.navigator.push({scene: 'About'})}>
-            <Text style={[styles.commonText, {marginLeft: 3}]}>
+            <Text style={[sceneStyle.commonText, {marginLeft: 3}]}>
               About
             </Text>
           </TouchableHighlight>
-          <View style={styles.separator_top}/>
+          <View style={sceneStyle.separator_top}/>
         </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 0,
