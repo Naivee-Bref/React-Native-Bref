@@ -15,7 +15,7 @@ import {
   AsyncStorage
 } from 'react-native';
 
-import theme, {styles} from 'react-native-theme';
+import theme from 'react-native-theme';
 
 export default class SettingsScene extends Component {
   static propTypes = {
@@ -33,10 +33,8 @@ export default class SettingsScene extends Component {
   };
 
   _darkTheme() {
-    console.log('aaa');
     if (theme.name !== 'default') {
       theme.active();
-      // this.setState({nightModeEnabled: 'true'});
       console.log('Active dark theme.');
     }
   }
@@ -44,7 +42,6 @@ export default class SettingsScene extends Component {
   _lightTheme() {
     if (theme.name !== 'light') {
       theme.active('light');
-      // this.setState({nightModeEnabled: null});
       console.log('Active light theme.');
     }
   }
@@ -52,8 +49,25 @@ export default class SettingsScene extends Component {
   async _loadInitialState() {
     await AsyncStorage.getItem('@Bref:TouchIdEnabled')
       .then(result => {
+        console.log('Load initial state TouchIdEnabled: ' + result);
         if (result !== null) {
-          this.setState({touchIdEnabled: result === 'true'});
+          this.setState({touchIdEnabled: result == 'true'});
+        }
+        else {
+          this.setState({touchIdEnabled: false});
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    await AsyncStorage.getItem('@Bref:NightModeEnabled')
+      .then(result => {
+        console.log('Load initial state NightModeEnabled: ' + result);
+        if (result !== null) {
+          this.setState({nightModeEnabled: result == 'true'});
+        }
+        else {
+          this.setState({nightModeEnabled: true});
         }
       })
       .catch(error => {
@@ -68,140 +82,107 @@ export default class SettingsScene extends Component {
   async _storeTouchIdOption(value) {
     await AsyncStorage.setItem('@Bref:TouchIdEnabled', value.toString())
       .then(success => {
-        console.log('store touch id option success');
+        console.log('Store touch id option success. TouchIdEnabled: ' + value);
       })
       .catch(error => {
-        console.log('store touch id option fail');
+        console.log('Store touch id option fail.');
       });
   }
 
-  _renderRow(rowData) {
-    switch (rowData.toString()) {
-      case 'Set Motto':
-        return (
-          <View>
-            <View style={styles.separator_top}/>
-            <TouchableHighlight
-              underlayColor={"#21618C"}
-              activeOpacity={0.5}
-              onPress={() => this.props.navigator.push({scene: 'Set Motto'})}>
-              <Text style={styles.commonText}> {rowData.toString()} </Text>
-            </TouchableHighlight>
-          </View>
-        );
-      case 'Enable Touch ID':
-        return (
-          <View style={{width: 400}}>
-            <View style={styles.separator_bottom}/>
-            <Text style={[styles.commonText, {marginLeft: 3}]}>
-              Enable Touch ID
-              <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 160}}>
-                <Switch disabled={false} style={styles.switch}
-                        onValueChange={(value) => {
-                          this.setState({touchIdEnabled: value});
-                          this._storeTouchIdOption(value).done();
-                        }}
-                        value={this.state.touchIdEnabled == true}/>
-              </View>
-            </Text>
-          </View>
-        );
-      case 'Enable Night Mode':
-        return (
-          <View style={{width: 400}}>
-            <View style={styles.separator_bottom}/>
-            <Text style={[styles.commonText, {marginLeft: 3}]}>
-              Enable Night Mode
-              <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 142}}>
-                <Switch disabled={false} style={styles.switch}
-                        onValueChange={(value) => {
-                          if (value) {
-                            this._darkTheme();
-                          }
-                          else {
-                            this._lightTheme();
-                          }
-                        }}
-                />
-              </View>
-            </Text>
-          </View>
-        );
-      case 'About':
-        return (
-          <View style={{width: 400}}>
-            <View style={styles.separator_bottom}/>
-            <TouchableHighlight
-              underlayColor={"#21618C"}
-              activeOpacity={0.5}
-              onPress={() => this.props.navigator.push({scene: 'About'})}>
-              <Text style={[styles.commonText, {marginLeft: 3}]}>
-                About
-              </Text>
-            </TouchableHighlight>
-            <View style={styles.separator_top}/>
-          </View>
-        );
-    }
+  async _storeDarkThemeOption(value) {
+    await AsyncStorage.setItem('@Bref:NightModeEnabled', value.toString())
+      .then(success => {
+        console.log('Store night mode option success. NightModeEnabled: ' + value);
+      })
+      .catch(error => {
+        console.log('Store night mode option fail.');
+      });
   }
 
   render() {
     return (
       <View style={[{marginTop: 60}, styles.container]}>
-        <ListView style={{marginTop: 10}}
-                  dataSource={this.state.dataSource}
-                  enableEmptySections={true}
-                  renderRow={(rowData) => this._renderRow(rowData)}
-        />
-        <TouchableHighlight onPress={this._darkTheme()}>
-          <Text style={styles.commonText}>
-            dark
+        <View style={{width: 400}}>
+          <View style={styles.separator_bottom}/>
+          <Text style={[styles.commonText, {marginLeft: 3}]}>
+            Enable Touch ID
+            <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 160}}>
+              <Switch style={styles.switch}
+                      value={this.state.touchIdEnabled === true}
+                      onValueChange={(value) => {
+                        this.setState({touchIdEnabled: value});
+                        this._storeTouchIdOption(value).done();
+                      }}
+              />
+            </View>
           </Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this._lightTheme()}>
-          <Text style={styles.commonText}>
-            light
+        </View>
+        <View style={{width: 400}}>
+          <View style={styles.separator_bottom}/>
+          <Text style={[styles.commonText, {marginLeft: 3}]}>
+            Enable Night Mode
+            <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 142}}>
+              <Switch style={styles.switch}
+                      value={this.state.nightModeEnabled === true}
+                      onValueChange={(value) => {
+                        this.setState({nightModeEnabled: value});
+                        this._storeDarkThemeOption(value).done();
+                      }}
+              />
+            </View>
           </Text>
-        </TouchableHighlight>
+        </View>
+        <View style={{width: 400}}>
+          <View style={styles.separator_bottom}/>
+          <TouchableHighlight
+            underlayColor={"#21618C"}
+            activeOpacity={0.5}
+            onPress={() => this.props.navigator.push({scene: 'About'})}>
+            <Text style={[styles.commonText, {marginLeft: 3}]}>
+              About
+            </Text>
+          </TouchableHighlight>
+          <View style={styles.separator_top}/>
+        </View>
       </View>
     );
   }
 }
-//
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 0,
-//     backgroundColor: '#202020',
-//     justifyContent: 'flex-start'
-//   },
-//   backButtonText: {
-//     color: '#FFFFFF',
-//     fontSize: 50
-//   },
-//   commonText: {
-//     padding: 5,
-//     paddingTop: 10,
-//     paddingBottom: 10,
-//     color: '#FFFFFF'
-//   },
-//   separator_top: {
-//     height: 1,
-//     backgroundColor: '#D7DBDD',
-//   },
-//   separator_bottom: {
-//     height: 1,
-//     marginLeft: 10,
-//     marginRight: 30,
-//     backgroundColor: '#D7DBDD',
-//   },
-//   row: {
-//     flexDirection: 'row',
-//     margin: 10,
-//     backgroundColor: 'black',
-//   },
-//   switch: {
-//     marginLeft: 40,
-//     marginTop: 20
-//   }
-// });
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 0,
+    backgroundColor: '#202020',
+    justifyContent: 'flex-start'
+  },
+  backButtonText: {
+    color: '#FFFFFF',
+    fontSize: 50
+  },
+  commonText: {
+    padding: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
+    color: '#FFFFFF'
+  },
+  separator_top: {
+    height: 1,
+    backgroundColor: '#D7DBDD',
+  },
+  separator_bottom: {
+    height: 1,
+    marginLeft: 10,
+    marginRight: 30,
+    backgroundColor: '#D7DBDD',
+  },
+  row: {
+    flexDirection: 'row',
+    margin: 10,
+    backgroundColor: 'black',
+  },
+  switch: {
+    marginLeft: 40,
+    marginTop: 20
+  }
+});
