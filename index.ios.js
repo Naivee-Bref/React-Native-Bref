@@ -24,6 +24,7 @@ import theme from 'react-native-theme';
 
 theme.add(require('./js/style/darkTheme'));
 theme.add(require('./js/style/lightTheme'), 'light');
+import DatePickerScene from './js/page/DatePickerScene';
 
 class RN_Bref extends Component {
   constructor(props, context) {
@@ -135,12 +136,15 @@ class RN_Bref extends Component {
                 RightButton: (route, navigator, index, navState) => {
                   if (route.scene === 'New' || route.scene === 'Set Motto') {
                     return (
+
                       <TouchableHighlight
                         style={{alignItems: 'center'}}
                         onPress={() => navigator.pop()}
                       >
                         <Icon name="check-square-o" style={navStyle.navButtonRight}/>
                       </TouchableHighlight>
+
+
                     );
                   }
                   else {
@@ -183,6 +187,8 @@ class RN_Bref extends Component {
         return (<AboutScene navigator={navigator}/>);
       case 'Set Motto':
         return (<SetMottoScene navigator={navigator}/>);
+      case 'Date Picker':
+        return (<DatePickerScene navigator={navigator}/>);
       default:
         return (<OriginalScene navigator={navigator}/>);
     }

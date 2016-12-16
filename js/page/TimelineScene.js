@@ -31,22 +31,97 @@ export default class TimelineScene extends Component {
 
   constructor(props, context) {
     super(props, context);
-    ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
+    ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([]),
       rows: [],
+      date: new Date(),
       DIARY_KEY: '@Bref:diaries'
     };
+    this.listView = null;
+    this.listViewItem = [];
+    this.listViewHeight = 0;
+    this.t_scroll_y = 0;
   }
 
   componentWillMount() {
+    this._disableFilterByDate().done();
     this._refreshData().done();
+  }
+
+  componentDidMount() {   //will be executed after the first render
+    this._checkFilterByDate().done();
+  }
+
+  componentDidUpdate() {  //will be executed after returning back from the filter by date scene (or deletion of the listView, but it will not cause the modification of stoorage
+    this._checkFilterByDate().done();
+  }
+
+  async _disableFilterByDate() {
+    await AsyncStorage.setItem('@Bref:FilterByDate', "false")
+      .then(success => {
+        console.log('disable filter by date success');
+      })
+      .catch(error => {
+        console.log('disable filter by date fail')
+      });
+  }
+
+  async _checkFilterByDate() {
+    let FilterByDate = await AsyncStorage.getItem('@Bref:FilterByDate');
+    if (FilterByDate != null) {
+      if (FilterByDate == 'true') {
+        this._disableFilterByDate().done(); //after scrolling, set the operation to false
+        let SelectDate = await AsyncStorage.getItem('@Bref:SelectDate');
+        if (SelectDate != null) {
+          let first_index = -1;
+          for (let i = 0; i < this.state.rows.length; i++) { //the first is the lastest item with date equal to the selected date in the calendar picker
+            let date = this.state.rows[i].timeStamp;
+            let t_date = dateFormat(date, 'yyyy') + '-' + dateFormat(date, 'mm') + '-' + dateFormat(date, 'dd');
+            if (SelectDate == t_date) {
+              first_index = i;
+              break;
+            }
+          }
+          if (first_index != -1) {
+            this._scrollToIndex(first_index);
+          }
+        }
+      }
+    }
   }
 
   _deleteItem(rowID) {
     DiaryActions.deleteDiary(this.state.rows[rowID]);
     delete this.state.rows[rowID];
     this.setState({dataSource: ds.cloneWithRows(this.state.rows)});
+  }
+
+  _scrollToTop() {
+    if (this.listView != null && this.state.rows.length != 0) {
+      this.listView.scrollTo({y: 0});
+    }
+  }
+
+  _scrollToBottom() {
+    if (this.listView != null && this.state.rows.length != 0) { //now rows
+      let last_row_id = this.state.rows.length - 1;
+      this.listViewItem[last_row_id].measure((t_x, t_y, t_width, t_height, t_pageX, t_pageY) => {
+        this.t_scroll_y = t_y + t_height - this.listViewHeight;
+      });
+      this.listView.scrollTo({y: this.t_scroll_y});
+    }
+  }
+
+  _scrollToIndex(index) {
+    if (this.listView != null && this.state.rows.length != 0) { //now rows
+      if (index < 0 || index >= this.state.rows.length) return;
+      this.listViewItem[index].measure((t_x, t_y, t_width, t_height, t_pageX, t_pageY) => {
+        this.t_scroll_y = t_y;
+      });
+      this.listView.scrollTo({y: this.t_scroll_y});
+
+    }
   }
 
   _deleteStatus(rowID) {
@@ -78,7 +153,8 @@ export default class TimelineScene extends Component {
     }
     let date = new Date(rowData.timeStamp);
     return (
-      <View style={sceneStyle.item}>
+      <View style={sceneStyle.item}
+            ref={(t_ref) => this.listViewItem[rowID] = t_ref}>
         <View style={sceneStyle.date}>
           <Text style={sceneStyle.monthText}>
             {dateFormat(date, 'mmm')}.
@@ -121,7 +197,40 @@ export default class TimelineScene extends Component {
         <TouchableHighlight onPress={() => this.props.navigator.pop()}>
           <Text style={sceneStyle.backButtonText}>Back</Text>
         </TouchableHighlight>
+        <View style={sceneStyle.content}>
+          <TouchableHighlight
+            style={[sceneStyle.button, {width: 100, marginLeft: 150}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => {
+              this.props.navigator.push({scene: 'Date Picker'});
+            }}>
+            <Text style={sceneStyle.buttonText}>Search By Date</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[sceneStyle.button, {width: 30, marginLeft: 0}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => this._scrollToTop()}>
+            <Text style={sceneStyle.buttonText}>Top</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[sceneStyle.button, {width: 60, marginLeft: 0}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => this._scrollToBottom()}>
+            <Text style={sceneStyle.buttonText}>Bottom</Text>
+          </TouchableHighlight>
+        </View>
         <ListView
+          ref={ref => this.listView = ref}
+          pageSize={1000000}   //the reason why no pageSize setting will fail when touching bottom is that the page cannot load too many items
+          onLayout={(event) => {
+            let layout = event.nativeEvent.layout;
+            this.listViewHeight = layout.height;
+          }}
           dataSource={this.state.dataSource}
           enableEmptySections={true}
           renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
@@ -203,9 +312,24 @@ const sceneStyle = StyleSheet.create({
   },
   buttonText: {
     marginLeft: 0,
-    marginTop: 3.3,
+    marginTop: 3.5,
     fontSize: 12,
     textAlign: 'center',
     color: '#AFAFAF',
+    fontWeight: 'bold'
+  },
+  button: {
+    marginTop: 0,
+    height: 25,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
+    backgroundColor: '#202020'
+  },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

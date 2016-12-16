@@ -34,7 +34,6 @@ export default class SitesScene extends Component {
   }
 }
 
-
 const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,

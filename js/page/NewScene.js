@@ -128,25 +128,24 @@ const sceneStyle = StyleSheet.create({
     flexDirection: 'column',
     paddingTop: 40,
     alignItems: 'center',
-    flex: 0
   },
   location: {
     flex: 1,
     marginLeft: 20
   },
   button: {
-    height: 50,
-    width: 90,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    height: 40,
+    width: 80,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
     backgroundColor: '#202020'
   },
   buttonText: {
-    height: 32,
+    height: 30,
     width: 70,
-    marginLeft: 10,
+    marginLeft: 5,
     marginTop: 5,
     fontSize: 24,
     textAlign: 'center',

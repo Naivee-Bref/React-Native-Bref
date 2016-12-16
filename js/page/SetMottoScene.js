@@ -103,8 +103,9 @@ const sceneStyle = StyleSheet.create({
   },
   button: {
     marginTop: 10,
+    marginLeft: 5,
     height: 45,
-    width: 90,
+    width: 70,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderBottomLeftRadius: 10,
@@ -113,8 +114,8 @@ const sceneStyle = StyleSheet.create({
   },
   buttonText: {
     height: 30,
-    width: 70,
-    marginLeft: 10,
+    width: 60,
+    marginLeft: 5,
     marginTop: 5,
     fontSize: 24,
     textAlign: 'center',
