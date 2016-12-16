@@ -103,7 +103,6 @@ export default class TimelineScene extends Component {
   }
 
   _scrollToBottom() {
-
     if (this.listView != null && this.state.rows.length != 0) { //now rows
       let last_row_id = this.state.rows.length - 1;
       this.listViewItem[last_row_id].measure((t_x, t_y, t_width, t_height, t_pageX, t_pageY) => {

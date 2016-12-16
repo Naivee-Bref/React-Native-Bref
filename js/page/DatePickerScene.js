@@ -13,11 +13,11 @@ import {
   AlertIOS
 } from 'react-native';
 import Calendar from 'react-native-calendar';
-
+import dateFormat from 'dateformat';
 
 const customDayHeadings = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const customMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const style_0 = {
+const calendar_style = {
   controlButtonText: {
     color: 'blue'
   },
@@ -43,13 +43,34 @@ export default class DatePickerScene extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {};
+    this.state = {
+      DIARY_KEY: '@Bref:diaries',
+      availableDate : []
+    };
   };
 
   _getCurrentDate() {
     let currentDate = new Date();
     let DateString = currentDate.getFullYear().toString() + "-" + (currentDate.getMonth() + 1).toString() + "-" + currentDate.getDate();
     return DateString;
+  }
+
+  async _getAllAvailableDate() {
+    let data = await AsyncStorage.getItem(this.state.DIARY_KEY);
+    let all_date = [];
+    all_date = JSON.parse(data);
+    let date_set = new Set();
+    for (let i = 0; i < all_date.length; i++) {
+      let date = all_date[i].timeStamp;
+      let t_date = dateFormat(date, 'yyyy') + '-' + dateFormat(date, 'mm') + '-' + dateFormat(date, 'dd');
+      if (date_set.has(t_date)) continue;
+      date_set.add(t_date);
+      this.state.availableDate.push(t_date);
+    }
+  }
+
+  componentWillMount() {
+    this._getAllAvailableDate().done();
   }
 
   async _storeSelectDate(value) {
@@ -79,9 +100,9 @@ export default class DatePickerScene extends Component {
     return (
       <View style={[{marginTop: 60}, styles.container]}>
         <Calendar
-          customStyle={style_0}
+          customStyle={calendar_style}
           showEventIndicators
-          eventDates={['2016-12-07', '2016-11-03']}
+          eventDates={this.state.availableDate}
           dayHeadings={customDayHeadings}               // Default: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
           monthNames={customMonthNames}                // Defaults to english names of months
           nextButtonText={'Next'}           // Text for next button. Default: 'Next'
@@ -98,7 +119,6 @@ export default class DatePickerScene extends Component {
           titleFormat={'MMMM YYYY'}         // Format for displaying current month. Default: 'MMMM YYYY'
           today={this._getCurrentDate()}              // Defaults to today
           weekStart={1} // Day on which week starts 0 - Sunday, 1 - Monday, 2 - Tuesday, etc, Default: 1
-
         />
       </View>
 
