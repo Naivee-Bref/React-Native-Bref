@@ -45,8 +45,10 @@ export default class DatePickerScene extends Component {
     super(props, context);
     this.state = {
       DIARY_KEY: '@Bref:diaries',
-      availableDate : []
+      availableDate: [],
+      currentSelectedDate: ""
     };
+    this.date_set = new Set();
   };
 
   _getCurrentDate() {
@@ -59,12 +61,11 @@ export default class DatePickerScene extends Component {
     let data = await AsyncStorage.getItem(this.state.DIARY_KEY);
     let all_date = [];
     all_date = JSON.parse(data);
-    let date_set = new Set();
     for (let i = 0; i < all_date.length; i++) {
       let date = all_date[i].timeStamp;
       let t_date = dateFormat(date, 'yyyy') + '-' + dateFormat(date, 'mm') + '-' + dateFormat(date, 'dd');
-      if (date_set.has(t_date)) continue;
-      date_set.add(t_date);
+      if (this.date_set.has(t_date)) continue;
+      this.date_set.add(t_date);
       this.state.availableDate.push(t_date);
     }
   }
@@ -81,7 +82,7 @@ export default class DatePickerScene extends Component {
       .catch(error => {
         console.log('set filter by date fail')
       });
-    
+
     let DateString = value.substring(0, 10);
     await AsyncStorage.setItem('@Bref:SelectDate', DateString)
       .then(success => {
@@ -93,6 +94,11 @@ export default class DatePickerScene extends Component {
   }
 
   _onDateSelect(date) {
+    if (!this.date_set.has(date.substring(0, 10)))    //has no moment records
+    {
+      this.setState({currentSelectedDate: date.substring(0, 10)});
+      return;
+    }
     this._storeSelectDate(date);
   }
 
@@ -106,7 +112,9 @@ export default class DatePickerScene extends Component {
           dayHeadings={customDayHeadings}               // Default: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
           monthNames={customMonthNames}                // Defaults to english names of months
           nextButtonText={'Next'}           // Text for next button. Default: 'Next'
-          onDateSelect={(date) => this._onDateSelect(date)} // Callback after date selection
+          onDateSelect={(date) => {
+            this._onDateSelect(date);
+          }} // Callback after date selection
           onSwipeNext={this.onSwipeNext}    // Callback for forward swipe event
           onSwipePrev={this.onSwipePrev}    // Callback for back swipe event
           onTouchNext={this.onTouchNext}    // Callback for next touch event
@@ -120,9 +128,13 @@ export default class DatePickerScene extends Component {
           today={this._getCurrentDate()}              // Defaults to today
           weekStart={1} // Day on which week starts 0 - Sunday, 1 - Monday, 2 - Tuesday, etc, Default: 1
         />
+        <Text style={[styles.commonText, {marginTop: 8}]}>
+          Selected date: &nbsp; {this.state.currentSelectedDate} has no records!
+        </Text>
+        <Text style={styles.commonText}>
+          Only dates with green squares in the bottom are valid.
+        </Text>
       </View>
-
-
     );
   }
 }
@@ -136,8 +148,8 @@ const styles = StyleSheet.create({
   },
   commonText: {
     padding: 5,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     color: '#FFFFFF'
   },
 });
