@@ -1,6 +1,9 @@
 /**
  * Created by weiyixia on 16/12/15.
  */
+
+'use strict';
+
 import React, {Component, PropTypes} from 'react';
 import {
   StyleSheet,
@@ -27,14 +30,12 @@ const calendar_style = {
   weekendHeading: {
     color: 'black'
   },
-
   eventIndicator: {
     backgroundColor: 'green',
     width: 10,
     height: 10
   }
 }
-
 
 export default class DatePickerScene extends Component {
   static propTypes = {

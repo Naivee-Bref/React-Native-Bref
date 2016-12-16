@@ -17,16 +17,12 @@ import {
   AlertIOS,
   StatusBar,
 } from 'react-native';
-import Reflux from 'reflux';
-import dateFormat from 'dateformat';
 
 import Photo from '../component/Photo';
 import Location from '../component/Location';
-import diaryStore from './../component/Storage';
 import DiaryActions from './../actions';
 
 export default class NewScene extends Component {
-  mixins = [Reflux.connect(diaryStore, 'store')];
 
   static propTypes = {
     navigator: PropTypes.object.isRequired

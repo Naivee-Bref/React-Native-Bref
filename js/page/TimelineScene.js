@@ -190,7 +190,6 @@ export default class TimelineScene extends Component {
   }
 
   render() {
-
     return (
       <View style={styles.container }>
         <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
@@ -329,7 +328,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#202020'
   },
   content: {
-
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
