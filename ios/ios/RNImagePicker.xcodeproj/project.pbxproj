@@ -9,6 +9,9 @@
 		014A3B6A1C6CF34500B6D375 /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3B691C6CF34500B6D375 /* ImagePickerManager.m */; };
 		1DBDDCCD1DB66F2B00C1EEE3 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A3B5C1C6CF33500B6D375 /* libRNImagePicker.a */; };
 		721377CF396C4805B6E8FA88 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C879791E85416BB166D2E3 /* libRNVectorIcons.a */; };
+		4F5DDE808CEE4C7A8F1CB886 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DA6CC5317FB4C75B8042874 /* libAirMaps.a */; };
+		FAB2AABD8AC24F5BB0FFB65B /* libPasscodeAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8F78AD4BA1F466E9E5AECF4 /* libPasscodeAuth.a */; };
+		C22377C74BE942B28FE83E25 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 559263256494456CBAA9B7EE /* libRCTActionSheet.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +33,12 @@
 		9061AD1366514FF8855CD108 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		D6EB1564775D441884D46F0D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		68C879791E85416BB166D2E3 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		78B8FB35500141E383765C24 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		9DA6CC5317FB4C75B8042874 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		E309BB6BC629475A97029C66 /* PasscodeAuth.xcodeproj */ = {isa = PBXFileReference; name = "PasscodeAuth.xcodeproj"; path = "../../node_modules/react-native-passcode-auth/PasscodeAuth.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		E8F78AD4BA1F466E9E5AECF4 /* libPasscodeAuth.a */ = {isa = PBXFileReference; name = "libPasscodeAuth.a"; path = "libPasscodeAuth.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		25FC36F539C44111B89C2D2A /* reactnativeswipeout.xcodeproj */ = {isa = PBXFileReference; name = "reactnativeswipeout.xcodeproj"; path = "../../node_modules/react-native-swipeout/ios/reactnativeswipeout.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		559263256494456CBAA9B7EE /* libRCTActionSheet.a */ = {isa = PBXFileReference; name = "libRCTActionSheet.a"; path = "libRCTActionSheet.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +48,9 @@
 			files = (
 				1DBDDCCD1DB66F2B00C1EEE3 /* libRNImagePicker.a in Frameworks */,
 				721377CF396C4805B6E8FA88 /* libRNVectorIcons.a in Frameworks */,
+				4F5DDE808CEE4C7A8F1CB886 /* libAirMaps.a in Frameworks */,
+				FAB2AABD8AC24F5BB0FFB65B /* libPasscodeAuth.a in Frameworks */,
+				C22377C74BE942B28FE83E25 /* libRCTActionSheet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +80,9 @@
 			children = (
 				9061AD1366514FF8855CD108 /* RNImagePicker.xcodeproj */,
 				D6EB1564775D441884D46F0D /* RNVectorIcons.xcodeproj */,
+				78B8FB35500141E383765C24 /* AirMaps.xcodeproj */,
+				E309BB6BC629475A97029C66 /* PasscodeAuth.xcodeproj */,
+				25FC36F539C44111B89C2D2A /* reactnativeswipeout.xcodeproj */,
 			);
 			name = Libraries;
 			path = "";
@@ -225,12 +240,18 @@
 					"$(SRCROOT)/../Example/node_modules/react-native/React/**",
 					"$(SRCROOT)/../../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../../node_modules/react-native-maps/ios/**",
+					"$(SRCROOT)/../../node_modules/react-native-passcode-auth",
+					"$(SRCROOT)/../../node_modules/react-native-swipeout/ios/reactnativeswipeout",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
@@ -245,12 +266,18 @@
 					"$(SRCROOT)/../Example/node_modules/react-native/React/**",
 					"$(SRCROOT)/../../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../../node_modules/react-native-maps/ios/**",
+					"$(SRCROOT)/../../node_modules/react-native-passcode-auth",
+					"$(SRCROOT)/../../node_modules/react-native-swipeout/ios/reactnativeswipeout",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};

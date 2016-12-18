@@ -13,6 +13,7 @@
     "react-native": "0.35.0",
     "react-native-calendar": "^0.9.0",
     "react-native-image-picker": "^0.22.10",
+    "react-native-maps": "^0.12.2",
     "react-native-passcode-auth": "^1.0.0",
     "react-native-swipeout": "^2.0.12",
     "react-native-theme": "^0.1.7",

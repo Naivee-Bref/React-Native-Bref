@@ -11,7 +11,7 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
-
+import MapView from 'react-native-maps';
 import {styles} from 'react-native-theme';
 
 export default class SitesScene extends Component {
@@ -23,12 +23,35 @@ export default class SitesScene extends Component {
     super(props, context);
   };
 
+  press(location){
+    ///LocationTimelineScene().location = 'Jiading Qu';
+    return this.props.navigator.push({
+      scene: 'Location Timeline',
+      passProps:{location:'Jiading Qu'}
+    })
+  }
+  ///onPress={() => this.props.navigator.push({scene: 'Location Timeline'})}>
   render() {
     return (
-      <View style={[styles.background, sceneStyle.container]}>
+      <View style={[styles.background, sceneStyle.container, {marginTop: 60}]}>
+
+
+        <Text style={[styles.text, sceneStyle.commonText]}>
+          Profile SceneA
+        </Text>
+        <TouchableHighlight
+          underlayColor={"#21618C"}
+          activeOpacity={0.5}
+          onPress={() => this.press(' ')}>
+          <Text style={[styles.text, sceneStyle.commonText]}> Goto Location </Text>
+        </TouchableHighlight>
+
         <Text style={[styles.text, sceneStyle.commonText]}>
           Profile Scene
         </Text>
+
+
+
       </View>
     )
   }
