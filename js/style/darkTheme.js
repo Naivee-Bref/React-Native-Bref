@@ -5,6 +5,12 @@
 'use strict';
 
 const darkTheme = {
+  navBar: {
+    backgroundColor: 'black'
+  },
+  navColor: {
+    color: 'white'
+  },
   background: {
     backgroundColor: 'black'
   },
@@ -19,9 +25,6 @@ const darkTheme = {
   },
   text: {
     color: '#CFCFCF'
-  },
-  navBar: {
-    color: 'white'
   }
 };
 

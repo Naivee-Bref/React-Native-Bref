@@ -5,6 +5,12 @@
 'use strict';
 
 const lightTheme = {
+  navBackground: {
+    backgroundColor: 'white'
+  },
+  navContentColor: {
+    color: 'black'
+  },
   background: {
     backgroundColor: 'white'
   },
@@ -19,9 +25,6 @@ const lightTheme = {
   },
   text: {
     color: '#CFCFCF'
-  },
-  navBar: {
-    color: 'black'
   }
 };
 
