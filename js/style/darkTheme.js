@@ -5,15 +5,17 @@
 'use strict';
 
 const darkTheme = {
-  navBackground: {
-    backgroundColor: 'black'
-  },
   navContentColor: {
     color: 'white'
   },
   background: {
     backgroundColor: 'black'
   },
+  pageBackground: {
+    backgroundColor: '#202020'
+  },
+
+  // Origin Page
   Bref: {
     color: '#FFFFFF'
   },
@@ -23,6 +25,28 @@ const darkTheme = {
   mottoText: {
     color: '#CFCFCF'
   },
+
+  // Timeline Page
+  buttonText: {
+    color: '#AFAFAF'
+  },
+  monthColor: {
+    color: '#AFAFAF'
+  },
+  dayColor: {
+    color: 'white'
+  },
+  cardColor: {
+    shadowColor: 'black',
+    backgroundColor: 'black'
+  },
+  timelineTextColor: {
+    color: 'white'
+  },
+  timelineOthersColor: {
+    color: '#AFAFAF'
+  },
+
   text: {
     color: '#CFCFCF'
   }

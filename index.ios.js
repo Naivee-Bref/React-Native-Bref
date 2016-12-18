@@ -128,7 +128,11 @@ class RN_Bref extends Component {
                     return null;
                   } else {
                     return (
-                      <TouchableHighlight style={{alignItems: 'center'}} onPress={() => navigator.pop()}>
+                      <TouchableHighlight
+                        underlayColor="transparent"
+                        style={{alignItems: 'center'}}
+                        onPress={() => navigator.pop()}
+                      >
                         <Icon name="chevron-left" style={[navStyle.navButtonLeft, styles.navContentColor]}/>
                       </TouchableHighlight>
                     );
@@ -138,6 +142,7 @@ class RN_Bref extends Component {
                   if (route.scene === 'New' || route.scene === 'Set Motto') {
                     return (
                       <TouchableHighlight
+                        underlayColor="transparent"
                         style={{alignItems: 'center'}}
                         onPress={() => navigator.pop()}
                       >
@@ -161,7 +166,7 @@ class RN_Bref extends Component {
                   }
                 }
               }}
-              style={styles.navBackground}
+              style={{backgroundColor: 'transparent'}}
             />
           }
         />

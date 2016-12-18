@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 import {styles} from 'react-native-theme';
+import {name} from 'react-native-theme';
 
 export default class OriginalScene extends Component {
   static propTypes = {
@@ -43,44 +44,55 @@ export default class OriginalScene extends Component {
 
   render() {
     this._loadMotto().done();
+    let statusBar;
+    if (name == 'light') {
+      statusBar = (
+        <StatusBar barStyle="default"/>
+      );
+    }
+    else {
+      statusBar = (
+        <StatusBar barStyle="light-content"/>
+      );
+    }
     return (
       <View style={[styles.background, sceneStyle.container]}>
-        <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
+        {statusBar}
         <View style={{flex: 1.5, justifyContent: 'flex-end'}}>
-          <Text style={[styles.Bref, sceneStyle.welcome_main]}>
+          <Text style={[styles.Bref, sceneStyle.Bref]}>
             bref.
           </Text>
         </View>
 
         <View style={{flex: 1}}>
-          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'New'})}>
-            <Text style={[styles.welcomeText, sceneStyle.welcome_text]}>
+          <TouchableHighlight underlayColor="transparent" onPress={() => this.props.navigator.push({scene: 'New'})}>
+            <Text style={[styles.welcomeText, sceneStyle.welcomeText]}>
               New
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Timeline'})}>
-            <Text style={[styles.welcomeText, sceneStyle.welcome_text]}>
+          <TouchableHighlight underlayColor="transparent" onPress={() => this.props.navigator.push({scene: 'Timeline'})}>
+            <Text style={[styles.welcomeText, sceneStyle.welcomeText]}>
               Timeline
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Sites'})}>
-            <Text style={[styles.welcomeText, sceneStyle.welcome_text]}>
+          <TouchableHighlight underlayColor="transparent" onPress={() => this.props.navigator.push({scene: 'Sites'})}>
+            <Text style={[styles.welcomeText, sceneStyle.welcomeText]}>
               Sites
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.props.navigator.push({scene: 'Settings'})}>
-            <Text style={[styles.welcomeText, sceneStyle.welcome_text]}>
+          <TouchableHighlight underlayColor="transparent" onPress={() => this.props.navigator.push({scene: 'Settings'})}>
+            <Text style={[styles.welcomeText, sceneStyle.welcomeText]}>
               Settings
             </Text>
           </TouchableHighlight>
         </View>
 
         <View style={sceneStyle.motto}>
-          <Text style={[styles.welcomeText, sceneStyle.quote, {textAlign: 'left'}]}>“</Text>
-          <Text style={[styles.mottoText, sceneStyle.motto_text]}>
+          <Text style={[styles.mottoText, sceneStyle.quote, {textAlign: 'left'}]}>“</Text>
+          <Text style={[styles.mottoText, sceneStyle.mottoText]}>
             { this.state.motto }
           </Text>
-          <Text style={[styles.welcomeText, sceneStyle.quote, {textAlign: 'right'}]}>”</Text>
+          <Text style={[styles.mottoText, sceneStyle.quote, {textAlign: 'right'}]}>”</Text>
         </View>
       </View>
     );
@@ -92,21 +104,18 @@ const sceneStyle = StyleSheet.create({
     flex: 1,
     padding: 10,
     justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: '#000000'
+    alignItems: 'center'
   },
-  welcome_main: {
+ Bref: {
     fontSize: 70,
-    // color: '#FFFFFF',
     textAlign: 'center',
     margin: 10,
     letterSpacing: 8,
     fontFamily: 'Georgia-Bold',
     justifyContent: 'center'
   },
-  welcome_text: {
+  welcomeText: {
     textAlign: 'center',
-    // color: '#CFCFCF',
     fontSize: 16,
     marginBottom: 5
   },
@@ -117,14 +126,12 @@ const sceneStyle = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 1
   },
-  motto_text: {
+  mottoText: {
     fontSize: 14,
-    // color: '#CFCFCF',
     marginLeft: 10,
     marginRight: 10
   },
   quote: {
-    color: '#CFCFCF',
     fontFamily: 'Helvetica-Bold',
     fontSize: 20
   }
