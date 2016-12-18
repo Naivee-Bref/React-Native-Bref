@@ -153,9 +153,7 @@ export default class LocationTimelineScene extends Component {
       );
     }
     let date = new Date(rowData.timeStamp);
-    //this.location = 'Jiading Qu';
-    this.location = this.props.route.passProps.location
-    console.log(this.location)
+    this.location = this.props.route.passProps.location;
     if (rowData.city == this.location) {
       return (
         <View style={sceneStyle.item}
