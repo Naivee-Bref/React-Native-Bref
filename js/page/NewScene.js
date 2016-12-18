@@ -20,6 +20,7 @@ import {
 import Reflux from 'reflux';
 import dateFormat from 'dateformat';
 import {styles} from 'react-native-theme';
+import {name} from 'react-native-theme';
 import Photo from '../component/Photo';
 import Location from '../component/Location';
 import diaryStore from './../component/Storage';
@@ -78,16 +79,27 @@ export default class NewScene extends Component {
   }
 
   render() {
+    let statusBar;
+    if (name == 'light') {
+      statusBar = (
+        <StatusBar barStyle="default"/>
+      );
+    }
+    else {
+      statusBar = (
+        <StatusBar barStyle="light-content"/>
+      );
+    }
     return (
-      <View style={sceneStyle.container_out}>
-        <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
-        <View style={sceneStyle.container}>
+      <View style={[sceneStyle.container, styles.pageBackground]}>
+        {statusBar}
+        <View style={sceneStyle.content}>
           <Photo
             storeSource={null}
             getImageUrlBack={(url) => this._getImageData(url)}
           />
           <TextInput
-            style={sceneStyle.input}
+            style={[sceneStyle.input, styles.input]}
             onChangeText={(text) => this.setState({text})}
             value={this.state.text}
             multiline={true}
@@ -98,17 +110,17 @@ export default class NewScene extends Component {
             autoCapitalize={'none'}
             autoCorrect={false}
           />
-          <View style={sceneStyle.location} refreshing>
+          <View refreshing>
             <Location getCityBack={(city) => this._getCity(city)}/>
           </View>
           <TouchableHighlight
-            style={sceneStyle.button}
+            style={[sceneStyle.button, styles.postButton]}
             underlayColor={'gray'}
             activeOpacity={0.5}
             onPress={() => {
               this._submitOnPress();
             }}>
-            <Text style={sceneStyle.buttonText}>Post </Text>
+            <Text style={[sceneStyle.buttonText, styles.postButtonText]}>Post </Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -117,44 +129,36 @@ export default class NewScene extends Component {
 }
 
 const sceneStyle = StyleSheet.create({
-  container_out: {
-    paddingTop: 50,
-    flex: 1,
-    backgroundColor: '#202020'
-  },
   container: {
-    backgroundColor: '#202020',
-    justifyContent: 'center',
+    flex: 1,
+    padding: 10,
+    justifyContent: 'flex-start'
+  },
+  content: {
     flexDirection: 'column',
-    paddingTop: 40,
+    paddingTop: 63,
     alignItems: 'center',
   },
-  location: {
-    flex: 1,
-    marginLeft: 20
-  },
   button: {
+    marginTop: 20,
     height: 40,
     width: 80,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
-    backgroundColor: '#202020'
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0.3,
+    },
   },
   buttonText: {
-    height: 30,
-    width: 70,
-    marginLeft: 5,
-    marginTop: 5,
-    fontSize: 24,
+    marginTop: 7,
+    fontSize: 20,
     textAlign: 'center',
-    color: '#FFFFFF',
     fontWeight: 'bold'
-  },
-  backButtonText: {
-    color: '#FFFFFF',
-    fontSize: 50
   },
   commonText: {
     padding: 5,
@@ -165,12 +169,7 @@ const sceneStyle = StyleSheet.create({
     paddingTop: 10,
     height: 100,
     width: Dimensions.get('window').width - 60,
-    borderBottomColor: '#AFAFAF',
-    borderLeftColor: '#202020',
-    borderRightColor: '#202020',
-    borderTopColor: '#202020',
     borderWidth: 0.5,
-    color: '#AFAFAF',
     marginLeft: 30,
     marginRight: 30,
     fontSize: 15

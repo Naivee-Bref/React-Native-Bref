@@ -47,6 +47,33 @@ const darkTheme = {
     color: '#AFAFAF'
   },
 
+  // New Page
+  photoContainer: {
+    borderColor: '#9B9B9B',
+    shadowColor: 'black',
+    backgroundColor: 'black'
+  },
+  photoText: {
+    color: '#AFAFAF'
+  },
+  input: {
+    borderBottomColor: '#AFAFAF',
+    borderLeftColor: '#202020',
+    borderRightColor: '#202020',
+    borderTopColor: '#202020',
+    color: '#AFAFAF'
+  },
+  locationText: {
+    color: '#AFAFAF'
+  },
+  postButton: {
+    shadowColor: 'black',
+    backgroundColor: 'black'
+  },
+  postButtonText: {
+    color: 'white'
+  },
+
   text: {
     color: '#CFCFCF'
   }

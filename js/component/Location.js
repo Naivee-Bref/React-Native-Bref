@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import {styles} from 'react-native-theme';
 
 
 export default class Location extends Component {
@@ -82,7 +83,7 @@ export default class Location extends Component {
   render() {
     return (
       <View refreshing>
-        <Text style={styles.commonText}>
+        <Text style={[locationStyle.commonText, styles.locationText]}>
           <Text>City: </Text>
           {this.state.city}
         </Text>
@@ -91,10 +92,9 @@ export default class Location extends Component {
   }
 };
 
-const styles = StyleSheet.create({
+const locationStyle = StyleSheet.create({
   commonText: {
     padding: 20,
-    paddingBottom: 3,
-    color: '#AFAFAF'
+    paddingBottom: 3
   }
 });

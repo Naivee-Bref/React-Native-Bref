@@ -47,6 +47,34 @@ const lightTheme = {
     color: '#6F6F6F'
   },
 
+  // New Page
+  photoContainer: {
+    borderColor: '#AFAFAF',
+    shadowColor: 'grey',
+    backgroundColor: 'white'
+  },
+  photoText: {
+    color: '#6F6F6F'
+  },
+  input: {
+    borderBottomColor: '#6F6F6F',
+    borderLeftColor: '#F6F6F6',
+    borderRightColor: '#F6F6F6',
+    borderTopColor: '#F6F6F6',
+    color: '#6F6F6F'
+  },
+  locationText: {
+    color: '#6F6F6F'
+  },
+  postButton: {
+    shadowColor: 'grey',
+    backgroundColor: 'white'
+  },
+  postButtonText: {
+    color: 'black'
+  },
+
+
   text: {
     color: '#6F6F6F'
   }
