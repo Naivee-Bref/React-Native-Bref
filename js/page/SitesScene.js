@@ -9,8 +9,10 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  MapView
 } from 'react-native';
+//import MapView from 'react-native-maps';
 
 import {styles} from 'react-native-theme';
 
@@ -25,11 +27,15 @@ export default class SitesScene extends Component {
 
   render() {
     return (
-      <View style={[styles.background, sceneStyle.container]}>
+      /*<View style={[styles.background, sceneStyle.container]}>
         <Text style={[styles.text, sceneStyle.commonText]}>
           Profile Scene
-        </Text>
-      </View>
+        </Text>*/
+    <MapView
+      style={{height: 700, margin: 40}}
+      showsUserLocation={true}
+    />
+    //</View>
     )
   }
 }
