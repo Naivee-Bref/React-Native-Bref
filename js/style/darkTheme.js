@@ -74,9 +74,14 @@ const darkTheme = {
     color: 'white'
   },
 
-  text: {
-    color: '#CFCFCF'
+  // Settings Page
+  separatorColor: {
+    backgroundColor: '#9B9B9B',
+  },
+  settingText: {
+    color: 'white'
   }
+
 };
 
 module.exports = darkTheme;

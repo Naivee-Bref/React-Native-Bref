@@ -74,10 +74,15 @@ const lightTheme = {
     color: 'black'
   },
 
-
-  text: {
-    color: '#6F6F6F'
+  // Settings Page
+  separatorColor: {
+    backgroundColor: '#AFAFAF',
+  },
+  settingText: {
+    color: 'black'
   }
+
+
 };
 
 module.exports = lightTheme;
