@@ -25,6 +25,7 @@ import theme from 'react-native-theme';
 theme.add(require('./js/style/darkTheme'));
 theme.add(require('./js/style/lightTheme'), 'light');
 import DatePickerScene from './js/page/DatePickerScene';
+import {styles} from 'react-native-theme';
 
 class RN_Bref extends Component {
   constructor(props, context) {
@@ -128,7 +129,7 @@ class RN_Bref extends Component {
                   } else {
                     return (
                       <TouchableHighlight style={{alignItems: 'center'}} onPress={() => navigator.pop()}>
-                        <Icon name="chevron-left" style={navStyle.navButtonLeft}/>
+                        <Icon name="chevron-left" style={[navStyle.navButtonLeft, styles.navContentColor]}/>
                       </TouchableHighlight>
                     );
                   }
@@ -136,15 +137,12 @@ class RN_Bref extends Component {
                 RightButton: (route, navigator, index, navState) => {
                   if (route.scene === 'New' || route.scene === 'Set Motto') {
                     return (
-
                       <TouchableHighlight
                         style={{alignItems: 'center'}}
                         onPress={() => navigator.pop()}
                       >
-                        <Icon name="check-square-o" style={navStyle.navButtonRight}/>
+                        <Icon name="check-square-o" style={[navStyle.navButtonRight, styles.navContentColor]}/>
                       </TouchableHighlight>
-
-
                     );
                   }
                   else {
@@ -156,14 +154,14 @@ class RN_Bref extends Component {
                   title = route.scene;
                   if (title != 'Initial') {
                     return (
-                      <Text style={navStyle.navBarTitle}>
+                      <Text style={[navStyle.navBarTitle,styles.navContentColor]}>
                         {title}
                       </Text>
                     );
                   }
                 }
               }}
-              style={{backgroundColor: 'black'}}
+              style={styles.navBackground}
             />
           }
         />
@@ -201,19 +199,16 @@ const navStyle = StyleSheet.create({
   navButtonLeft: {
     marginLeft: 25,
     marginTop: 10,
-    fontSize: 20,
-    color: 'white'
+    fontSize: 20
   },
   navButtonRight: {
     marginRight: 25,
     marginTop: 10,
-    fontSize: 25,
-    color: 'white'
+    fontSize: 25
   },
   navBarTitle: {
     marginTop: 10,
     fontSize: 20,
-    color: 'white',
     fontWeight: 'bold'
   }
 });
