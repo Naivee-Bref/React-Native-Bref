@@ -5,10 +5,10 @@
 'use strict';
 
 const darkTheme = {
-  navBar: {
+  navBackground: {
     backgroundColor: 'black'
   },
-  navColor: {
+  navContentColor: {
     color: 'white'
   },
   background: {
