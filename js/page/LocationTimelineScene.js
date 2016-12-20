@@ -277,10 +277,10 @@ const sceneStyle = StyleSheet.create({
     alignItems: 'center'
   },
   monthText: {
-    fontSize: 14
+    fontSize: 12
   },
   dayText: {
-    fontSize: 23
+    fontSize: 20
   },
   card: {
     padding: 10,
