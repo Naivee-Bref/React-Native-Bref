@@ -48,7 +48,7 @@ const calendar_style_1 = {
     borderColor: 'black'
   },
   selectedDayCircle: {
-    backgroundColor: 'black'
+    backgroundColor: 'transparent'
   },
   dayButton:{
     borderTopColor: 'transparent'
@@ -85,7 +85,7 @@ const calendar_style_2 = {
     borderColor: 'white'
   },
   selectedDayCircle: {
-    backgroundColor: 'white'
+    backgroundColor: 'transparent'
   },
   dayButton:{
     borderTopColor: 'transparent'
@@ -205,10 +205,10 @@ export default class DatePickerScene extends Component {
           today={this._getCurrentDate()}              // Defaults to today
           weekStart={1} // Day on which week starts 0 - Sunday, 1 - Monday, 2 - Tuesday, etc, Default: 1
         />
-        <Text style={[styles.timeLineOthersColor, sceneStyle.commonText, {marginTop: 8}]}>
+        <Text style={[styles.timelineOthersColor, sceneStyle.commonText, {marginTop: 8}]}>
           Selected date: &nbsp; {this.state.currentSelectedDate} has no records!
         </Text>
-        <Text style={[styles.timeLineOthersColor, sceneStyle.commonText]}>
+        <Text style={[styles.timelineOthersColor, sceneStyle.commonText]}>
           Only dates with green squares in the bottom are valid.
         </Text>
         </View>

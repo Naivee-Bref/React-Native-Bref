@@ -21,6 +21,7 @@ import {
 } from 'react-native';
 //import MapView from 'react-native-maps';
 import dateFormat from 'dateformat';
+import {name} from 'react-native-theme';
 import {styles} from 'react-native-theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DiaryActions from './../actions';
@@ -201,8 +202,10 @@ export default class SitesScene extends Component {
 
   render() {
     this._refreshData().done();
+    let siteStatusBar = (<StatusBar barStyle="default" />);
     return (
       <View style={[styles.background, sceneStyle.container]}>
+        {siteStatusBar}
         <MapView
           style={sceneStyle.map}
           annotations = {/*[{

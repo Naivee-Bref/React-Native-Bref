@@ -21,6 +21,7 @@ import {
 import dateFormat from 'dateformat';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {styles} from 'react-native-theme';
+import {name} from 'react-native-theme';
 import DiaryActions from './../actions';
 let ds;
 
@@ -161,20 +162,20 @@ export default class LocationTimelineScene extends Component {
         <View style={sceneStyle.item}
               ref={(t_ref) => this.listViewItem[rowID] = t_ref}>
           <View style={sceneStyle.date}>
-            <Text style={sceneStyle.monthText}>
+            <Text style={[sceneStyle.monthText, styles.monthColor]}>
               {dateFormat(date, 'mmm')}.
             </Text>
-            <Text style={sceneStyle.dayText}>
+            <Text style={[sceneStyle.dayText, styles.dayColor]}>
               {dateFormat(date, 'dd')}
             </Text>
           </View>
 
-          <View style={sceneStyle.card}>
+          <View style={[sceneStyle.card, styles.cardColor]}>
             <View style={{flex: 5}}>
-              <Text style={sceneStyle.timelineText}>
+              <Text style={[sceneStyle.timelineText, styles.timelineTextColor]}>
                 {rowData.text}
               </Text>
-              <Text style={sceneStyle.timelineOthers}>
+              <Text style={[sceneStyle.timelineOthers, styles.timelineOthersColor]}>
                 <Icon name="clock-o"/>&nbsp;
                 {dateFormat(date, 'HH:MM:ss')}&nbsp;&nbsp;
                 <Icon name="map-marker"/>&nbsp;
@@ -183,7 +184,7 @@ export default class LocationTimelineScene extends Component {
                                     onPress={()=> {
                                       this._deleteStatus(rowID);
                                     }}>
-                  <Text style={sceneStyle.buttonText}>Delete </Text>
+                  <Text style={[sceneStyle.buttonText, styles.timelineOthersColor]}>Delete </Text>
                 </TouchableHighlight>
               </Text>
             </View>
@@ -199,37 +200,45 @@ export default class LocationTimelineScene extends Component {
   }
 
   render() {
+    let statusBar;
+    if (name == 'light') {
+      statusBar = (
+        <StatusBar barStyle="default"/>
+      );
+    }
+    else {
+      statusBar = (
+        <StatusBar barStyle="light-content"/>
+      );
+    }
     return (
-      <View style={sceneStyle.container}>
-        <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
-        <TouchableHighlight onPress={() => this.props.navigator.pop()}>
-          <Text style={sceneStyle.backButtonText}>Back</Text>
-        </TouchableHighlight>
+      <View style={[sceneStyle.container, styles.pageBackground]}>
+        {statusBar}
         <View style={sceneStyle.content}>
           <TouchableHighlight
             style={[sceneStyle.button, {width: 100, marginLeft: 150}]}
-            underlayColor={'gray'}
+            underlayColor="transparent"
             activeOpacity={0.5}
             onPress={() => {
               this.props.navigator.push({scene: 'Date Picker'});
             }}>
-            <Text style={sceneStyle.buttonText}>Search By Dateeee</Text>
+            <Text style={[sceneStyle.buttonText, styles.buttonText]}>Search By Date</Text>
           </TouchableHighlight>
 
           <TouchableHighlight
             style={[sceneStyle.button, {width: 30, marginLeft: 0}]}
-            underlayColor={'gray'}
+            underlayColor="transparent"
             activeOpacity={0.5}
             onPress={() => this._scrollToTop()}>
-            <Text style={sceneStyle.buttonText}>Top</Text>
+            <Text style={[sceneStyle.buttonText, styles.buttonText]}>Top</Text>
           </TouchableHighlight>
 
           <TouchableHighlight
             style={[sceneStyle.button, {width: 60, marginLeft: 0}]}
-            underlayColor={'gray'}
+            underlayColor="transparent"
             activeOpacity={0.5}
             onPress={() => this._scrollToBottom()}>
-            <Text style={sceneStyle.buttonText}>Bottom</Text>
+            <Text style={[sceneStyle.buttonText, styles.buttonText]}>Bottom</Text>
           </TouchableHighlight>
         </View>
         <ListView
@@ -252,17 +261,12 @@ const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#202020',
     justifyContent: 'center'
   },
-  backButtonText: {
-    color: '#FFFFFF',
-    fontSize: 50
-  },
   item: {
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 20,
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 15,
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'center'
@@ -273,19 +277,15 @@ const sceneStyle = StyleSheet.create({
     alignItems: 'center'
   },
   monthText: {
-    color: '#AFAFAF',
     fontSize: 14
   },
   dayText: {
-    color: 'white',
     fontSize: 23
   },
   card: {
     padding: 10,
     marginLeft: 10,
-    backgroundColor: 'black',
-    borderRadius: 2,
-    shadowColor: 'black',
+    borderRadius: 4,
     shadowOpacity: 0.5,
     shadowRadius: 1,
     shadowOffset: {
@@ -296,12 +296,10 @@ const sceneStyle = StyleSheet.create({
     flex: 9
   },
   timelineText: {
-    color: '#FFFFFF',
     fontSize: 14,
     lineHeight: 16
   },
   timelineOthers: {
-    color: '#AFAFAF',
     fontSize: 12,
     marginTop: 5
   },
@@ -323,7 +321,6 @@ const sceneStyle = StyleSheet.create({
     marginTop: 3.5,
     fontSize: 12,
     textAlign: 'center',
-    color: '#AFAFAF',
     fontWeight: 'bold'
   },
   button: {
@@ -332,12 +329,12 @@ const sceneStyle = StyleSheet.create({
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
     borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4,
-    backgroundColor: '#202020'
+    borderBottomRightRadius: 4
   },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 63
   }
 });
