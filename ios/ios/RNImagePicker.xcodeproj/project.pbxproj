@@ -9,6 +9,8 @@
 		014A3B6A1C6CF34500B6D375 /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3B691C6CF34500B6D375 /* ImagePickerManager.m */; };
 		1DBDDCCD1DB66F2B00C1EEE3 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A3B5C1C6CF33500B6D375 /* libRNImagePicker.a */; };
 		721377CF396C4805B6E8FA88 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C879791E85416BB166D2E3 /* libRNVectorIcons.a */; };
+		70211758C28D4CFD913CA0B0 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4E04EB7A414A0FB1DF0C87 /* libAirMaps.a */; };
+		A04EE90A01A8463582D971D7 /* libPasscodeAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2BA12EA5484ED98254808F /* libPasscodeAuth.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +32,10 @@
 		9061AD1366514FF8855CD108 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		D6EB1564775D441884D46F0D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		68C879791E85416BB166D2E3 /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		B2EEBC88251443B782282E41 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		EE4E04EB7A414A0FB1DF0C87 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		78335CF060A6497390BCB0BD /* PasscodeAuth.xcodeproj */ = {isa = PBXFileReference; name = "PasscodeAuth.xcodeproj"; path = "../../node_modules/react-native-passcode-auth/PasscodeAuth.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3A2BA12EA5484ED98254808F /* libPasscodeAuth.a */ = {isa = PBXFileReference; name = "libPasscodeAuth.a"; path = "libPasscodeAuth.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +45,8 @@
 			files = (
 				1DBDDCCD1DB66F2B00C1EEE3 /* libRNImagePicker.a in Frameworks */,
 				721377CF396C4805B6E8FA88 /* libRNVectorIcons.a in Frameworks */,
+				70211758C28D4CFD913CA0B0 /* libAirMaps.a in Frameworks */,
+				A04EE90A01A8463582D971D7 /* libPasscodeAuth.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +76,8 @@
 			children = (
 				9061AD1366514FF8855CD108 /* RNImagePicker.xcodeproj */,
 				D6EB1564775D441884D46F0D /* RNVectorIcons.xcodeproj */,
+				B2EEBC88251443B782282E41 /* AirMaps.xcodeproj */,
+				78335CF060A6497390BCB0BD /* PasscodeAuth.xcodeproj */,
 			);
 			name = Libraries;
 			path = "";
@@ -225,12 +235,16 @@
 					"$(SRCROOT)/../Example/node_modules/react-native/React/**",
 					"$(SRCROOT)/../../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../../node_modules/react-native-maps/ios/**",
+					"$(SRCROOT)/../../node_modules/react-native-passcode-auth",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
@@ -245,12 +259,16 @@
 					"$(SRCROOT)/../Example/node_modules/react-native/React/**",
 					"$(SRCROOT)/../../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../../node_modules/react-native-maps/ios/**",
+					"$(SRCROOT)/../../node_modules/react-native-passcode-auth",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
