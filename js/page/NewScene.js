@@ -106,7 +106,7 @@ export default class NewScene extends Component {
             placeholder={'Say something...'}
             placeholderTextColor={'gray'}
             keyboardType={'default'}
-            maxLength={700}
+            maxLength={1000}
             autoCapitalize={'none'}
             autoCorrect={false}
           />
@@ -120,7 +120,7 @@ export default class NewScene extends Component {
             onPress={() => {
               this._submitOnPress();
             }}>
-            <Text style={[sceneStyle.buttonText, styles.postButtonText]}>Post </Text>
+            <Text style={[sceneStyle.buttonText, styles.postButtonText]}>Post</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -170,6 +170,7 @@ const sceneStyle = StyleSheet.create({
     height: 100,
     width: Dimensions.get('window').width - 60,
     borderWidth: 0.5,
+    marginTop: 30,
     marginLeft: 30,
     marginRight: 30,
     fontSize: 15

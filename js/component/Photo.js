@@ -72,6 +72,7 @@ const photoStyle = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 50,
     shadowOpacity: 0.3,
     shadowRadius: 1,
     shadowOffset: {

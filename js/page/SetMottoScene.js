@@ -11,10 +11,13 @@ import {
   TextInput,
   AsyncStorage,
   TouchableHighlight,
-  AlertIOS
+  AlertIOS,
+  StatusBar,
+  Dimensions
 } from 'react-native';
 
 import {styles} from 'react-native-theme';
+import {name} from 'react-native-theme';
 
 export default class SetMottoScene extends Component {
   static propTypes = {
@@ -67,22 +70,36 @@ export default class SetMottoScene extends Component {
   }
 
   render() {
+    let statusBar;
+    if (name == 'light') {
+      statusBar = (
+        <StatusBar barStyle="default"/>
+      );
+    }
+    else {
+      statusBar = (
+        <StatusBar barStyle="light-content"/>
+      );
+    }
     return (
-      <View style={[{marginTop: 60}, sceneStyle.container]}>
-        <TextInput style={[sceneStyle.commonText, {height: 420}]}
+      <View style={[styles.pageBackground, sceneStyle.container]}>
+        {statusBar}
+        <TextInput style={[sceneStyle.input, styles.input, {height: 220}]}
                    defaultValue={this.state.motto}
                    multiline={true}
+                   placeholder={'"Motto..."'}
+                   placeholderTextColor={'gray'}
                    onChangeText={(motto) => this.setState({motto})}
         />
         <View style={sceneStyle.separator}/>
         <TouchableHighlight
-          style={sceneStyle.button}
+          style={[sceneStyle.button, styles.postButton]}
           underlayColor={'gray'}
           activeOpacity={0.5}
           onPress={() => {
             this.setMotto();
           }}>
-          <Text style={sceneStyle.buttonText}>Save</Text>
+          <Text style={[sceneStyle.buttonText, styles.postButtonText]}>Save</Text>
         </TouchableHighlight>
       </View>
     );
@@ -93,33 +110,32 @@ const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 0,
-    backgroundColor: '#202020',
+    alignItems: 'center'
   },
   commonText: {
     padding: 5,
     paddingBottom: 3,
-    color: '#AFAFAF',
-    fontSize: 32
+    fontSize: 20
   },
   button: {
-    marginTop: 10,
-    marginLeft: 5,
-    height: 45,
-    width: 70,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: '#202020'
+    marginTop: 40,
+    height: 40,
+    width: 80,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0.3,
+    },
   },
   buttonText: {
-    height: 30,
-    width: 60,
-    marginLeft: 5,
-    marginTop: 5,
-    fontSize: 24,
+    marginTop: 7,
+    fontSize: 20,
     textAlign: 'center',
-    color: '#FFFFFF',
     fontWeight: 'bold'
   },
   separator: {
@@ -127,6 +143,16 @@ const sceneStyle = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
-    backgroundColor: '#D7DBDD'
+    //backgroundColor: '#D7DBDD'
+  },
+  input: {
+    paddingTop: 190,
+    height: 60,
+    width: Dimensions.get('window').width - 60,
+    borderWidth: 0.5,
+    marginTop: 80,
+    marginLeft: 30,
+    marginRight: 30,
+    fontSize: 15
   }
 });
