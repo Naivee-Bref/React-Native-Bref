@@ -1,5 +1,5 @@
 /**
- * Created by irmo on 16/11/2.
+ * Created by qzane on 16/12/18.
  */
 
 'use strict';
@@ -9,9 +9,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
-  MapView,
   ListView,
+  TouchableHighlight,
   AsyncStorage,
   Image,
   ImageStore,
@@ -19,17 +18,17 @@ import {
   StatusBar,
   AlertIOS,
 } from 'react-native';
-//import MapView from 'react-native-maps';
 import dateFormat from 'dateformat';
-import {styles} from 'react-native-theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {styles} from 'react-native-theme';
 import DiaryActions from './../actions';
 let ds;
 
-export default class SitesScene extends Component {
+export default class LocationTimelineScene extends Component {
   static propTypes = {
-    navigator: PropTypes.object.isRequired
+    navigator: PropTypes.object.isRequired,
   };
+
 
   constructor(props, context) {
     super(props, context);
@@ -44,17 +43,11 @@ export default class SitesScene extends Component {
     this.listViewItem = [];
     this.listViewHeight = 0;
     this.t_scroll_y = 0;
-    global.SITES_LOCATIONS = new Set();
-    global.SITES_GPS = [];
-    global.SITES_COUNT = 0;
-    global.SITES_FINISH = 0;
-    this.longitude = -1;
-    this.latitude = -1;
-
-  };
+  }
 
   componentWillMount() {
     this._disableFilterByDate().done();
+    this._refreshData().done();
   }
 
   componentDidMount() {   //will be executed after the first render
@@ -139,114 +132,128 @@ export default class SitesScene extends Component {
       [
         {text: 'Delete', onPress: () => this._deleteItem(rowID)},
         {text: 'Cancel', onPress: () => console.log('Cancel deletion')},
-      ],
+      ]
     );
   }
 
   _refreshData = async() => {
-    if (global.SITES_FINISH > 3) return;
     let data = await AsyncStorage.getItem(this.state.DIARY_KEY);
     let JSONdata = (JSON.parse(data)).reverse();
     this.setState({dataSource: this.state.dataSource.cloneWithRows(JSONdata)});
     this.setState({rows: JSONdata});
-    for (var i = 0; i < JSONdata.length; i+=1) {
-      console.log(JSONdata[i].city);
-      if (global.SITES_LOCATIONS.has(JSONdata[i].city)) continue;
-      global.SITES_LOCATIONS.add(JSONdata[i].city);
-      this.geocoding(JSONdata[i].city);
-    }
-    console.log("Refreshed GPS Data");
-    global.SITES_FINISH += 1;
   };
 
-  gotoLocation(location){
-    return this.props.navigator.push({
-      scene: 'Location Timeline',
-      passProps:{location:location}
-    });
-  }
+  _renderRow(rowData, sectionID, rowID) {
+    let oneImage;
+    if (rowData.imageUrl !== null) {
+      oneImage = (
+        <TouchableHighlight style={ sceneStyle.imageContainer }>
+          <Image style={ sceneStyle.image } source={{uri: rowData.imageUrl}}/>
+        </TouchableHighlight>
+      );
+    }
+    let date = new Date(rowData.timeStamp);
+    //this.location = 'Jiading Qu';
+    this.location = this.props.route.passProps.location;
+    //console.log(this.location)
+    if (rowData.city == this.location) {
+      return (
+        <View style={sceneStyle.item}
+              ref={(t_ref) => this.listViewItem[rowID] = t_ref}>
+          <View style={sceneStyle.date}>
+            <Text style={sceneStyle.monthText}>
+              {dateFormat(date, 'mmm')}.
+            </Text>
+            <Text style={sceneStyle.dayText}>
+              {dateFormat(date, 'dd')}
+            </Text>
+          </View>
 
-  geocoding(cityName) {
-    var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
-    var apiKey = 'access_token=pk.eyJ1Ijoic3RyYXdiZXJyeWZnIiwiYSI6ImNpdW03a2hhZzAwN2oyb20xYTJ2dmVzOGoifQ.R7XeStof2bdjmKMGHIVlmg';
-    var req = new XMLHttpRequest();
-    var reqUrl = url + cityName + '.json?' + apiKey;
-    console.log('request url:' + reqUrl);
-    req.onreadystatechange = function () {
-      if (req.readyState == 4 && req.status == 200) {
-        try {
-          let jsonObj = JSON.parse(req.responseText);
-          var longitude = jsonObj.features[0].center[0];
-          var latitude = jsonObj.features[0].center[1];
-          console.log("Gnerated Mark at " + longitude + ", "+ latitude);
-          global.SITES_GPS.push({
-            longitude: longitude,
-            latitude: latitude,
-            title: cityName,
-            animateDrop: true,
-            onFocus: () => {
-              console.log("Just Clicked at " + cityName);
-            }
-          });
-        }
-        catch (error) {
-          console.log(error);
-        }
-      }
-    }.bind(this);
-    req.open('GET', reqUrl, true);
-    req.send(null);
+          <View style={sceneStyle.card}>
+            <View style={{flex: 5}}>
+              <Text style={sceneStyle.timelineText}>
+                {rowData.text}
+              </Text>
+              <Text style={sceneStyle.timelineOthers}>
+                <Icon name="clock-o"/>&nbsp;
+                {dateFormat(date, 'HH:MM:ss')}&nbsp;&nbsp;
+                <Icon name="map-marker"/>&nbsp;
+                {rowData.city}&nbsp;
+                <TouchableHighlight style={{width: 55, height: 15}}
+                                    onPress={()=> {
+                                      this._deleteStatus(rowID);
+                                    }}>
+                  <Text style={sceneStyle.buttonText}>Delete </Text>
+                </TouchableHighlight>
+              </Text>
+            </View>
+            <View style={{flex: 1, alignItems: 'flex-end'}}>
+              {oneImage}
+            </View>
+          </View>
+        </View>
+      )
+    } else {
+      return null;
+    }
   }
 
   render() {
-    this._refreshData().done();
     return (
-      <View style={[styles.background, sceneStyle.container]}>
-        <MapView
-          style={sceneStyle.map}
-          annotations = {/*[{
-            latitude: 31.1,
-            longitude: 121.1,
-            animateDrop: true,
-            title: "Shanghai",
-            subtitile: "Where I met you",
-            onFocus: () => {
-              //gotoLocation('Shanghai');
-              //this.geocoding("Shanghai");
-              console.log(global.SITES_GPS);
-            }
-          }]*/
-          global.SITES_GPS}
+      <View style={sceneStyle.container}>
+        <StatusBar backgroundColor="#FFFFFF" barStyle="light-content"/>
+        <TouchableHighlight onPress={() => this.props.navigator.pop()}>
+          <Text style={sceneStyle.backButtonText}>Back</Text>
+        </TouchableHighlight>
+        <View style={sceneStyle.content}>
+          <TouchableHighlight
+            style={[sceneStyle.button, {width: 100, marginLeft: 150}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => {
+              this.props.navigator.push({scene: 'Date Picker'});
+            }}>
+            <Text style={sceneStyle.buttonText}>Search By Dateeee</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[sceneStyle.button, {width: 30, marginLeft: 0}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => this._scrollToTop()}>
+            <Text style={sceneStyle.buttonText}>Top</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[sceneStyle.button, {width: 60, marginLeft: 0}]}
+            underlayColor={'gray'}
+            activeOpacity={0.5}
+            onPress={() => this._scrollToBottom()}>
+            <Text style={sceneStyle.buttonText}>Bottom</Text>
+          </TouchableHighlight>
+        </View>
+        <ListView
+          ref={ref => this.listView = ref}
+          pageSize={1000000}   //the reason why no pageSize setting will fail when touching bottom is that the page cannot load too many items
+          onLayout={(event) => {
+            let layout = event.nativeEvent.layout;
+            this.listViewHeight = layout.height;
+          }}
+          dataSource={this.state.dataSource}
+          enableEmptySections={true}
+          renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
         />
       </View>
-    )
+    );
   }
 }
-//showsUserLocation={true}
 
 const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    // backgroundColor: '#000000',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  map: {
-    //height: 700,
-    //marginTop: 50,
-    //margin: 0,
-    //flex: 1
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  commonText: {
-    padding: 5,
-    paddingBottom: 3,
-    // color: '#AFAFAF'
+    backgroundColor: '#202020',
+    justifyContent: 'center'
   },
   backButtonText: {
     color: '#FFFFFF',

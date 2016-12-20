@@ -21,6 +21,7 @@ import SettingsScene from './js/page/SettingsScene';
 import AboutScene from './js/page/AboutScene';
 import SetMottoScene from './js/page/SetMottoScene';
 import theme from 'react-native-theme';
+import LocationTimelineScene from './js/page/LocationTimelineScene'
 
 theme.add(require('./js/style/darkTheme'));
 theme.add(require('./js/style/lightTheme'), 'light');
@@ -192,6 +193,8 @@ class RN_Bref extends Component {
         return (<SetMottoScene navigator={navigator}/>);
       case 'Date Picker':
         return (<DatePickerScene navigator={navigator}/>);
+      case 'Location Timeline':
+        return (<LocationTimelineScene navigator={navigator} route={route}/>);
       default:
         return (<OriginalScene navigator={navigator}/>);
     }
