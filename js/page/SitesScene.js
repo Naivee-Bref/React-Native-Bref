@@ -185,7 +185,8 @@ export default class SitesScene extends Component {
             title: cityName,
             animateDrop: true,
             onFocus: () => {
-              console.log("Just Clicked at " + cityName);
+              //console.log("Just Clicked at " + cityName);
+              this.gotoLocation(cityName);
             }
           });
         }
