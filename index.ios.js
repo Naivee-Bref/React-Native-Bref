@@ -127,8 +127,18 @@ class RN_Bref extends Component {
                 LeftButton: (route, navigator, index, navState) => {
                   if (route.scene === 'Initial') {
                     return null;
-                  } else {
-                    return (
+                  } else
+                    if(route.scene ==='Sites'){
+                      return (
+                        <TouchableHighlight
+                          underlayColor="transparent"
+                          style={{alignItems: 'center'}}
+                          onPress={() => navigator.pop()}
+                        >
+                          <Icon name="chevron-left" style={[navStyle.navButtonLeft, navStyle.defaultColor]}/>
+                        </TouchableHighlight>);
+                    }
+                      else{return (
                       <TouchableHighlight
                         underlayColor="transparent"
                         style={{alignItems: 'center'}}
@@ -159,6 +169,13 @@ class RN_Bref extends Component {
                   var title = null;
                   title = route.scene;
                   if (title != 'Initial') {
+                    if (title === 'Sites') {
+                      return (
+                        <Text style={[navStyle.navBarTitle,navStyle.defaultColor]}>
+                          {title}
+                        </Text>
+                      );
+                    }
                     return (
                       <Text style={[navStyle.navBarTitle,styles.navContentColor]}>
                         {title}
@@ -204,6 +221,9 @@ class RN_Bref extends Component {
 AppRegistry.registerComponent('RN_Bref', () => RN_Bref);
 
 const navStyle = StyleSheet.create({
+  defaultColor: {
+    color: 'black'
+  },
   navButtonLeft: {
     marginLeft: 25,
     marginTop: 10,
