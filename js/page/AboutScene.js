@@ -8,10 +8,12 @@ import React, {Component, PropTypes} from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  StatusBar
 } from 'react-native';
 
 import {styles} from 'react-native-theme';
+import {name} from 'react-native-theme';
 
 export default class AboutScene extends Component {
   static propTypes = {
@@ -26,17 +28,31 @@ export default class AboutScene extends Component {
   };
 
   render() {
+    let statusBar;
+    if (name == 'light') {
+      statusBar = (
+        <StatusBar barStyle="default"/>
+      );
+    }
+    else {
+      statusBar = (
+        <StatusBar barStyle="light-content"/>
+      );
+    }
     return (
-      <View style={[styles.background, {marginTop: 60}, sceneStyle.container]}>
-        <Text style={[{fontSize: 40}, sceneStyle.commonText]}>
-          bref. v1.0
-        </Text>
-        <Text style={[{fontSize: 20}, sceneStyle.commonText]}>
-          Naivee Team
-        </Text>
-        <Text style={[{fontSize: 20}, sceneStyle.commonText]}>
-          Copyright @ 2016. All rights reserved.
-        </Text>
+      <View style={[styles.pageBackground, sceneStyle.container]}>
+        {statusBar}
+        <View style={sceneStyle.content}>
+          <Text style={[{fontSize: 40}, sceneStyle.commonText]}>
+            bref. v1.0
+          </Text>
+          <Text style={[{fontSize: 20}, sceneStyle.commonText]}>
+            Naivee Team
+          </Text>
+          <Text style={[{fontSize: 20}, sceneStyle.commonText]}>
+            Copyright @ 2016. All rights reserved.
+          </Text>
+        </View>
       </View>
     );
   }
@@ -49,6 +65,12 @@ const sceneStyle = StyleSheet.create({
     // backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'flex-start'
+  },
+  content: {
+    marginTop: 90,
+    flexDirection: 'column',
+    paddingTop: 63,
+    alignItems: 'center',
   },
   commonText: {
     padding: 5,

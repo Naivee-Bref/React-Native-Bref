@@ -12,10 +12,12 @@ import {
   TouchableHighlight,
   Switch,
   ListView,
-  AsyncStorage
+  AsyncStorage,
+  StatusBar
 } from 'react-native';
 
 import theme, {styles} from 'react-native-theme';
+import {name} from 'react-native-theme';
 
 export default class SettingsScene extends Component {
   static propTypes = {
@@ -106,37 +108,52 @@ export default class SettingsScene extends Component {
   }
 
   render() {
+    let statusBar;
+    if (name == 'light') {
+      statusBar = (
+        <StatusBar barStyle="default"/>
+      );
+    }
+    else {
+      statusBar = (
+        <StatusBar barStyle="light-content"/>
+      );
+    }
     return (
-      <View style={[styles.background, {marginTop: 60}, sceneStyle.container]}>
-        <View>
-          <View style={sceneStyle.separator_top}/>
-          <TouchableHighlight
-            underlayColor={"#21618C"}
-            activeOpacity={0.5}
-            onPress={() => this.props.navigator.push({scene: 'Set Motto'})}>
-            <Text style={[styles.text, sceneStyle.commonText]}> Set Motto </Text>
-          </TouchableHighlight>
-        </View>
-        <View style={{width: 400}}>
-          <View style={sceneStyle.separator_bottom}/>
-          <Text style={[styles.text, sceneStyle.commonText, {marginLeft: 3}]}>
-            Enable Touch ID
-            <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 160}}>
-              <Switch style={sceneStyle.switch}
+      <View style={[styles.pageBackground, sceneStyle.container]}>
+        {statusBar}
+        <View style={sceneStyle.content}>
+          <View>
+            <View style={[sceneStyle.separator_top, styles.separatorColor]}/>
+            <TouchableHighlight
+              underlayColor="transparent"
+              activeOpacity={0.5}
+              onPress={() => this.props.navigator.push({scene: 'Set Motto'})}>
+              <Text style={[styles.settingText, sceneStyle.commonText]}>Set Motto</Text>
+            </TouchableHighlight>
+          </View>
+
+          <View>
+            <View style={[sceneStyle.separator_bottom, styles.separatorColor]}/>
+            <Text style={[styles.settingText, sceneStyle.commonText]}>
+              Enable Touch ID
+              <View style={{width: 100, height: 10, marginLeft: 170}}>
+                <Switch style={sceneStyle.switch}
                       value={this.state.touchIdEnabled === true}
                       onValueChange={(value) => {
                         this.setState({touchIdEnabled: value});
                         this._storeTouchIdOption(value).done();
                       }}
-              />
-            </View>
-          </Text>
-        </View>
-        <View style={{width: 400}}>
-          <View style={sceneStyle.separator_bottom}/>
-          <Text style={[styles.text, sceneStyle.commonText, {marginLeft: 3}]}>
+                />
+              </View>
+            </Text>
+          </View>
+
+        <View>
+          <View style={[sceneStyle.separator_bottom, styles.separatorColor]}/>
+          <Text style={[styles.settingText, sceneStyle.commonText]}>
             Enable Light Mode
-            <View style={{width: 100, height: 10, marginTop: -20, marginLeft: 142}}>
+            <View style={{width: 100, height: 10, marginLeft: 152}}>
               <Switch style={sceneStyle.switch}
                       value={this.state.lightModeEnabled === true}
                       onValueChange={(value) => {
@@ -146,17 +163,19 @@ export default class SettingsScene extends Component {
             </View>
           </Text>
         </View>
-        <View style={{width: 400}}>
-          <View style={sceneStyle.separator_bottom}/>
+
+        <View>
+          <View style={[sceneStyle.separator_bottom, styles.separatorColor]}/>
           <TouchableHighlight
-            underlayColor={"#21618C"}
+            underlayColor="transparent"
             activeOpacity={0.5}
             onPress={() => this.props.navigator.push({scene: 'About'})}>
-            <Text style={[styles.text, sceneStyle.commonText, {marginLeft: 3}]}>
+            <Text style={[styles.settingText, sceneStyle.commonText]}>
               About
             </Text>
           </TouchableHighlight>
-          <View style={sceneStyle.separator_top}/>
+          <View style={[sceneStyle.separator_top, styles.separatorColor]}/>
+        </View>
         </View>
       </View>
     );
@@ -166,31 +185,27 @@ export default class SettingsScene extends Component {
 const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 0,
+    padding: 15,
     justifyContent: 'flex-start'
   },
+  content: {
+    flexDirection: 'column',
+    marginTop: 63
+  },
   commonText: {
-    padding: 5,
-    paddingTop: 10,
-    paddingBottom: 10,
+    padding: 10,
+    paddingTop: 12,
+    paddingBottom: 12,
   },
   separator_top: {
-    height: 1,
-    backgroundColor: '#D7DBDD',
+    height: 1
   },
   separator_bottom: {
     height: 1,
     marginLeft: 10,
-    marginRight: 30,
-    backgroundColor: '#D7DBDD',
-  },
-  row: {
-    flexDirection: 'row',
-    margin: 10,
-    backgroundColor: 'black',
+    marginRight: 10
   },
   switch: {
-    marginLeft: 40,
-    marginTop: 20
+    marginTop: 2
   }
 });

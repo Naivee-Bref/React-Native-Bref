@@ -14,6 +14,7 @@ import {
   ImageStore
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import {styles} from 'react-native-theme';
 
 export default class Photo extends Component {
   static propTypes = {
@@ -55,9 +56,9 @@ export default class Photo extends Component {
     return (
       <View>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-            { this.state.avatarSource === null ? <Text style={styles.commonText}>Select a Photo</Text> :
-              <Image style={styles.avatar} source={this.state.avatarSource}/>
+          <View style={[photoStyle.avatar, photoStyle.avatarContainer, styles.photoContainer, {marginBottom: 20}]}>
+            { this.state.avatarSource === null ? <Text style={[photoStyle.commonText, styles.photoText]}>Select a Photo</Text> :
+              <Image style={photoStyle.avatar} source={this.state.avatarSource}/>
             }
           </View>
         </TouchableOpacity>
@@ -66,13 +67,18 @@ export default class Photo extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const photoStyle = StyleSheet.create({
   avatarContainer: {
-    borderColor: '#9B9B9B',
     borderWidth: 1,
-    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 50,
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0.3,
+    },
   },
   avatar: {
     borderRadius: 60,
@@ -82,6 +88,5 @@ const styles = StyleSheet.create({
   commonText: {
     padding: 5,
     paddingBottom: 3,
-    color: '#AFAFAF'
   }
 });
