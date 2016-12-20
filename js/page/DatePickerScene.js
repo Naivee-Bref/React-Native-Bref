@@ -13,16 +13,18 @@ import {
   Switch,
   ListView,
   AsyncStorage,
-  AlertIOS
+  AlertIOS,
+  StatusBar
 } from 'react-native';
 import Calendar from 'react-native-calendar';
 import dateFormat from 'dateformat';
-
+import {styles} from 'react-native-theme';
+import {name} from 'react-native-theme';
 const customDayHeadings = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const customMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const calendar_style = {
+const calendar_style_1 = {
   controlButtonText: {
-    color: 'blue'
+    color: '#6F6F6F'
   },
   weekendDayText: {
     color: 'black'
@@ -30,12 +32,70 @@ const calendar_style = {
   weekendHeading: {
     color: 'black'
   },
+  title: {
+    color: 'black'
+  },
+  calendarContainer: {
+    backgroundColor: '#F6F6F6'
+  },
+  day: {
+    color: 'black'
+  },
+  dayHeading: {
+    color: 'black'
+  },
+  weekRow:{
+    borderColor: 'black'
+  },
+  selectedDayCircle: {
+    backgroundColor: 'black'
+  },
+  dayButton:{
+    borderTopColor: 'transparent'
+  },
   eventIndicator: {
     backgroundColor: 'green',
     width: 10,
     height: 10
   }
-}
+};
+const calendar_style_2 = {
+  controlButtonText: {
+    color: '#AFAFAF'
+  },
+  weekendDayText: {
+    color: 'white'
+  },
+  weekendHeading: {
+    color: 'white'
+  },
+  title: {
+    color: 'white'
+  },
+  calendarContainer: {
+    backgroundColor: '#202020'
+  },
+  day: {
+    color: 'white'
+  },
+  dayHeading: {
+    color: 'white'
+  },
+  weekRow:{
+    borderColor: 'white'
+  },
+  selectedDayCircle: {
+    backgroundColor: 'white'
+  },
+  dayButton:{
+    borderTopColor: 'transparent'
+  },
+  eventIndicator: {
+    backgroundColor: 'green',
+    width: 10,
+    height: 10
+  }
+};
 
 export default class DatePickerScene extends Component {
   static propTypes = {
@@ -104,10 +164,26 @@ export default class DatePickerScene extends Component {
   }
 
   render() {
+    let statusBar;
+    let calendar;
+    if (name == 'light') {
+      statusBar = (
+        <StatusBar barStyle="default"/>
+      );
+      calendar = calendar_style_1;
+    }
+    else {
+      statusBar = (
+        <StatusBar barStyle="light-content"/>
+      );
+      calendar = calendar_style_2;
+    }
     return (
-      <View style={[{marginTop: 60}, styles.container]}>
+      <View style={[styles.pageBackground, sceneStyle.container]}>
+        {statusBar}
+        <View style={sceneStyle.content}>
         <Calendar
-          customStyle={calendar_style}
+          customStyle={calendar}
           showEventIndicators
           eventDates={this.state.availableDate}
           dayHeadings={customDayHeadings}               // Default: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
@@ -129,28 +205,34 @@ export default class DatePickerScene extends Component {
           today={this._getCurrentDate()}              // Defaults to today
           weekStart={1} // Day on which week starts 0 - Sunday, 1 - Monday, 2 - Tuesday, etc, Default: 1
         />
-        <Text style={[styles.commonText, {marginTop: 8}]}>
+        <Text style={[styles.timeLineOthersColor, sceneStyle.commonText, {marginTop: 8}]}>
           Selected date: &nbsp; {this.state.currentSelectedDate} has no records!
         </Text>
-        <Text style={styles.commonText}>
+        <Text style={[styles.timeLineOthersColor, sceneStyle.commonText]}>
           Only dates with green squares in the bottom are valid.
         </Text>
+        </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const sceneStyle = StyleSheet.create({
   container: {
     flex: 1,
     padding: 0,
-    backgroundColor: '#202020',
+   // backgroundColor: '#202020',
     justifyContent: 'flex-start'
+  },
+  content: {
+    flexDirection: 'column',
+    paddingTop: 63,
+    alignItems: 'center',
   },
   commonText: {
     padding: 5,
     paddingTop: 5,
     paddingBottom: 5,
-    color: '#FFFFFF'
+    //color: '#FFFFFF'
   },
 });
