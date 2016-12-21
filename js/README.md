@@ -8,22 +8,28 @@
 js
 ├── README.md
 ├── actions.js
+├── annotation
+│   └── icon.png
 ├── component
 │   ├── Location.js
 │   ├── Photo.js
 │   └── Storage.js
-├── config
-│   └── config.js
 ├── data
 │   └── DiaryItem.js
 ├── page
+│   ├── AboutScene.js
+│   ├── DatePickerScene.js
+│   ├── LocationTimelineScene.js
 │   ├── NewScene.js
 │   ├── OriginalScene.js
+│   ├── SetMottoScene.js
 │   ├── SettingsScene.js
 │   ├── SitesScene.js
 │   └── TimelineScene.js
 └── style
-    └── style.js
+    ├── darkTheme.js
+    └── lightTheme.js
+5 directories, 18 files
 ```
 ### Sub-directory / File Description
 
@@ -43,6 +49,7 @@ js
   - DatePickerScene.js: Show date picker
   - LocationTImelineScene.js: Timeline in sites
   - SetMottoScene.js: Set the motto
+  - AboutScene.js: About the application
 - Style:
   - darkTheme.js: Dark theme style
   - lightTheme.js: Light theme style

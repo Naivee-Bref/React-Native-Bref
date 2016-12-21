@@ -44,7 +44,7 @@ export default class AboutScene extends Component {
         {statusBar}
         <View style={sceneStyle.content}>
           <Text style={[{fontSize: 40}, sceneStyle.commonText]}>
-            bref. v1.0
+            bref. v2.0
           </Text>
           <Text style={[{fontSize: 20}, sceneStyle.commonText]}>
             Naivee Team
