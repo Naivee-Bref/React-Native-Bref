@@ -1,6 +1,6 @@
 # React-Native-Bref
 
-Bref developed in React-Native.
+Bref is a diary app of iOS, developed in React-Native.
 
 #### Usage
 
@@ -41,6 +41,6 @@ Again, feel free to modify anything.
 
 ---
 
-Author: Naivee
+Author: Naivee Team
 
-Last modified date:  2016/10/25
+Last modified date:  2016/12/21

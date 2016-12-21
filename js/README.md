@@ -29,21 +29,23 @@ js
 
 - action.js: Provide public action method on **Diary** class, based on **Reflux**, being used to control data flow.
 - component:
-  - Location.js: TODO
-  - Photo.js: TODO
-  - Storage.js: Cooperate with **action.js**, be used to store diary data.
-- config:
-  - config.js: TODO
+  - Location.js: Got the GPS and reverseGeocoding component
+  - Photo.js: Show a photo
+  - Storage.js: Cooperate with **action.js**, be used to store diary data
 - data:
   - DiaryItem.js: **Diary** class definition, provide methods to create a diary and modify a diary
 - page:
-  - NewScene.js: TODO
-  - OriginalScene.js: TODO
-  - SettingScene.js: TODO
-  - SitesScene.js: TODO
-  - TimelineScene.js: TODO
+  - OriginalScene.js: The original scene of the application
+  - NewScene.js: One of four major scenes. Post a new diary
+  - TimelineScene.js: One of four major scenes. Show timeline
+  - SitesScene.js: One of four major scenes. Show diaries on map.
+  - SettingScene.js: One of four major scenes. Show settings
+  - DatePickerScene.js: Show date picker
+  - LocationTImelineScene.js: Timeline in sites
+  - SetMottoScene.js: Set the motto
 - Style:
-  - style.js: TODO
+  - darkTheme.js: Dark theme style
+  - lightTheme.js: Light theme style
 
 ### For developer:
 
